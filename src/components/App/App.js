@@ -1,13 +1,11 @@
 import './App.css';
 import { Route } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Preloader from '../Preloader/Preloader';
 
 function App() {
   return (
     <>
       <PageNotFound />
-      <Preloader />
     </>
   );
 }
