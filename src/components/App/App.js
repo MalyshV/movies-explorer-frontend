@@ -2,10 +2,12 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
+import Techs from '../Techs/Techs';
 
 const App = () => {
   return (
     <>
+      <Techs />
       <PageNotFound />
       <Footer />
     </>
