@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 
-function PageNotFound () {
+const PageNotFound = () => {
   return (
     <div className="not-found">
       <h1 className="not-found__title">404</h1>

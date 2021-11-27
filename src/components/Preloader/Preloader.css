@@ -49,6 +49,13 @@
   padding: 20px;
 }
 
+@media (max-width: 320px) {
+  .preloader {
+    max-width: 300px;
+    width: 100%;
+  }
+}
+
 .preloader__container {
   width: 100px;
   height: 100px;

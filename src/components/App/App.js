@@ -1,11 +1,13 @@
 import './App.css';
 import { Route } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Footer from '../Footer/Footer';
 
-function App() {
+const App = () => {
   return (
     <>
       <PageNotFound />
+      <Footer />
     </>
   );
 }
