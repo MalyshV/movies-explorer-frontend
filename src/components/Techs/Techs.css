@@ -1,5 +1,5 @@
 .techs {
-  padding: 100px 0;
+  padding: 100px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,7 +27,7 @@
   line-height: 58px;
   margin: 90px 0 26px;
   padding: 0;
-
+  text-align: center;
 }
 
 .techs__text {

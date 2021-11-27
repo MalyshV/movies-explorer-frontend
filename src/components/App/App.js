@@ -2,11 +2,14 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
+import Promo from '../Promo/Promo';
+
 import Techs from '../Techs/Techs';
 
 const App = () => {
   return (
     <>
+      <Promo />
       <Techs />
       <PageNotFound />
       <Footer />

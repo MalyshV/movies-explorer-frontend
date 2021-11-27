@@ -53,6 +53,7 @@
   .preloader {
     max-width: 300px;
     width: 100%;
+    padding: 20px 0;
   }
 }
 
