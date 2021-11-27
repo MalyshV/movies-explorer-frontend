@@ -55,6 +55,12 @@
   color: #000;
 }
 
+@media (max-width: 768px) {
+  .footer {
+    max-width: 708px;
+  }
+}
+
 @media (max-width: 320px) {
   .footer {
     font-size: 12px;
