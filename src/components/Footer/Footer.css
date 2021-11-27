@@ -11,11 +11,17 @@
   font-size: 13px;
   line-height: 16px;
   min-height: 172px;
-  max-width: 1140px;
-  width: 100%;
+  background-color: #FAFAFA;
 }
 
+/* .footer__content {
+  max-width: 1140px;
+  width: 100%;
+} */
+
 .footer__title {
+  max-width: 1140px;
+  width: 100%;
   margin: 0;
   margin-top: 79px;
   font: inherit;
@@ -24,6 +30,8 @@
 }
 
 .footer__columns {
+  max-width: 1140px;
+  width: 100%;
   border-top: 1px solid #E8E8E8;
   padding-top: 20px;
   margin-top: 20px;
@@ -47,6 +55,10 @@
   text-decoration: none;
   color: #000;
   font: inherit;
+}
+
+.footer__link:hover {
+  opacity: 0.7;
 }
 
 .footer__copyright {
