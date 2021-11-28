@@ -1,4 +1,5 @@
 import React from 'react';
+import Portfolio from '../Portfolio/Portfolio';
 
 const AboutMe = () => {
   return (
@@ -19,6 +20,7 @@ const AboutMe = () => {
           </div>
           <img className="student__image" alt="фото студента"/>
         </article>
+        <Portfolio />
       </div>
     </section>
   )
