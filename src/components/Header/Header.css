@@ -43,13 +43,13 @@
 }
 
 .header__page {
-  display: none;
   text-decoration: none;
   color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
   font: inherit;
+  display: none;
 }
 
 .header__page:hover {

@@ -9,8 +9,8 @@ const Header = () => {
         <img className="header__icon" alt="логотип сайта" src={logoIcon}/>
         <nav className="header__nav">
           <ul className="header__pages">
-            <Link className="header__page" to="/movies">Фильмы</Link>
-            <Link className="header__page" to="/saved-movies">Сохранённые фильмы</Link>
+              <Link className="header__page" to="/movies">Фильмы</Link>
+              <Link className="header__page" to="/saved-movies">Сохранённые фильмы</Link>
           </ul>
           <ul className="header__links">
             <Link className="header__link" to="/signup">Регистрация</Link>
