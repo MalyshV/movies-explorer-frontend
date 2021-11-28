@@ -5,12 +5,14 @@ import Footer from '../Footer/Footer';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
 import AboutMe from '../AboutMe/AboutMe';
+import Header from '../Header/Header';
 
 import Techs from '../Techs/Techs';
 
 const App = () => {
   return (
     <>
+      <Header />
       <Promo />
       <AboutProject />
       <Techs />
