@@ -4,6 +4,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
+import AboutMe from '../AboutMe/AboutMe';
 
 import Techs from '../Techs/Techs';
 
@@ -13,6 +14,7 @@ const App = () => {
       <Promo />
       <AboutProject />
       <Techs />
+      <AboutMe />
       <PageNotFound />
       <Footer />
     </>
