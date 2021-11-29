@@ -1,25 +1,32 @@
 import './App.css';
 import { Route } from 'react-router-dom';
+// import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
 import Promo from '../Promo/Promo';
 import AboutProject from '../AboutProject/AboutProject';
 import AboutMe from '../AboutMe/AboutMe';
 import Header from '../Header/Header';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 
 import Techs from '../Techs/Techs';
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <PageNotFound />
-      <Footer />
-    </>
+    /* <CurrentUserContext.Provider> */
+      <div className="page">
+        <Header />
+        <Register />
+        <Login />
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <PageNotFound />
+        <Footer />
+      </div>
+    /* </CurrentUserContext.Provider> */
   );
 }
 

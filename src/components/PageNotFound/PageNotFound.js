@@ -13,6 +13,6 @@ const PageNotFound = () => {
       <Preloader />
     </div>
   )
-}
+};
 
 export default PageNotFound;
