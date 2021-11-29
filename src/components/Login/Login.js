@@ -20,8 +20,8 @@ const Login = () => {
           </fieldset>
         </form>
         <div className="register__signin">
-            <p className="register__text">Уже зарегистрированы?</p>
-            <Link className="register__link" to="/signup">Войти</Link>
+            <p className="register__text">Ещё не зарегистрированы?</p>
+            <Link className="register__link" to="/signup">Регистрация</Link>
           </div>
       </div>
     </div>
