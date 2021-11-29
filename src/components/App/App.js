@@ -9,6 +9,7 @@ import AboutMe from '../AboutMe/AboutMe';
 import Header from '../Header/Header';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import Profile from '../Profile/Profile';
 
 import Techs from '../Techs/Techs';
 
@@ -19,6 +20,7 @@ const App = () => {
         <Header />
         <Register />
         <Login />
+        <Profile />
         <Promo />
         <AboutProject />
         <Techs />

@@ -15,6 +15,10 @@
   flex-direction: column;
 }
 
+.register__content_type_loggedin {
+  max-width: 410px;
+}
+
 .register__logo {
   width: 38px;
   height: 38px;
@@ -34,14 +38,17 @@
   width: 100%;
 }
 
+.register__title_type_loggedin {
+  text-align: center;
+  margin-bottom: 123px;
+}
+
 .register__form {
   margin: 0;
   padding: 0;
   font: inherit;
   display: flex;
   flex-direction: column;
-  max-width: 396px;
-  width: 100%;
 }
 
 .register__container {
@@ -51,6 +58,10 @@
   display: flex;
   flex-direction: column;
   border: 0;
+}
+
+.register__container_type_loggedin {
+  margin-bottom: 0;
 }
 
 .register__label {
@@ -67,6 +78,21 @@
   margin-top: 0;
 }
 
+.register__label_type_loggedin {
+  margin: 0;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #000000;
+  margin-bottom: -23px;
+  z-index: 1;
+}
+
+.register__label_type_loggedin:nth-of-type(2) {
+  margin-bottom: 0;
+  margin-top: -23px;
+}
+
 .register__input {
   margin: 0;
   padding: 0;
@@ -75,6 +101,19 @@
   border-bottom: 1px solid #E8E8E8;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.register__input_type_loggedin {
+  max-width: 410px;
+  text-align: end;
+  z-index: 0;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.register__input_type_loggedin:nth-of-type(2) {
+  border: 0;
 }
 
 .register__input_type_sucsess {
@@ -106,6 +145,12 @@
   justify-content: center;
   align-items: center;
   border: 0;
+}
+
+.register__button_type_loggedin {
+  margin-top: 220px;
+  color: #000;
+  background-color: transparent;
 }
 
 .register__button:hover {
@@ -147,3 +192,9 @@
   opacity: 0.7;
   cursor: pointer;
 }
+
+.register__link_type_loggedin {
+  color: #EE3465;
+  margin-left: 0;
+}
+

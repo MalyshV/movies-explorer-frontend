@@ -21,7 +21,7 @@ const Login = () => {
         </form>
         <div className="register__signin">
             <p className="register__text">Уже зарегистрированы?</p>
-            <Link className="register__link" to="/signin">Войти</Link>
+            <Link className="register__link" to="/signup">Войти</Link>
           </div>
       </div>
     </div>
