@@ -10,6 +10,8 @@ import Header from '../Header/Header';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
+import SavedMovies from '../SavedMovies/SavedMovies'
+import Movies from '../Movies/Movies';
 
 import Techs from '../Techs/Techs';
 
@@ -21,6 +23,8 @@ const App = () => {
         <Register />
         <Login />
         <Profile />
+        <Movies />
+        <SavedMovies />
         <Promo />
         <AboutProject />
         <Techs />

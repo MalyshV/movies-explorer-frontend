@@ -1,0 +1,38 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+  font-family: Inter;
+  font-style: normal;
+}
+
+.movies__button {
+  margin: 50px 0 80px;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1140px;
+  width: 100%;
+  min-height: 36px;
+  align-self: center;
+  background-color: #F9F9F9;
+  border-radius: 6px;
+  border: none;
+}
+
+.movies__button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.movies__button_type_selected {
+  background-color: #EE3465;
+  color: #fff;
+}
+
+.movies__button_type_delete {
+  color: #000;
+}
