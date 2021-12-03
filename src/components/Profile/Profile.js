@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Header/Header';
 
 const Profile = () => {
   return (
     <div className="page">
-      <Header />
       <div className="register">
         <div className="register__content register__content_type_loggedin">
           <h2 className="register__title register__title_type_loggedin">Привет, Виталий!</h2>

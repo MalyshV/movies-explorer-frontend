@@ -1,17 +1,13 @@
 import React from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import SearchForm from '../SearchForm/SearchForm';
 
 const SavedMovies = () => {
   return(
-    <>
-      <Header />
-      <section class="movies__content">
-
-
-      </section>
-      <Footer />
-    </>
+    <section class="movies">
+      <SearchForm />
+      <MoviesCardList />
+    </section>
   )
 };
 

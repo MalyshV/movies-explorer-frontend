@@ -7,12 +7,15 @@ const Register = () => {
   return(
     <div className="register">
       <div className="register__content">
-        <img className="register__logo" src={logo} alt="логотип сайта"/>
+        <Link className="register__link" to="/">
+          <img className="register__logo" src={logo} alt="логотип сайта"/>
+        </Link>
         <h2 className="register__title">Добро пожаловать!</h2>
         <form className="register__form">
           <fieldset className="register__container">
-            <label className="register__label">Имя</label>
-            <input type="text" className="register__input" required tabIndex="1" />
+            <label className="register__label">Имя
+              <input type="text" className="register__input" required tabIndex="1" />
+            </label>
             <span className="register__error">Что-то пошло не так...</span>
             <label className="register__label">E-mail</label>
             <input type="email" className="register__input" required tabIndex="2" />

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer className="footer">
       <div className="footer__content">
         <h3 className="footer__title">
           Учебный проект Яндекс.Практикум х BeatFilm.
@@ -16,7 +16,7 @@ const Footer = () => {
           <p class="footer__copyright">&copy; 2021</p>
         </div>
       </div>
-    </div>
+    </footer>
   )
 };
 

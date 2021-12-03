@@ -1,46 +1,32 @@
 import './App.css';
-import { Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 // import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import PageNotFound from '../PageNotFound/PageNotFound';
+import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
-import Promo from '../Promo/Promo';
-import AboutProject from '../AboutProject/AboutProject';
-import AboutMe from '../AboutMe/AboutMe';
 import Header from '../Header/Header';
+import PageNotFound from '../PageNotFound/PageNotFound';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Movies from '../Movies/Movies';
 
-import Techs from '../Techs/Techs';
-
 const App = () => {
   return (
-    /* <CurrentUserContext.Provider> */
-      <div className="page">
-        <Header />
-        <Register />
-        <Login />
-        <Profile />
-        <Movies />
-        <SavedMovies />
-        <Promo />
-        <AboutProject />
-        <Techs />
-        <AboutMe />
-        <PageNotFound />
-        <Footer />
-      </div>
-    /* </CurrentUserContext.Provider> */
+    <>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path='/movies' element={<Movies/>} />
+        <Route path='/saved-movies' element={<SavedMovies />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/signup' element={<Register />} />
+        <Route path='/signin' element={<Login />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
-
-/* <Route path='/'></Route>
-      <Route path='/movies'></Route>
-      <Route path='/saved-movies'></Route>
-      <Route path='/profile'></Route>
-      <Route path='/signup'></Route>
-      <Route path='/signin'></Route> */

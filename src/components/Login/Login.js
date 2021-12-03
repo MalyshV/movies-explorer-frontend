@@ -6,7 +6,9 @@ const Login = () => {
   return (
     <div className="register">
       <div className="register__content">
-        <img className="register__logo" src={logo} alt="логотип сайта"/>
+        <Link className="register__link" to="/">
+          <img className="register__logo" src={logo} alt="логотип сайта"/>
+        </Link>
         <h2 className="register__title">Рады видеть!</h2>
         <form className="register__form">
           <fieldset className="register__container">

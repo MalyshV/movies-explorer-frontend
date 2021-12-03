@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Preloader from '../Preloader/Preloader';
 
 const PageNotFound = () => {
   return (
@@ -10,7 +9,6 @@ const PageNotFound = () => {
         Страница не найдена
       </p>
       <Link className="note-found__link" to="/">Назад</Link>
-      <Preloader />
     </div>
   )
 };

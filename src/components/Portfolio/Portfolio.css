@@ -1,5 +1,14 @@
 .portfolio {
-  margin-top: 101px;
+  margin: 0 0 125px;
+  font-family: Inter;
+  display: flex;
+  flex-direction: column;
+}
+
+.portfolio__content {
+  max-width: 1140px;
+  width: 100%;
+  align-self: center;
 }
 
 .portfolio__title {
