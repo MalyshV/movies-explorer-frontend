@@ -1,24 +1,7 @@
 .techs {
-  padding: 100px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  background-color: #F5F5F5;
-}
-
-.techs__title {
-  font: inherit;
-  font-size: 22px;
-  line-height: 27px;
-  margin: 0;
-  padding: 0;
-  max-width: 1140px;
-  width: 100%;
-  border-bottom: 1px solid #000;
-  padding-bottom: 23px;
 }
 
 .techs__subtitle {
