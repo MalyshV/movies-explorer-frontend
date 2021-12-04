@@ -51,6 +51,11 @@
   justify-content: center;
 }
 
+.techs__item:hover {
+  transform: translate(0, 10px);
+  cursor: pointer;
+}
+
 @media (max-width: 678px) {
   .techs__items {
     max-width: 650px;

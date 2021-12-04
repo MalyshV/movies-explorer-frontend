@@ -1,22 +1,32 @@
 import React from 'react';
 import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 const Form = ({ name, title, textOnButton, underFormQuestion, linkName, children, linkPath }) => {
+  const {
+    register,
+    formState: {
+      errors,
+    },
+    handleSubmit,
+  } = useForm();
 
-  const logoClass = "form__logo" || "form__logo_type_loggedin";
+  const onSubmit = (data) => {
+    alert(JSON.stringify(data));
+  };
 
   return(
     <div className="form">
       <div className="form__content">
         <Link className="form__link" to="/">
-          <img className={logoClass} src={logo} alt="логотип сайта"/>
+          <img className="form__logo" src={logo} alt="логотип сайта"/>
         </Link>
         <h2 className="form__title">{title}</h2>
-        <form className="form__form" action="#" name={name}>
+        <form className="form__form" action="#" name={name} onSubmit={handleSubmit(onSubmit)}>
           <fieldset className="form__container">
             {children}
-            <button className="form__button" type="button">{textOnButton}</button>
+            <button className="form__button" type="submit">{textOnButton}</button>
           </fieldset>
         </form>
         <div className="form__signin">

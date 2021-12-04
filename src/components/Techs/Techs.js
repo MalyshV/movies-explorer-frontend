@@ -1,11 +1,9 @@
 import React from 'react';
 import Section from '../Section/Section';
 
-const bgColor = {color: 'red'};
-
 const Techs = () => {
   return(
-    <Section style={bgColor} title="Технологии">
+    <Section title="Технологии">
       <article class="techs">
         <h4 className="techs__subtitle">7 технологий</h4>
         <p className="techs__text">

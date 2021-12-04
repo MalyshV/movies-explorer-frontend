@@ -1,15 +1,12 @@
 import React from 'react';
 import Form from '../Form/Form';
+import FormInput from '../FormInput/FormInput';
 
 const Profile = () => {
   return (
-    <Form name="profileForm" title="Привет, Виталий!" textOnButton="Редактировать" underFormQuestion="Уже зарегистрированы?" linkPath="/" linkName="Выйти из аккаунта">
-      <label className="form__label form__label_type_loggedin">Имя</label>
-      <input type="text" name="userName" className="form__input form__input_type_loggedin" required tabIndex="1" value={'Виталий'} />
-      <span className="form__error" />
-      <input type="email" className="form__input form__input_type_loggedin" required tabIndex="2" value={'pochta@yandex.ru'} />
-      <label className="form__label form__label_type_loggedin">E-mail</label>
-      <span className="form__error" />
+    <Form logo="" name="profileForm" title="Привет, Виталий!" textOnButton="Редактировать" linkPath="/" underFormQuestion="" linkName="Выйти из аккаунта">
+      <FormInput labelClassName="_type_loggedin" inputClassName="_type_loggedin" labelName="Имя" inputType="text" inputName="userName" tabIndex="1" value="Виталий"/>
+      <FormInput labelClassName="_type_loggedin" inputClassName="_type_loggedin" inputType="email" labelName="E-mail" tabIndex="2" value="pochta@yandex.ru"/>
     </Form>
   )
 }

@@ -42,10 +42,10 @@
   cursor: pointer;
 }
 
-.form__link_type_loggedin {
+/* .form__link_type_loggedin {
   color: #EE3465;
   margin-left: 0;
-}
+} */
 
 .form__logo {
   width: 38px;
@@ -79,13 +79,14 @@
   border: 0;
 }
 
-.form__container_type_loggedin {
+/* .form__container_type_loggedin {
   margin-bottom: 0;
-}
+} */
 
 .form__label {
   margin: 0;
   margin-top: 24px;
+  margin-bottom: 5px;
   padding: 0;
   font-weight: normal;
   font-size: 10px;
@@ -97,7 +98,7 @@
   margin-top: 0;
 }
 
-.form__label_type_loggedin {
+/* .form__label_type_loggedin {
   margin: 0;
   font-weight: 500;
   font-size: 11px;
@@ -105,12 +106,12 @@
   color: #000000;
   margin-bottom: -23px;
   z-index: 1;
-}
+} */
 
-.form__label_type_loggedin:nth-of-type(2) {
-  margin-bottom: 0;
+/* .form__label_type_loggedin:nth-of-type(2) {
+  border-bottom: 0;
   margin-top: -23px;
-}
+} */
 
 .form__input {
   margin: 0;
@@ -128,6 +129,14 @@
   cursor: pointer;
 }
 
+.form__input:focus {
+  background-color: transparent;
+}
+
+/* .form__input:valid {
+  border-bottom: 1px solid #2BE080;
+}
+
 .form__input_type_loggedin {
   max-width: 410px;
   text-align: end;
@@ -138,8 +147,8 @@
 }
 
 .form__input_type_loggedin:nth-of-type(2) {
-  border: 0;
-}
+  border-bottom: transparent;
+} */
 
 .form__input_type_sucsess {
   border-color: #2BE080;
@@ -172,11 +181,11 @@
   border: 0;
 }
 
-.form__button_type_loggedin {
+/* .form__button_type_loggedin {
   margin-top: 220px;
   color: #000;
   background-color: transparent;
-}
+} */
 
 .form__button:hover {
   opacity: 0.7;
