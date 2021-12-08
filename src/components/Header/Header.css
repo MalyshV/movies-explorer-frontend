@@ -28,3 +28,9 @@
   height: 38px;
   margin-right: 55px;
 }
+
+.header__icon:hover {
+  transition: opacity .5s ease-in-out;
+  opacity: 0.7;
+  cursor: pointer;
+}

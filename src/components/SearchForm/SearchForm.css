@@ -49,9 +49,22 @@
   line-height: 20px; /* изменить?? */
 }
 
+.search__input:hover {
+  transition: background-color .5s ease-in-out;
+  background-color: #E8E8E8;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
 .search__icon {
   width: 34px;
   height: 34px;
+}
+
+.search__icon:hover {
+  transition: opacity .5s ease-in-out;
+  opacity: 0.7;
+  cursor: pointer;
 }
 
 .search__button {
@@ -67,4 +80,10 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 18px;
+}
+
+.search__button:hover {
+  transition: opacity .5s ease-in-out;
+  opacity: 0.7;
+  cursor: pointer;
 }

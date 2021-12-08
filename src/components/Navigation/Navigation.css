@@ -27,6 +27,7 @@
 
 .nav__page:hover {
   opacity: 0.7;
+  transition: opacity .5s ease-in-out;
 }
 
 .nav__links {
@@ -59,4 +60,5 @@
 
 .nav__link:hover {
   opacity: 0.7;
+  transition: opacity .5s ease-in-out;
 }

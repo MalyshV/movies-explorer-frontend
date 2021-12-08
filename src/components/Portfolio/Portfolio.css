@@ -50,6 +50,7 @@
 }
 
 .portfolio__link:hover {
+  transition: opacity .5s ease-in-out;
   opacity: 0.7;
   cursor: pointer;
 }

@@ -52,6 +52,7 @@
 }
 
 .techs__item:hover {
+  transition: opacity .5s ease-in-out;
   transform: translate(0, 10px);
   cursor: pointer;
 }
