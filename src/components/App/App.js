@@ -13,11 +13,11 @@ import Movies from '../Movies/Movies';
 
 const App = () => {
   return (
-    <>
+    <div class="page">
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path='/movies' element={<Movies/>} />
+        <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/signup' element={<Register />} />
@@ -25,7 +25,7 @@ const App = () => {
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer />
-    </>
+    </div>
   );
 };
 

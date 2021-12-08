@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
   list-style-type: none; /* перенести в класс списка */
-  font-family: 'Inter';
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   border-radius: 6px;
   background: #FDFDFD;
@@ -58,6 +58,17 @@
   border: none;
   font-size: 12px;
   line-height: 11px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.card__like_type_delete {
+  background-image: url(../../images/close_icon.svg);
+}
+
+.card__like_type_active {
+  background-image: url(../../images/icon__COLOR_invisible.svg);
+  background-color: #EE3465;
 }
 
 .card__like:hover {

@@ -4,18 +4,18 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 const MoviesCardList = () => {
   return (
     <ul class="cards">
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27"/>
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
+      <MoviesCard duration="27" />
     </ul>
   )
 };

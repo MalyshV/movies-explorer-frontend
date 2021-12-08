@@ -3,6 +3,7 @@
   max-width: 1102px;
   width: 100%;
   justify-content: space-between;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .nav__pages {

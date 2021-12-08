@@ -1,11 +1,10 @@
 .footer {
-  margin: 0 auto;
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: Inter;
+  font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 13px;
@@ -15,8 +14,8 @@
 }
 
 .footer__content {
-  max-width: 1140px;
   width: 100%;
+  max-width: 1140px;
 }
 
 .footer__title {

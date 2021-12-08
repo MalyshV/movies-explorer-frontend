@@ -4,10 +4,9 @@
   background-color: #fff;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
-  font-family: Inter;
   font-style: normal;
   font-weight: normal;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .section:nth-of-type(3) {
