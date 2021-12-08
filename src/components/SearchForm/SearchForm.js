@@ -1,19 +1,17 @@
 import React from 'react';
 import img from '../../images/searchIcon.svg';
+import FormInput from '../FormInput/FormInput';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 const SearchForm = () => {
   return (
     <section className="search">
-      <form className="search__form">
-        <div className="search__box">
-          <img src={img} alt="иконка поиска" className="search__icon" />
-          <h3 className="search__title">Фильм</h3>
-          <button className="search__button">Найти</button>
-        </div>
-        <fieldset className="search__container">
-          <input type="search" placeholder="Фильм" className="search__input" />
-        </fieldset>
-      </form>
+      <div className="search__box">
+        <img src={img} alt="иконка поиска" className="search__icon" />
+        <FormInput placeholder="Фильм" inputType="search" tabIndex="1" inputName="search" labelClassName="_place_movies" inputClassName="_place_movies"></FormInput>
+        <button className="search__button">Найти</button>
+      </div>
+      <FilterCheckbox />
     </section>
   )
 };

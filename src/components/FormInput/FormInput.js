@@ -1,11 +1,12 @@
 import React from "react";
 
-const FormInput = ({ labelClassName, inputClassName, labelName, inputType, inputName, spanText, tabIndex, value }) => {
+const FormInput = ({ labelClassName, inputClassName, labelName, inputType, inputName, spanText, tabIndex, value, placeholder, children }) => {
   return(
     <>
       <label className={`form__label form__label${labelClassName}`}>{labelName}</label>
-      <input type={inputType} name={inputName} className={`form__input form__input${inputClassName}`} required tabIndex={tabIndex} value={value}/>
+      <input type={inputType} name={inputName} className={`form__input form__input${inputClassName}`} required tabIndex={tabIndex} value={value} placeholder={placeholder}/>
       <span className="form__error">{spanText}</span>
+      { children }
     </>
   )
 };
