@@ -1,0 +1,82 @@
+.button {
+  margin: 69px 0 0;
+  padding: 0;
+  width: 396px;
+  height: 45px;
+  background-color: #2BE080;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+}
+
+.button_place_profile {
+  margin-top: 220px;
+  height: 16px;
+  color: #000;
+  background-color: transparent;
+}
+
+.button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity .5s ease-in-out;
+}
+
+.button_place_search-form {
+  margin-top: 0;
+  background-color: #2BE080;
+  color: #fff;
+  border-radius: 48px;
+  width: 59px;
+  height: 34px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.button_place_movies {
+  margin: 50px 0 80px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  max-width: 1140px;
+  width: 100%;
+  min-height: 36px;
+  align-self: center;
+  background-color: #F9F9F9;
+  border-radius: 6px;
+  border: none;
+  color: #000;
+}
+
+.button_place_card {
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  background-color: #F9F9F9;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  line-height: 11px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #000;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.button_place_card_delete {
+  background-image: url(../../images/close_icon.svg);
+}
+
+.button_place_card_active {
+  background-image: url(../../images/icon__COLOR_invisible.svg);
+  background-color: #EE3465;
+}

@@ -3,7 +3,7 @@ import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 // import { useForm } from 'react-hook-form';
 
-const Form = ({ name, title, titleClassName, textOnButton, underFormQuestion, linkName, children, linkPath, linkClassName, buttonClassName, profileLinkClassName }) => {
+const Form = ({ name, title, titleClassName, underFormQuestion, linkName, children, linkPath, linkClassName, profileLinkClassName }) => {
   return(
     <div className="form">
       <div className="form__content">
@@ -14,7 +14,6 @@ const Form = ({ name, title, titleClassName, textOnButton, underFormQuestion, li
         <form className="form__form" action="#" name={name}>
           <fieldset className="form__container">
             {children}
-            <button className={`form__button form__button${buttonClassName}`} type="submit">{textOnButton}</button>
           </fieldset>
         </form>
         <div className="form__signin">

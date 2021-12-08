@@ -38,18 +38,19 @@
 
 .form__input:hover {
   transition: background-color .5s ease-in-out;
-  background-color: #E8E8E8;
+  background-color: #F9F9F9;
   border-radius: 3px;
   cursor: pointer;
 }
 
 .form__input:focus {
   background-color: transparent;
+  border-bottom: 1px solid #EE3465;
 }
 
-/* .form__input:valid {
+.form__input:valid {
   border-bottom: 1px solid #2BE080;
-} */
+}
 
 .form__input_type_loggedin {
   max-width: 410px;
@@ -60,12 +61,12 @@
   line-height: 13px;
 }
 
-.form__input_type_loggedin:nth-of-type(2) {
-  border-bottom: transparent;
+.form__input_type_loggedin:valid {
+  border-bottom: 1px solid #E8E8E8;
 }
 
-.form__input_type_sucsess {
-  border-color: #2BE080;
+.form__input_type_loggedin:nth-of-type(2) {
+  border-bottom: transparent;
 }
 
 .form__error {
