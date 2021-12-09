@@ -93,9 +93,7 @@
   max-width: 270px;
   width: 100%;
   min-height: 327px;
-  border: 1px dashed grey;
   border-radius: 10px;
-  background-color: grey;
   overflow: hidden;
   box-sizing: border-box;
 }

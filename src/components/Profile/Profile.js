@@ -2,7 +2,7 @@ import React from 'react';
 import Form from '../Form/Form';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
-import errors from '../../utils/constants';
+import errors from '../../utils/errorsConfig';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
 const Profile = () => {
