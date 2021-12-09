@@ -3,7 +3,7 @@ import logo from '../../images/logo.svg';
 import { Link } from 'react-router-dom';
 // import { useForm } from 'react-hook-form';
 
-const Form = ({ name, title, titleClassName, underFormQuestion, linkName, children, linkPath, linkClassName, profileLinkClassName }) => {
+const Form = ({ name, onSubmit, title, titleClassName, underFormQuestion, linkName, children, linkPath, linkClassName, profileLinkClassName }) => {
   return(
     <div className="form">
       <div className="form__content">
@@ -11,7 +11,7 @@ const Form = ({ name, title, titleClassName, underFormQuestion, linkName, childr
           <img className="form__logo" src={logo} alt="логотип сайта"/>
         </Link>
         <h2 className={`form__title form__title${titleClassName}`}>{title}</h2>
-        <form className="form__form" action="#" name={name}>
+        <form className="form__form" action="#" name={name} onSubmit={onSubmit}>
           <fieldset className="form__container">
             {children}
           </fieldset>

@@ -4,7 +4,7 @@ import Section from '../Section/Section';
 const Techs = () => {
   return(
     <Section title="Технологии">
-      <article class="techs">
+      <article className="techs">
         <h4 className="techs__subtitle">7 технологий</h4>
         <p className="techs__text">
           На курсе веб-разработки мы освоили технологии, которые применили в  дипломном проекте.

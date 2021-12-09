@@ -13,7 +13,7 @@ import Movies from '../Movies/Movies';
 
 const App = () => {
   return (
-    <div class="page">
+    <div className="page">
       <Header />
       <Routes>
         <Route path='/' element={<Main />} />

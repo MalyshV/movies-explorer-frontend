@@ -3,7 +3,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 const MoviesCardList = () => {
   return (
-    <ul class="cards">
+    <ul className="cards">
       <MoviesCard duration="27" />
       <MoviesCard duration="27" />
       <MoviesCard duration="27" />

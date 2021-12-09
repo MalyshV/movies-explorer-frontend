@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm';
 
 const SavedMovies = () => {
   return(
-    <section class="movies">
+    <section className="movies">
       <SearchForm />
       <MoviesCardList />
     </section>
