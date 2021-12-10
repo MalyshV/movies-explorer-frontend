@@ -1,6 +1,8 @@
 import React from 'react';
 import wrong from '../../images/2.svg';
 
+/* пока проверка через файл .css */
+
 const ErrorPopup = ({ isOpen, onClose, popupText }) => {
 
   return(
