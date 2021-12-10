@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 // import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
