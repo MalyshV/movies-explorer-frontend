@@ -13,11 +13,11 @@
 
   /* для показа модального окна по /signin, /signup, /profile закомментить код ниже */
 
-  visibility: hidden;
+  /* visibility: hidden;
   opacity: 0;
   transition-property: opacity visibility;
   transition-duration: .5s;
-  transition-timing-function: linear;
+  transition-timing-function: linear; */
 }
 
 .popup_is-opened {
@@ -27,7 +27,7 @@
 
 .popup__content {
   max-width: 430px;
-  height: 370px;
+  min-height: 370px;
   width: 100%;
   background-color: #fff;
   border-radius: 10px;
@@ -81,4 +81,12 @@
   font-weight: normal;
   font-size: 20px;
   line-height: 24px;
+}
+
+@media (max-width: 690px) {
+  .popup__content {
+    max-width: 290px;
+    padding: 0 25px;
+    min-height: 290px;
+  }
 }
