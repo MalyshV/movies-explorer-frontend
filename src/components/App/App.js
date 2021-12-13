@@ -14,17 +14,38 @@ import Movies from '../Movies/Movies';
 const App = () => {
   return (
     <div className="page">
-      <Header />
       <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route path='/' element={
+          <>
+            <Header />
+            <Main />
+            <Footer />
+          </>
+        } />
+        <Route path='/movies' element={
+          <>
+            <Header />
+            <Movies />
+            <Footer />
+          </>
+        } />
+        <Route path='/saved-movies' element={
+          <>
+            <Header />
+            <SavedMovies />
+            <Footer />
+          </>
+        } />
+        <Route path='/profile' element={
+          <>
+            <Header />
+            <Profile />
+          </>
+        } />
         <Route path='/signup' element={<Register />} />
         <Route path='/signin' element={<Login />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
-      <Footer />
     </div>
   );
 };
