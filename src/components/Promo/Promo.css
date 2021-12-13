@@ -83,6 +83,7 @@
 
 @media (max-width: 350px) {
   .promo__title {
-    max-width: 300px;
+    width: 300px;
+    font-size: 30px;
   }
 }
