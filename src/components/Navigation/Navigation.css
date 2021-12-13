@@ -66,12 +66,6 @@
  display: flex;
 }
 
-.nav__page_type_loggedIn-active {
-  text-decoration: none;
-  color: #000;
-  font-weight: bold;
-}
-
 .nav__page_type_loggedIn:first-of-type {
   display: none;
 }

@@ -13,14 +13,6 @@
   font-family: 'Inter', Arial, sans-serif;
 }
 
-/* @media (max-width: 1020px) {
-  .page {
-    padding: 0 44px;
-  }
+.active {
+  font-weight: bold;
 }
-
-@media (max-width: 768px) {
-  .page {
-    padding: 0 30px;
-  }
-} */

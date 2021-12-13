@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); /* для проверки белой шапки - true - здесь и в NavLinks.js */
+  const [isLoggedIn, setIsLoggedIn] = useState(false); /* для проверки белой шапки - true - здесь и в NavLinks.js */
 
   const headerClassName=`${!isLoggedIn? 'header' : 'header header_type_loggedIn'}`;
 
