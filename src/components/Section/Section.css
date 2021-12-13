@@ -16,7 +16,6 @@
 .section__content {
   max-width: 1140px;
   width: 100%;
-  border: 1px color red;
 }
 
 .section__title {
@@ -33,9 +32,9 @@
   .section {
     padding-left: 50px;
     padding-right: 50px;
-
   }
 }
+
 @media (max-width: 690px) {
   .section {
     padding: 70px 18px;

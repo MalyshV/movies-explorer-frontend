@@ -6,15 +6,12 @@
   width: 100%;
   list-style: none;
   gap: 32px 28px;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  border: 1px solid red;
-  place-items: center;
+  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
-@media (max-width: 540px) {
+@media (max-width: 600px) {
   .cards {
-    margin-top: 90px;
-    gap: 14px;
-    max-width: 300px;
+    gap: 16px 0;
   }
 }

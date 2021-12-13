@@ -6,11 +6,31 @@
   flex-direction: column;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
-  border: 1px solid red;
+  padding: 0 70px;
 }
 
 .movies__content {
   max-width: 1140px;
   width: 100%;
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .movies {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 690px) {
+  .movies {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .movies__content {
+    max-width: 400px;
+  }
 }

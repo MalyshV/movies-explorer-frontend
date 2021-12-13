@@ -98,4 +98,14 @@
     width: 59px;
     margin-top: 0;
   }
+
+  .button_place_card {
+    width: 100px;
+    margin-top: 0;
+  }
+
+  .button_place_movies {
+    width: 100%;
+    margin-top: 50px;
+  }
 }
