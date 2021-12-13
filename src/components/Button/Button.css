@@ -93,4 +93,9 @@
     line-height: 15px;
     margin-top: 220px;
   }
+
+  .button_place_search-form {
+    width: 59px;
+    margin-top: 0;
+  }
 }
