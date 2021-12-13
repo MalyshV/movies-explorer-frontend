@@ -62,6 +62,7 @@
 }
 
 .button_place_card {
+  background-image: url(../../images/button_save_icon.svg);
   margin: 0;
   padding: 0;
   width: 100px;
@@ -79,11 +80,34 @@
 
 .button_place_card_delete {
   background-image: url(../../images/close_icon.svg);
+  background-color: #F9F9F9;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  line-height: 11px;
+  background-position: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .button_place_card_active {
   background-image: url(../../images/icon__COLOR_invisible.svg);
   background-color: #EE3465;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  line-height: 11px;
+  background-position: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 690px) {
@@ -106,6 +130,6 @@
 
   .button_place_movies {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 50px
   }
 }

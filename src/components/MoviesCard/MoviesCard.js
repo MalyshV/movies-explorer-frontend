@@ -10,7 +10,7 @@ const MoviesCard = ({ duration }) => {
         <p className="card__duration"><span>{duration}</span> минут</p>
       </div>
       <img className="card__image" src={film} alt="обложка фильма" />
-      <Button textOnButton="Сохранить" buttonClassName="_place_card" />
+      <Button textOnButton="" buttonClassName="_place_card" />
     </li>
   )
 };

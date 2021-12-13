@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 
 const Movies = () => {
   return (
-    <section className="movies">
+    <section className="movies" >
       <div className="movies__content">
         <SearchForm />
         <MoviesCardList />

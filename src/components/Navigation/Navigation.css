@@ -40,6 +40,7 @@
 .nav__pages {
   margin: 0;
   padding: 0;
+  margin-left: 44px;
   list-style: none;
   max-width: 212px;
   width: 100%;
@@ -63,6 +64,12 @@
 
 .nav__page_type_loggedIn {
  display: flex;
+}
+
+.nav__page_type_loggedIn-active {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
 }
 
 .nav__page_type_loggedIn:first-of-type {
@@ -191,7 +198,6 @@
 
   .nav__page_type_loggedIn:hover{
     text-decoration: underline 1px #2BE080;
-
   }
 
   .nav__page_type_loggedIn:first-of-type {
