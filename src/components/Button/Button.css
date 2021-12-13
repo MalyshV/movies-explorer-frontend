@@ -85,3 +85,12 @@
   background-image: url(../../images/icon__COLOR_invisible.svg);
   background-color: #EE3465;
 }
+
+@media (max-width: 690px) {
+  .button {
+    width: 260px;
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 220px;
+  }
+}

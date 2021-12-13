@@ -13,11 +13,11 @@
 
   /* для показа модального окна по /signin, /signup, /profile закомментить код ниже */
 
-  /* visibility: hidden;
+  visibility: hidden;
   opacity: 0;
   transition-property: opacity visibility;
   transition-duration: .5s;
-  transition-timing-function: linear; */
+  transition-timing-function: linear;
 }
 
 .popup_is-opened {

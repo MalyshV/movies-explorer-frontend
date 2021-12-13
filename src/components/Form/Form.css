@@ -21,6 +21,7 @@
   font: inherit;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .form__link {
@@ -32,8 +33,6 @@
   padding: 0;
   background-color: transparent;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
   color: #2BE080;
 }
 
@@ -71,7 +70,7 @@
   font-size: 24px;
   line-height: 29px;
   color: #000;
-  max-width: 396px;
+  /* max-width: 396px; */
   width: 100%;
 }
 
@@ -91,16 +90,33 @@
 
 .form__signin {
   display: flex;
-  max-width: 396px;
+  /* max-width: 396px; */
   width: 100%;
   justify-content: center;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .form__text{
   margin: 0;
   padding: 0;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
   color: #A0A0A0;
+}
+
+@media (max-width: 690px) {
+  .form__content {
+    max-width: 290px;
+    align-items: center;
+  }
+
+  .form__title {
+    text-align: center;
+    margin-bottom: 123px;
+  }
+
+  .form__signin {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
