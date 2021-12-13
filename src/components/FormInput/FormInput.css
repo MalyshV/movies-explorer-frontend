@@ -110,3 +110,12 @@
   cursor: pointer;
   transition: opacity .5s ease-in-out;
 }
+
+@media (max-width: 690px) {
+  .form__input_place_movies {
+    text-align: start;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 0;
+  }
+}

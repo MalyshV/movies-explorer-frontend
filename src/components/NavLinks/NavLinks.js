@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import accauntIcon from '../../images/icon__accaunt.svg';
 
 const NavLinks = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); /* для проверки белой шапки - true - здесь и в Header.js */
+  const [isLoggedIn, setIsLoggedIn] = useState(false); /* для проверки белой шапки - true - здесь и в Header.js */
 
   const navClassName = `${!isLoggedIn? 'nav__page' : 'nav__page nav__page_type_loggedIn'}`;
   const linksClassName = `${!isLoggedIn? 'nav__links' : 'nav__links nav__links_type_loggedIn'}`;

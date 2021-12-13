@@ -10,11 +10,6 @@
   font-weight: normal;
 }
 
-.student__content {
-  max-width: 1140px;
-  width: 100%;
-}
-
 .student__title {
   margin: 0;
   padding: 0;
@@ -97,3 +92,82 @@
   overflow: hidden;
   box-sizing: border-box;
 }
+
+@media (max-width: 1040px) {
+  .student__info {
+    margin-top: 66px;
+  }
+
+  .student__block {
+    max-width: 500px;
+  }
+
+  .stunent__subtitle {
+    font-size: 40px;
+    line-height: 40px;
+    margin-bottom: 16px;
+  }
+
+  .student__about {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .student__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 20px;
+    margin-bottom: 87px;
+  }
+
+  .student__image {
+    max-width: 255px;
+    width: 100%;
+    height: 307px;
+    box-sizing: border-box;
+  }
+}
+
+ @media (max-width: 900px) {
+  .student__block {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 780px) {
+  .student__block {
+    max-width: 270px;
+  }
+}
+
+@media (max-width: 540px) {
+  .student__info {
+    flex-direction: column-reverse;
+    margin-top: 60px;
+  }
+
+  .stunent__subtitle {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 40px 0 20px;
+  }
+
+  .student__about {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .student__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 40px;
+  }
+
+  .student__image {
+    max-width: 292px;
+    width: 100%;
+    height: 352px;
+    box-sizing: border-box;
+  }
+}
+

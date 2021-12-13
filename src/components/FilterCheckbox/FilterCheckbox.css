@@ -50,3 +50,9 @@
   line-height: 18px;
   color: #000000;
 }
+
+@media (max-width: 690px) {
+  .checkbox__name {
+    font-size: 11px;
+  }
+}

@@ -6,9 +6,11 @@ import Button from '../Button/Button';
 const Movies = () => {
   return (
     <section className="movies">
-      <SearchForm />
-      <MoviesCardList />
-      <Button textOnButton="Ещё" buttonClassName="_place_movies" />
+      <div className="movies__content">
+        <SearchForm />
+        <MoviesCardList />
+        <Button textOnButton="Ещё" buttonClassName="_place_movies" />
+      </div>
     </section>
   )
 };

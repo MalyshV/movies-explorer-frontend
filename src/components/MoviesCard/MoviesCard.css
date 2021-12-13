@@ -21,7 +21,8 @@
   padding: 0;
   display: flex;
   justify-content: space-between;
-  width: 324px;
+  max-width: 324px;
+  width: 100%;
 }
 
 .card__title {
@@ -46,4 +47,42 @@
   margin: 0;
   padding: 0;
   width: 360px;
+}
+
+@media (max-width: 1020px) {
+  .card {
+    max-width: 342px;
+    min-height: 309px;
+  }
+
+  .card__image {
+    max-width: 342px;
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 540px) {
+  .card {
+    max-width: 300px;
+    min-height: 271px;
+  }
+
+  .card__image {
+    max-width: 300px;
+    min-height: 168px;
+  }
+
+  .card__info {
+    max-width: 272px;
+  }
+
+  .card__title {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .card__duration {
+    font-size: 10px;
+    line-height: 18px;
+  }
 }
