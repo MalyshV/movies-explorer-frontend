@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import NavMobile from '../NavMobile/NavMobile';
-import accauntIcon from '../../images/icon__accaunt.svg';
+import accauntIcon from '../../images/accaunt_icon.svg';
 
 const Navigation = ({ type }) => {
   return (

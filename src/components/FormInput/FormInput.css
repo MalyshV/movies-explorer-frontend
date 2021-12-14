@@ -39,14 +39,14 @@
 }
 
 .form__input:hover {
-  transition: background-color .5s ease-in-out;
-  background-color: #F9F9F9;
-  border-radius: 3px;
+  box-shadow: 5px 5px 20px rgba(50, 248, 139, 0.288);
+  transition: box-shadow .5s linear;
+  border-radius: 10px;
   cursor: pointer;
 }
 
 .form__input:focus {
-  background-color: transparent;
+  box-shadow: none;
   border-bottom: 1px solid #EE3465;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .form__input_place_movies {
-  margin: 0;
+  margin: 0 5px;
   padding: 0;
   height: 62px;
   width: 100%;
@@ -103,7 +103,7 @@
   padding: 0;
   width: 34px;
   height: 34px;
-  background: url(../../images/1.svg) no-repeat;
+  background: url(../../images/popup_close_icon.svg) no-repeat;
   background-size: cover;
 }
 

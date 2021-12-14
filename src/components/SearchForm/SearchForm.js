@@ -1,5 +1,5 @@
 import React from 'react';
-import img from '../../images/searchIcon.svg';
+import img from '../../images/search_icon.svg';
 import FormInput from '../FormInput/FormInput';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Button from '../Button/Button';

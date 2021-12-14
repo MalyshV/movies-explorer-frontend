@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
-import logoIcon from '../../images/logo.svg'
+import logoIcon from '../../images/logo_icon.svg'
 
 const Header = ({ type }) => {
   return (

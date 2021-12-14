@@ -10,9 +10,6 @@
   bottom: 0;
   right: 0;
   z-index: 1;
-
-  /* для показа модального окна по /signin, /signup, /profile закомментить код ниже */
-
   visibility: hidden;
   opacity: 0;
   transition-property: opacity visibility;
@@ -42,7 +39,7 @@
 
 .popup__close {
   padding: 0;
-  background-image: url(../../images/1.svg);
+  background-image: url(../../images/popup_close_icon.svg);
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -88,5 +85,20 @@
     max-width: 290px;
     padding: 0 25px;
     min-height: 290px;
+  }
+}
+
+@media (max-width: 375px) {
+  .popup__content {
+    max-width: 260px;
+    padding: 0 15px;
+    min-height: 260px;
+  }
+
+  .popup__close {
+    width: 40px;
+    height: 40px;
+    top: -30px;
+    right: -30px;
   }
 }

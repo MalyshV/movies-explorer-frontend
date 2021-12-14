@@ -188,8 +188,8 @@
   }
 
   .nav__accaunt_view_mobile:hover {
-    border: 2px solid #2BE080;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 5px 5px 20px rgba(50, 248, 139, 0.836);
+    transition: box-shadow .5s linear;
   }
 }
 

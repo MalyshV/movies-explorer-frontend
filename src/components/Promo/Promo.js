@@ -1,5 +1,5 @@
 import React from 'react';
-import picture from '../../images/text__COLOR_landing-logo.svg';
+import picture from '../../images/promo_bg_icon.svg';
 
 const Promo = () => {
   return(

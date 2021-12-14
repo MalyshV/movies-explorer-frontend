@@ -1,5 +1,5 @@
 import React from 'react';
-import film from '../../images/film_1.svg';
+import film from '../../images/film.svg';
 import Button from '../Button/Button';
 
 const MoviesCard = ({ duration, handleClick, buttonClassName }) => {

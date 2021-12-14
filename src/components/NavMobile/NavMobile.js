@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import NavLinks from '../NavLinks/NavLinks';
-import burgerIcon from '../../images/burger_large.svg';
-import closeBurgerIcon from '../../images/burger-close.svg';
-import accauntIcon from '../../images/icon__accaunt.svg';
+import burgerIcon from '../../images/burger_open_icon.svg';
+import closeBurgerIcon from '../../images/burger_close_icon.svg';
+import accauntIcon from '../../images/accaunt_icon.svg';
 
 const NavMobile = () => {
   const [isOpen, setIsOpen] = useState(false);

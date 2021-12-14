@@ -1,5 +1,5 @@
 import React from 'react';
-import linkIcon from '../../images/text__COLOR_font-main.svg';
+import linkIcon from '../../images/link_icon.svg';
 
 const Portfolio = () => {
   return (

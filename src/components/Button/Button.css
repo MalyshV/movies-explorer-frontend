@@ -57,8 +57,8 @@
 }
 
 .button_place_movies:hover {
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.09);
-  transition: box-shadow .5s linear;
+  box-shadow: 5px 5px 20px rgba(46, 46, 46, 0.308);
+  transition: box-shadow 1s linear;
 }
 
 .button_place_card {
@@ -78,9 +78,14 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
 }
 
+.button_place_card:hover {
+  box-shadow: 5px 5px 20px rgba(50, 248, 139, 0.836);
+  transition: box-shadow .5s linear;
+}
+
 .button_place_card-delete {
   margin-top: 0;
-  background-image: url(../../images/close_icon.svg);
+  background-image: url(../../images/button_delete_icon.svg);
   background-color: #F9F9F9;
   background-repeat: no-repeat;
   margin: 0;
@@ -95,9 +100,14 @@
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
 }
 
+.button_place_card-delete:hover {
+  box-shadow: 5px 5px 20px rgba(243, 56, 96, 0.836);
+  transition: box-shadow .5s linear;
+}
+
 .button_place_card-active {
   margin-top: 0;
-  background-image: url(../../images/icon__COLOR_invisible.svg);
+  background-image: url(../../images/button_like_icon.svg);
   background-color: #EE3465;
   background-repeat: no-repeat;
   margin: 0;
