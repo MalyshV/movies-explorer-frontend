@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
-import logoIcon from '../../images/logo.svg'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
+import logoIcon from '../../images/logo.svg'
 
-const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); /* для проверки белой шапки - true - здесь и в NavLinks.js */
-
-  const headerClassName=`${!isLoggedIn? 'header' : 'header header_type_loggedIn'}`;
-
-  return(
-    <header className={headerClassName}>
-      <div className="header__content">
+const Header = ({ type }) => {
+  return (
+    <header className={`header header_type_${type}`}>
+      <nav className="header__content">
         <Link className="header__page" to="/">
           <img className="header__icon" alt="логотип сайта" src={logoIcon}/>
         </Link>
-        <Navigation />
-      </div>
+        { type !== 'loggedIn' && <Navigation /> }
+        { type === 'loggedIn' && <Navigation type='loggedIn' /> }
+      </nav>
     </header>
   )
 };

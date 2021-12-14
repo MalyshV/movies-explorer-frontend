@@ -7,7 +7,7 @@ const NavMobile = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const wrightIcon = !isOpen ? burgerIcon : closeBurgerIcon;
-  const classes = `${isOpen ? 'nav__mobile nav__mobile_active' : 'nav__mobile'}`;
+  const classes = `${isOpen ? 'nav__mobile nav__mobile-active' : 'nav__mobile'}`;
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -16,10 +16,10 @@ const NavMobile = () => {
   const closeMobileMenu = () => setIsOpen(false);
 
   return (
-    <nav className={classes}>
+    <div className={classes}>
       <img className="nav__burger" src={wrightIcon} alt="иконка меню-бургера" onClick={handleOpen} />
       {isOpen && <NavLinks isMobile={true} closeMobileMenu={closeMobileMenu} />}
-    </nav>
+    </div>
   )
 };
 

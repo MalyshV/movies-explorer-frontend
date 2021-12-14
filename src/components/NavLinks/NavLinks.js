@@ -1,33 +1,24 @@
 import React, { useState } from "react";
-import { Link, NavLink } from 'react-router-dom';
-import accauntIcon from '../../images/icon__accaunt.svg';
+import { NavLink } from 'react-router-dom';
 
-const NavLinks = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); /* для проверки белой шапки - true - здесь и в Header.js */
-
-  const navClassName = `${!isLoggedIn? 'nav__page' : 'nav__page nav__page_type_loggedIn'}`;
+const NavLinks = ({ type }) => {
+  /* const navClassName = `${!isLoggedIn? 'nav__page' : 'nav__page nav__page_type_loggedIn'}`;
   const linksClassName = `${!isLoggedIn? 'nav__links' : 'nav__links nav__links_type_loggedIn'}`;
   const accClassName = `${!isLoggedIn? 'nav__accaunt' : 'nav__accaunt nav__accaunt_type_loggedIn'}`;
 
   const handleCloseSideMenu = () => {
     props.isMobile && props.closeMobileMenu();
-  };
+  }; */
+
+  /* const handleCloseSideMenu = () => {
+    props.isMobile && props.closeMobileMenu();
+  }; */
 
   return (
     <>
-      <ul className="nav__pages ">
-        <NavLink className={navClassName} to="/" onClick={handleCloseSideMenu}>Главная</NavLink>
-        <NavLink className={navClassName} to="/movies" onClick={handleCloseSideMenu}>Фильмы</NavLink>
-        <NavLink className={navClassName} to="/saved-movies" onClick={handleCloseSideMenu}>Сохранённые фильмы</NavLink>
-      </ul>
-      <ul className={linksClassName}>
-        <Link className="nav__link" to="/signup">Регистрация</Link>
-        <Link className="nav__link" to="/signin">Войти</Link>
-      </ul>
-      <Link className={accClassName} to="/profile" onClick={handleCloseSideMenu}>
-        <img className="nav__icon" alt="иконка входа в аккаунт" src={accauntIcon} />
-        <p className="nav__text">Аккаунт</p>
-      </Link>
+      <NavLink className='nav__page nav__page_type_loggedIn' to="/">Главная</NavLink>
+      <NavLink className='nav__page nav__page_type_loggedIn' to="/movies">Фильмы</NavLink>
+      <NavLink className='nav__page nav__page_type_loggedIn' to="/saved-movies">Сохранённые фильмы</NavLink>
     </>
   )
 };

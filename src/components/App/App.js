@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 // import { CurrentUserContext } from '../contexts/CurrentUserContext';
@@ -24,27 +25,27 @@ const App = () => {
         } />
         <Route path='/movies' element={
           <>
-            <Header />
+            <Header type="loggedIn" />
             <Movies />
             <Footer />
           </>
         } />
         <Route path='/saved-movies' element={
           <>
-            <Header />
+            <Header type="loggedIn" />
             <SavedMovies />
             <Footer />
           </>
         } />
         <Route path='/profile' element={
           <>
-            <Header />
+            <Header type="loggedIn" />
             <Profile />
           </>
         } />
-        <Route path='/signup' element={<Register />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='*' element={<PageNotFound />} />
+        <Route path='/signup' element={ <Register /> } />
+        <Route path='/signin' element={ <Login /> } />
+        <Route path='*' element={ <PageNotFound /> } />
       </Routes>
     </div>
   );
