@@ -5,14 +5,21 @@ import Button from '../Button/Button';
 import Preloader from '../Preloader/Preloader';
 
 const Movies = () => {
-  const [isLoading, setIsLoading] = useState(false); /* для демонстрации Прелоадера заменить на true */
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const type = isLiked ? '-active' : '';
+
+  const handleLoadClick = () => setIsLoading(!isLoading);
+
+  const handleLikeClick = () => setIsLiked(!isLiked);  // перенести удаление и лайк/разлайк в саму карточку
 
   return (
     <section className="movies" >
       <div className="movies__content">
         <SearchForm />
-        <MoviesCardList />
-        <Button textOnButton="Ещё" buttonClassName="_place_movies" />
+        <MoviesCardList onClick={handleLikeClick} className={type} />
+        <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={handleLoadClick} />
         { isLoading && <Preloader /> }
       </div>
     </section>

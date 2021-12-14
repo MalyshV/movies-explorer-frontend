@@ -21,10 +21,10 @@
   width: 100%;
   padding: 18px 0;
   display: flex;
+  position: relative;
   justify-content: space-between;
   align-items: center;
 }
-
 
 .header__icon {
   width: 38px;

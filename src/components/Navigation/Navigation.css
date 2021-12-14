@@ -1,47 +1,12 @@
-.nav {
-  display: flex;
-  max-width: 1102px;
-  width: 100%;
-  position: relative;
-  justify-content: space-between;
-}
-
-.nav__container {
-  display: flex;
-  max-width: 1102px;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.nav__container_type_loggedIn {
-  justify-content: space-between;
-}
-
-.nav__pc {
-  display: flex;
-  max-width: 1102px;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-end;
-  font-family: 'Inter', Arial, sans-serif;
-}
-
-.nav__mobile {
-  display: none;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .nav__burger {
   margin: 0;
   padding: 0;
   width: 44px;
   height: 44px;
+  box-sizing: border-box;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 12px;
+  right: 50px;
 }
 
 .nav__burger:hover {
@@ -56,10 +21,19 @@
   margin-left: 44px;
   list-style: none;
   max-width: 212px;
+  place-self: start;
   width: 100%;
   display: flex;
   justify-content: space-between;
   min-height: 42px;
+}
+
+.nav__pages_view_mobile {
+  display: none;
+}
+
+.nav__page:first-of-type {
+  display: none;
 }
 
 .nav__page {
@@ -70,19 +44,6 @@
   align-items: center;
   text-align: center;
   font: inherit;
-  display: none;
-}
-
-.nav__page:first-of-type {
-  display: none;
-}
-
-.nav__page_type_loggedIn {
- display: flex;
-}
-
-.nav__page_type_loggedIn:first-of-type {
-  display: none;
 }
 
 .nav__page:hover {
@@ -106,10 +67,6 @@
   color: #fff;
   text-decoration: none;
 }
-
-/* .nav__links_type_loggedIn {
-  display: none;
-} */
 
 .nav__link:nth-of-type(2) {
   color: #000;
@@ -139,10 +96,13 @@
   justify-content: space-between;
   align-items: center;
   text-decoration: none;
-  display: none;
 }
 
 .nav__accaunt_type_loggedIn {
+  margin-left: auto;
+}
+
+.nav__accaunt_view_mobile {
   display: flex;
   align-self: center;
 }
@@ -168,63 +128,81 @@
   color: #000000;
 }
 
-@media (max-width: 990px) {
-  /* .nav__pc {
-    display: none;
-  } */
-
-  .nav__pc_hidden {
+@media (max-width: 900px) {
+  .nav__pages {
     display: none;
   }
 
-  .nav__type_loggedIn {
+  .nav__page_view_mobile:first-of-type {
+    display: flex;
+  }
+
+  .nav__pages_view_mobile {
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -12px;
+    right: -50px;
+    background-color: #fff;
+    z-index: 3;
     max-width: 520px;
-    width: 100%;
-    opacity: 1;
-    z-index: 2;
+    justify-self: flex-start;
   }
 
-  .nav__mobile-active {
+  .nav__pages_view_mobile-active {
     box-shadow: 0px 0px 400px 400px rgba(143, 140, 140, 0.418);
     transition: box-shadow .3s linear;
   }
 
-  .nav__mobile {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
+  .nav__accaunt {
+    display: none;
   }
 
-  .nav__pages {
-    margin-top: 159px;
-    flex-direction: column;
-  }
-
-  .nav__page_type_loggedIn {
+  .nav__page_view_mobile {
+    margin: 0 90px;
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
-    margin-bottom: 28px;
+  }
+  .nav__page_view_mobile:nth-of-type(1) {
+    margin-top: 159px;
   }
 
-  .nav__page_type_loggedIn:hover{
-    text-decoration: underline 1px #2BE080;
+  .nav__page_view_mobile:nth-of-type(2) {
+    margin: 28px;
   }
 
-  .nav__page_type_loggedIn:first-of-type {
+  .nav__accaunt_view_mobile {
+    margin: 563px 0 90px;
+    padding: 9px 12px;
+    width: 100px;
+    height: 32px;
+    border: 2px solid #E8E8E8;
+    box-sizing: border-box;
+    border-radius: 50px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
   }
 
-  .nav__accaunt_type_loggedIn {
-    margin-top: 593px;
-    margin-bottom: 90px;
-  }
-
-  .nav__accaunt:hover {
+  .nav__accaunt_view_mobile:hover {
     border: 2px solid #2BE080;
     box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (max-width: 690px) {
+  .nav__burger {
+    right: 8px;
+  }
+
+  .nav__pages_view_mobile {
+    right: -10px;
+  }
+
+  .nav__page_view_mobile {
+    margin: 0 100px;
   }
 }

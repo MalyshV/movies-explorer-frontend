@@ -20,8 +20,6 @@
 
 @import url(./components/Header/Header.css);
 
-@import url(./components/SavedMovies/SavedMovies.css);
-
 @import url(./components/MoviesCard/MoviesCard.css);
 
 @import url(./components/MoviesCardList/MoviesCardList.css);

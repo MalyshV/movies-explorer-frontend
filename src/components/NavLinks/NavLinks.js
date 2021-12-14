@@ -1,24 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from 'react-router-dom';
 
-const NavLinks = ({ type }) => {
-  /* const navClassName = `${!isLoggedIn? 'nav__page' : 'nav__page nav__page_type_loggedIn'}`;
-  const linksClassName = `${!isLoggedIn? 'nav__links' : 'nav__links nav__links_type_loggedIn'}`;
-  const accClassName = `${!isLoggedIn? 'nav__accaunt' : 'nav__accaunt nav__accaunt_type_loggedIn'}`;
+const NavLinks = ({ view, ...props }) => {
+  const handleCloseBurgerMenu = () => {
+    props.isMobile && props.closeBurgerMenu();
+  };
 
-  const handleCloseSideMenu = () => {
-    props.isMobile && props.closeMobileMenu();
-  }; */
-
-  /* const handleCloseSideMenu = () => {
-    props.isMobile && props.closeMobileMenu();
-  }; */
+  const classes = view ? `nav__page nav__page_${view}` : 'nav__page';
 
   return (
     <>
-      <NavLink className='nav__page nav__page_type_loggedIn' to="/">Главная</NavLink>
-      <NavLink className='nav__page nav__page_type_loggedIn' to="/movies">Фильмы</NavLink>
-      <NavLink className='nav__page nav__page_type_loggedIn' to="/saved-movies">Сохранённые фильмы</NavLink>
+      <NavLink className={classes} to="/">Главная</NavLink>
+      <NavLink className={classes} to="/movies" onClick={handleCloseBurgerMenu}>Фильмы</NavLink>
+      <NavLink className={classes} to="/saved-movies" onClick={handleCloseBurgerMenu}>Сохранённые фильмы</NavLink>
     </>
   )
 };

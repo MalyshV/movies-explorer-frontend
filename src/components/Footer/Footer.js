@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Footer = () => {
+  let today = new Date();
+
   return (
     <footer className="footer">
       <div className="footer__content">
@@ -13,7 +15,7 @@ const Footer = () => {
             <a className="footer__link" rel="noreferrer" href="https://github.com/MalyshV" target="_blank">Github</a>
             <a className="footer__link" rel="noreferrer" href="https://www.facebook.com/profile.php?id=100013538104816" target="_blank">Facebook</a>
           </nav>
-          <p className="footer__copyright">&copy; 2021</p>
+          <p className="footer__copyright">&copy; {today.getFullYear()}</p>
         </div>
       </div>
     </footer>

@@ -4,8 +4,7 @@ import Nav from '../Nav/Nav';
 import NavMobile from '../NavMobile/NavMobile';
 import accauntIcon from '../../images/icon__accaunt.svg';
 
-const Navigation = ({ type, isMobile }) => {
-
+const Navigation = ({ type }) => {
   return (
     <>
       { type !== 'loggedIn' &&
@@ -15,19 +14,17 @@ const Navigation = ({ type, isMobile }) => {
         </ul>
       }
       { type === 'loggedIn' &&
-      <div className="nav">
-        <ul className="nav__pages">
-          <Nav />
-          { isMobile && <NavMobile /> }
-        </ul>
+      <>
+        <Nav />
+        <NavMobile />
         <Link className='nav__accaunt nav__accaunt_type_loggedIn' to="/profile">
           <img className="nav__icon" alt="иконка входа в аккаунт" src={accauntIcon} />
           <p className="nav__text">Аккаунт</p>
         </Link>
-      </div>
+      </>
       }
     </>
-  )
+  );
 };
 
 export default Navigation;

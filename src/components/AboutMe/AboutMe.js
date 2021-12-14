@@ -13,7 +13,7 @@ const AboutMe = () => {
           <p className="student__text">{studentsConfig.about}
           </p>
           <ul className="student__links">
-            <li><a className="student__link" target="_blank" rel="noreferrer" href="https://www.facebook.com/">Facebook</a></li>
+            <li><a className="student__link" target="_blank" rel="noreferrer" href="https://www.facebook.com/profile.php?id=100013538104816">Facebook</a></li>
             <li><a className="student__link" target="_blank" rel="noreferrer" href="https://github.com/MalyshV">Github</a></li>
           </ul>
         </div>

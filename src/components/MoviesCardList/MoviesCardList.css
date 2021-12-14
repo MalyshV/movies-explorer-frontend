@@ -1,5 +1,5 @@
 .cards {
-  margin: 119px 0 50px;
+  margin: 68px 0 50px;
   padding: 0;
   display: grid;
   max-width: 1140px;
@@ -12,6 +12,7 @@
 
 @media (max-width: 600px) {
   .cards {
+    margin-top: 40px;
     gap: 16px 0;
   }
 }

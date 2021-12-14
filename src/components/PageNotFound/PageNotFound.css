@@ -60,7 +60,7 @@
 
 @media (max-width: 320px) {
   .not-found {
-    padding: 329px 0 30px;
+    padding: 300px 0 30px;
   }
   .not-found__title {
     font-size: 80px;
@@ -71,7 +71,7 @@
   .not-found__subtitle {
     font-size: 12px;
     line-height: 15px;
-    margin: 10px 0 284px;
+    margin: 10px 0 0;
   }
   .note-found__link {
     font-size: 12px;

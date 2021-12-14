@@ -1,7 +1,6 @@
 .promo {
   margin: 0;
   background-color: #5C5C5C;
-  min-height: 560px;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -39,8 +38,9 @@
   object-fit: cover;
 }
 
-@media (max-width: 1020px) {
+@media (max-width: 960px) {
   .promo__content {
+    padding-top: 300px;
     align-items: center;
     text-align: center;
   }
@@ -53,7 +53,6 @@
 
 @media (max-width: 768px) {
   .promo__content {
-    padding-top: 300px;
     padding-bottom: 70px;
   }
 
@@ -64,6 +63,7 @@
 
 @media (max-width: 690px) {
   .promo__content {
+    padding-top: 190px;
     padding-left: 0;
     padding-right: 0;
   }

@@ -6,7 +6,7 @@ import logoIcon from '../../images/logo.svg'
 const Header = ({ type }) => {
   return (
     <header className={`header header_type_${type}`}>
-      <nav className="header__content">
+      <nav className={`header__content header__content_type_${type}`}>
         <Link className="header__page" to="/">
           <img className="header__icon" alt="логотип сайта" src={logoIcon}/>
         </Link>

@@ -4,7 +4,6 @@ import wrong from '../../images/2.svg';
 /* пока проверка через файл .css */
 
 const ErrorPopup = ({ isOpen, onClose, popupText }) => {
-
   return(
     <div className={`popup ${isOpen ? 'popup_is-opened' : ''}`}>
       <div className="popup__content">

@@ -2,7 +2,7 @@ import React from 'react';
 import film from '../../images/film_1.svg';
 import Button from '../Button/Button';
 
-const MoviesCard = ({ duration }) => {
+const MoviesCard = ({ duration, handleClick, buttonClassName }) => {
   return (
     <li className="card">
       <div className="card__info">
@@ -10,7 +10,7 @@ const MoviesCard = ({ duration }) => {
         <p className="card__duration"><span>{duration}</span> минут</p>
       </div>
       <img className="card__image" src={film} alt="обложка фильма" />
-      <Button textOnButton="" buttonClassName="_place_card" />
+      <Button textOnButton="" buttonClassName={`_place_card${buttonClassName}`} onClick={handleClick} />
     </li>
   )
 };
