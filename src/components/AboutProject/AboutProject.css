@@ -1,0 +1,138 @@
+.project {
+  margin: 0;
+  padding: 110px 0 110px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.project__content {
+  max-width: 1140px;
+  width: 100%;
+}
+
+.project__title {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 22px;
+  line-height: 27px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 23px;
+}
+
+.project__columns {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.project__column {
+  max-width: 550px;
+  width: 100%;
+}
+
+.project__subtitle {
+  margin: 70px 0 26px;
+  padding: 0;
+  font: inherit;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.project__text {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.project__items {
+  list-style: none;
+  margin: 110px 0 0;
+  padding: 0;
+  max-width: 1140px;
+  width: 100%;
+  min-height: 86px;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project__item {
+  display: flex;
+  min-height: 36px;
+  background-color: #F2F2F2;
+}
+
+.project__item:nth-of-type(2) {
+  background-color: #fff;
+}
+
+.project__text_type_grey {
+  font-weight: 500;
+  color: #A0A0A0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project__text_size_small {
+  width: 228px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.project__text_color_green {
+  background-color: #2BE080;
+}
+
+.project__text_size_large {
+  width: 912px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .project__items {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 690px) {
+  .project__columns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .project__subtitle {
+    margin-top: 60px;
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .project__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .project__items {
+    margin-top: 60px;
+    font-size: 11px;
+    line-height: 13px;
+    min-height: 80px;
+  }
+}

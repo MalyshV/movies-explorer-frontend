@@ -1,0 +1,168 @@
+.button {
+  margin: 69px 0 0;
+  padding: 0;
+  width: 396px;
+  height: 45px;
+  background-color: #2BE080;
+  border-radius: 3px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+}
+
+.button_place_profile {
+  margin-top: 220px;
+  height: 16px;
+  color: #000;
+  background-color: transparent;
+}
+
+.button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity .5s ease-in-out;
+}
+
+.button_place_search-form {
+  margin-top: 0;
+  background-color: #2BE080;
+  color: #fff;
+  border-radius: 48px;
+  width: 59px;
+  height: 34px;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.button_place_movies {
+  margin: 50px 0 80px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  max-width: 1140px;
+  width: 100%;
+  min-height: 36px;
+  align-self: center;
+  background-color: #F9F9F9;
+  border-radius: 6px;
+  border: none;
+  color: #000;
+}
+
+.button_place_movies:hover {
+  box-shadow: 5px 5px 20px rgba(46, 46, 46, 0.308);
+  transition: box-shadow 1s linear;
+}
+
+.button_place_card {
+  background-image: url(../../images/button_save_icon.svg);
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  background-color: #F9F9F9;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  line-height: 11px;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #000;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.button_place_card:hover {
+  box-shadow: 5px 5px 20px rgba(50, 248, 139, 0.836);
+  transition: box-shadow .5s linear;
+}
+
+.button_place_card-delete {
+  margin-top: 0;
+  background-image: url(../../images/button_delete_icon.svg);
+  background-color: #F9F9F9;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  line-height: 11px;
+  background-position: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.button_place_card-delete:hover {
+  box-shadow: 5px 5px 20px rgba(243, 56, 96, 0.836);
+  transition: box-shadow .5s linear;
+}
+
+.button_place_card-active {
+  margin-top: 0;
+  background-image: url(../../images/button_like_icon.svg);
+  background-color: #EE3465;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  height: 29px;
+  border-radius: 30px;
+  border: none;
+  font-size: 12px;
+  line-height: 11px;
+  background-position: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.button_place_not-found {
+  margin-top: 283px;
+  width: 42px;
+  height: 17px;
+  font-size: 14px;
+  line-height: 17px;
+  color: #2BE080;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+@media (max-width: 690px) {
+  .button {
+    width: 260px;
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 220px;
+  }
+
+  .button_place_search-form {
+    width: 59px;
+    margin-top: 0;
+  }
+
+  .button_place_card {
+    width: 100px;
+    margin-top: 0;
+  }
+
+  .button_place_card-active {
+    margin-top: 0;
+    width: 100px;
+  }
+
+  .button_place_card-delete {
+    margin-top: 0;
+    width: 100px;
+  }
+
+  .button_place_movies {
+    width: 100%;
+    margin-top: 50px
+  }
+}

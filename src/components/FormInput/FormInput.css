@@ -1,0 +1,133 @@
+.form__label {
+  margin: 0;
+  margin-top: 24px;
+  margin-bottom: 5px;
+  padding: 0;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #A0A0A0;
+}
+
+.form__label:first-of-type{
+  margin-top: 0;
+}
+
+.form__label_type_loggedin {
+  margin: 0;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 13px;
+  color: #000000;
+  margin-bottom: -23px;
+  z-index: 1;
+}
+
+.form__input {
+  margin: 0;
+  padding: 0;
+  height: 32px;
+  max-width: 396px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #E8E8E8;
+  margin-bottom: 17px;
+  padding-bottom: 9px;
+  white-space: nowrap;
+  overflow: hidden;
+  outline: none;
+}
+
+.form__input:hover {
+  box-shadow: 5px 5px 20px rgba(50, 248, 139, 0.288);
+  transition: box-shadow .5s linear;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.form__input:focus {
+  box-shadow: none;
+  border-bottom: 1px solid #EE3465;
+}
+
+.form__input:valid {
+  border-bottom: 1px solid #2BE080;
+}
+
+.form__input_type_loggedin {
+  max-width: 410px;
+  text-align: end;
+  z-index: 0;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+.form__input_type_loggedin:valid {
+  border-bottom: 1px solid #E8E8E8;
+}
+
+.form__input_type_loggedin:nth-of-type(2) {
+  border-bottom: transparent;
+}
+
+.form__error {
+  display: none;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.form__input_place_movies {
+  margin: 0 5px;
+  padding: 0;
+  height: 62px;
+  width: 100%;
+  max-width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 34px;
+  text-align: center;
+  outline: none;
+  border-bottom: 0;
+}
+
+.form__input_place_movies::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  margin: 4px 3px 0 0;
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  background: url(../../images/popup_close_icon.svg) no-repeat;
+  background-size: cover;
+}
+
+.form__input_place_movies::-webkit-search-cancel-button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity .5s ease-in-out;
+}
+
+@media (max-width: 690px) {
+  .form__input {
+    max-width: 260px;
+    margin-bottom: 0;
+    padding-bottom: 9px;
+  }
+
+  .form__input_place_movies {
+    text-align: start;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
