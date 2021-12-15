@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import NavLinks from '../NavLinks/NavLinks';
 import burgerIcon from '../../images/burger_open_icon.svg';
 import closeBurgerIcon from '../../images/burger_close_icon.svg';
@@ -20,10 +20,10 @@ const NavMobile = () => {
       { isOpen &&
       <>
         <NavLinks view="view_mobile" isMobile={true} closeBurgerMenu={closeBurgerMenu}  />
-        <Link className="nav__accaunt_view_mobile" to="/profile">
+        <NavLink className="nav__accaunt_view_mobile" to="/profile" onClick={closeBurgerMenu} >
           <img className="nav__icon" alt="иконка входа в аккаунт" src={accauntIcon} />
           <p className="nav__text">Аккаунт</p>
-        </Link>
+        </NavLink>
       </>
       }
     </ul>
