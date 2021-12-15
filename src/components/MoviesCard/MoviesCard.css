@@ -23,8 +23,7 @@
   padding: 0;
   display: flex;
   justify-content: space-between;
-  max-width: 324px;
-  width: 100%;
+  width: 95%;
 }
 
 .card__title {
@@ -64,25 +63,14 @@
   }
 }
 
-@media (max-width: 900px) {
-  .card__info {
-    max-width: 300px;
-  }
-}
-
 @media (max-width: 540px) {
   .card {
-    min-height: 271px;
-    padding: 14px;
+    min-height: 285px;
+    padding: 14px 0;
   }
 
   .card__image {
-    max-width: 300px;
     min-height: 168px;
-  }
-
-  .card__info {
-    max-width: 280px;
   }
 
   .card__title {
@@ -93,5 +81,11 @@
   .card__duration {
     font-size: 10px;
     line-height: 18px;
+  }
+}
+
+@media (max-width: 350px) {
+  .card {
+    min-height: 271px;
   }
 }
