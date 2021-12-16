@@ -1,18 +1,21 @@
-class Api {
-  constructor(config) {
-    this._baseUrl = config.baseUrl;
-    this._headers = config.headers;
-  };
+export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
-  // методы
+// общий getMovies - ??
 
-};
+export const findMovies = () => {
+  return fetch(MOVIES_URL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+  })
+  .then((res) => checkResponse(res));
+}
 
-const api = new Api({
-  baseUrl: 'http://localhost:3000',
-  headers: {
-    'Content-Type': 'application/json'
+export const checkResponse = (res) => {
+  if (res.ok) {
+    return res.json();
   }
-});
-
-export default api;
+  return Promise.reject(`Ошибка: ${res.status}`);
+};

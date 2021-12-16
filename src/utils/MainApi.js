@@ -1,35 +1,77 @@
-export const BASE_URL = 'http://localhost:3001';
+class Api {
+  constructor(config) {
+    this._baseUrl = config.baseUrl;
+    this._headers = config.headers;
+  };
 
-// регистрация
-export const register = (email, password, name) => {
-  return fetch(`${BASE_URL}/signup`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    // credentials: 'include', // надо ли мне это сейчас?
-    body: JSON.stringify({ email, password, name })
-  })
-  .then((res) => checkResponse(res));
-};
+  _checkToken = (headers) => {
+    const token = localStorage.getItem('jwt');
 
-// логин
-export const authorize = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    // credentials: 'include', // надо ли мне это сейчас?
-    body: JSON.stringify({ email, password })
-  })
-  .then((res) => checkResponse(res));
-};
+    if (token) {
+      headers['authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+  };
 
-// проверка ответа
-const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/profile`, {
+      method: 'GET',
+      headers: this._checkToken(this._headers),
+      credentials: 'include',
+    })
+    .then((res) => this._checkResponse(res));
+  };
+
+  setUserInfo(data) {
+    return fetch(`${this._baseUrl}/profile`, {
+      method: 'PATCH',
+      headers: this._checkToken(this._headers),
+      credentials: 'include',
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+      })
+    })
+    .then((res) => this._checkResponse(res));
+  };
+
+  // updateUserInfo - ??
+
+  // filterMovies - ??
+
+  // addMovie - ??
+
+  saveMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/:movieId`, {
+      method: 'PUT',
+      headers: this._checkToken(this._headers),
+      credentials: 'include',
+    })
+    .then((res) => this._checkResponse(res));
+  };
+
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/movies/:movieId`, {
+      method: 'DELETE',
+      headers: this._checkToken(this._headers),
+      credentials: 'include',
+    })
+    .then((res) => this._checkResponse(res));
   }
-  return Promise.reject(`Ошибка: ${res.status}`);
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
 };
+
+const api = new Api({
+  baseUrl: 'http://localhost:3000',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+});
+
+export default api;

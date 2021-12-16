@@ -4,8 +4,6 @@ import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
 import errors from '../../utils/errorsConfig';
 
-// import ErrorPopup from '../ErrorPopup/ErrorPopup';
-
 const Register = ({ handleRegistration }) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -23,9 +21,6 @@ const Register = ({ handleRegistration }) => {
     const password = userPassword;
 
     handleRegistration(email, password, name);
-    console.log('И я submitted');
-
-    // reset(); ??
   };
 
   return(
@@ -41,18 +36,3 @@ const Register = ({ handleRegistration }) => {
 }
 
 export default Register;
-
-// убираем попаз попапа с ошибкой для ревью
-
-  /* const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
-
-  const showPopupForRewier = (e) => {
-    e.preventDefault();
-    setIsErrorPopupOpen(!isErrorPopupOpen);
-  }
-
-  const handleClosePopup = () => setIsErrorPopupOpen(false); */
-
-  /*
-      { isErrorPopupOpen && <ErrorPopup popupClassName="popup popup_is-opened" popupText={errors.dubbleEmailErr} onClose={handleClosePopup} /> }
-  */

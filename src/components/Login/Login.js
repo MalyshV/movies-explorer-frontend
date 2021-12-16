@@ -3,7 +3,6 @@ import Form from '../Form/Form';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
 import errors from '../../utils/errorsConfig';
-// import ErrorPopup from '../ErrorPopup/ErrorPopup';
 
 const Login = ({ handleAuthorization }) => {
   const [userEmail, setUserEmail] = useState('');
@@ -33,16 +32,3 @@ const Login = ({ handleAuthorization }) => {
 };
 
 export default Login;
-
-// Закомментили показ попапа для ревьюера:
-
-/* { isErrorPopupOpen && <ErrorPopup popupClassName="popup popup_is-opened" popupText={errors.invalidEmailErr} onClose={handleClosePopup} /> } */
-
-/* const [isErrorPopupOpen, setIsErrorPopupOpen] = useState(false);
-
-  const showPopupForRewier = (e) => {
-    e.preventDefault();
-    setIsErrorPopupOpen(!isErrorPopupOpen);
-  }
-
-  const handleClosePopup = () => setIsErrorPopupOpen(false); */
