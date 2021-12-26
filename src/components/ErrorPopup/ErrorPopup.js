@@ -1,9 +1,9 @@
 import React from 'react';
 import wrong from '../../images/popup_bg_icon.svg';
-import errors from '../../utils/errorsConfig';
+// import errors from '../../utils/errorsConfig';
 
-const ErrorPopup = ({ onClose, isRegistered, isOpen }) => {
-  const popupText = !isRegistered ? errors.dubbleEmailErr : errors.invalidAuthErr;
+const ErrorPopup = ({ onClose, isOpen, popupText }) => {
+  // const popupText = !isRegistered ? errors.dubbleEmailErr : errors.invalidAuthErr;
 
   return(
     <div className={`popup ${isOpen ? 'popup_is-opened' : ''}`}>

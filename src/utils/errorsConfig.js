@@ -12,4 +12,9 @@ const errors = {
   notFoundErr: '404 Страница по указанному маршруту не найдена.',
 };
 
+export const invalidAuthErr = 'При авторизации произошла ошибка. Переданный токен некорректен.';
+export const invalivRegErr = 'При регистрации пользователя произошла ошибка.';
+export const updateProfileErr = 'При обновлении профиля произошла ошибка.';
+export const invalidEmailErr = 'Вы ввели неправильный логин или пароль.';
+
 export default errors;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, /*useLocation*/ } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -12,26 +12,33 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Movies from '../Movies/Movies';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
+import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
 import api from '../../utils/MainApi';
 import * as auth from '../../utils/auth';
-import errors from '../../utils/errorsConfig';
+import moviesApi from '../../utils/MoviesApi';
+import { invalidAuthErr, updateProfileErr, invalidEmailErr} from '../../utils/errorsConfig';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [isRegistered, setIsRegistered] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false);
+  const [cards, setCards] = useState([]);
+  const [savedCards, setSavedCards] = useState([]);
 
   const navigate = useNavigate();
+  // const location = useLocation();
+  // const fromPage = location.state?.from?.pathname || '/';
 
   useEffect(() => {
     if (isLoggedIn === true) {
-      Promise.all([api.getUserInfo()])
-      .then(([userData]) => {
-        console.log(userData);
+      Promise.all([api.getUserInfo(), moviesApi.findMovies()])
+      .then(([userData, cards]) => {
         setCurrentUser(userData);
+        localStorage.setItem('cards', JSON.stringify(cards));
+        setCards(cards); // надо ли? или оставить только верхнюю строку?
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {console.log(error)});
     }
   }, [isLoggedIn]);
 
@@ -42,40 +49,50 @@ const App = () => {
       auth.getContent(token)
       .then((userInfo) => {
         setIsLoggedIn(true);
+        setIsRegistered(true);
         setCurrentUser(userInfo);
       })
       .catch((error) => console.log(error));
     }
   }, [navigate]);
 
-  // регистрация
+  useEffect(() => {
+    const closeErrorPopupByEscape = (event) => {
+      if (event.key === 'Escape') {
+        handleCloseErrorPopup();
+      }
+    }
+    document.addEventListener('keydown', closeErrorPopupByEscape)
+    return () => document.removeEventListener('keydown', closeErrorPopupByEscape)
+  }, []);
+
   const handleRegistration = (email, password, name) => {
     auth.register(email, password, name)
-      .then(() => {
-        console.log(email, password, name);
+      .then((data) => {
+        localStorage.setItem('jwt', data.token)
+        // console.log(email, password, name);
         setIsRegistered(true);
-        return navigate('/movies');
+        setIsLoggedIn(true);
+        return navigate('/signin');
       })
       .catch((error) => {
         setIsRegistered(false);
         console.log(error);
-        handleOpenErrorPopup();
+        handleOpenErrorPopup(invalidAuthErr);
       })
       .finally(() => {
         //handleOpenErrorPopup();
       })
   };
 
-  // логин
   const handleAuthorization = (email, password) => {
     auth.authorize(email, password)
-      .then((data) => {
-        localStorage.setItem('jwt', data.token)
+      .then(() => {
         setIsLoggedIn(true);
-        return navigate('/movies');
+        return navigate('/movies', {replace: true});
       })
       .catch((error) => {
-        handleOpenErrorPopup();
+        handleOpenErrorPopup(invalidEmailErr);
         console.log(error);
       })
       .finally(() => {
@@ -88,18 +105,18 @@ const App = () => {
     setIsLoggedIn(false);
     setCurrentUser({});
     console.log('Разлогинился');
-    return navigate('/');
+    return navigate('/', {replace: true});
   };
 
-  // обновление данных профиля
-  // поправить вывод ошибки + саму верстку
   const handleUpdateUser = (data) => {
     api.setUserInfo(data)
       .then((data) => {
         setCurrentUser(data);
       })
-      .catch((error) => console.log(error));
-      handleOpenErrorPopup(errors.updateProfileErr);
+      .catch((error) => {
+        console.log(error);
+        handleOpenErrorPopup(updateProfileErr);
+      })
   };
 
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
@@ -117,31 +134,37 @@ const App = () => {
           </>
         } />
         <Route path='/movies' element={
-          <>
-            <Header type="loggedIn" />
-            <Movies />
-            <Footer />
-          </>
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+            <>
+              <Header type="loggedIn" />
+              <Movies cards={cards} />
+              <Footer />
+            </>
+          </ProtectedRoute>
         } />
         <Route path='/saved-movies' element={
-          <>
-            <Header type="loggedIn" />
-            <SavedMovies />
-            <Footer />
-          </>
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+            <>
+              <Header type="loggedIn" />
+              <SavedMovies cards={cards} />
+              <Footer />
+            </>
+          </ProtectedRoute>
         } />
         <Route path='/profile' element={
-          <>
-            <Header type="loggedIn" />
-            <Profile name={currentUser.name} onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />
-          </>
+          <ProtectedRoute isLoggedIn={isLoggedIn}>
+            <>
+              <Header type="loggedIn" />
+              <Profile name={currentUser.name} onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />
+            </>
+          </ProtectedRoute>
         } />
         <Route path='/signup' element={ <Register handleRegistration={handleRegistration} /> } />
         <Route path='/signin' element={ <Login handleAuthorization={handleAuthorization} /> } />
         <Route path='*' element={ <PageNotFound /> } />
       </Routes>
     </div>
-    <ErrorPopup isOpen={isErrorPopupOpened} onClose={handleCloseErrorPopup} isRegistered={isRegistered} />
+    <ErrorPopup popupText={[invalidEmailErr || updateProfileErr || invalidAuthErr]} isOpen={isErrorPopupOpened} onClose={handleCloseErrorPopup} isRegistered={isRegistered} />
     </CurrentUserContext.Provider>
   );
 };

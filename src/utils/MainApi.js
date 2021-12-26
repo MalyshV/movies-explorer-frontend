@@ -14,7 +14,7 @@ class Api {
   };
 
   getUserInfo() {
-    return fetch(`${this._baseUrl}/profile`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._checkToken(this._headers),
       credentials: 'include',
@@ -23,7 +23,7 @@ class Api {
   };
 
   setUserInfo(data) {
-    return fetch(`${this._baseUrl}/profile`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._checkToken(this._headers),
       credentials: 'include',
@@ -68,7 +68,7 @@ class Api {
 };
 
 const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json'
   }
