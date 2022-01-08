@@ -33,7 +33,7 @@
   font-size: 15px;
   line-height: 18px;
   color: #000000;
-  max-width: 290px;
+  max-width: 260px;
 }
 
 .card__duration {
@@ -107,5 +107,8 @@
 @media (max-width: 350px) {
   .card {
     min-height: 271px;
+  }
+  .card__title {
+    max-width: 220px;
   }
 }

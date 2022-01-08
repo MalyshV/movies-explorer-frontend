@@ -1,31 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from '../Form/Form';
 import FormInput from '../FormInput/FormInput';
 import Button from '../Button/Button';
-import errors from '../../utils/errorsConfig';
+import useFormWithValidation from '../../hooks/useValidation';
 
 const Login = ({ handleAuthorization }) => {
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setUserPassword] = useState('');
-
-  const handleChangeEmail = (e) => setUserEmail(e.target.value);
-  const handleChangePassword = (e) => setUserPassword(e.target.value);
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const isDisabled = values.email === '' || values.password === '' || !isValid;
+  const loginButton = !isDisabled ? '' : ' button-disabled';
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const email = userEmail;
-    const password = userPassword;
-
-    handleAuthorization(email, password);
+    !isDisabled && handleAuthorization(values.email, values.password);
   }
 
   return (
     <>
       <Form name="loginForm" title="Рады видеть!" textOnButton="Войти" underFormQuestion="Ещё не зарегистрированы?" linkPath="/signup" linkName="Регистрация" onSubmit={handleSubmit}>
-        <FormInput inputType="email" labelName="Email" inputId="email" labelFor="email" tabIndex="1" placeholder="" spanText={errors.mailErr} value={userEmail} onChange={handleChangeEmail} />
-        <FormInput inputType="password" labelName="Пароль" inputId="psw" labelFor="psw" tabIndex="2" placeholder="" value={userPassword} onChange={handleChangePassword} />
-        <Button textOnButton="Войти" tabIndex="3" />
+        <FormInput minLength="8" maxLength="30" inputType="email" inputName="email" labelName="Email" inputId="email" labelFor="email" tabIndex="1" placeholder="" value={values.email || ''} onChange={handleChange} spanText={errors.email} />
+        <FormInput inputType="password" inputName="password" labelName="Пароль" inputId="password" labelFor="password" tabIndex="2" placeholder="" value={values.password || ''} onChange={handleChange} spanText={errors.password} />
+        <Button buttonClassName={loginButton} textOnButton="Войти" tabIndex="3" />
       </Form>
     </>
   )

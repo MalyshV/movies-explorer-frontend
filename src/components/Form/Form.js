@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from '../../images/logo_icon.svg';
 import { Link } from 'react-router-dom';
-// import { useForm } from 'react-hook-form';
 
 const Form = ({ name, onSubmit, onClick, title, titleClassName, underFormQuestion, linkName, children, linkPath, linkClassName, profileLinkClassName }) => {
 

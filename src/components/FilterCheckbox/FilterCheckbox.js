@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import MoviesCard from "../MoviesCard/MoviesCard";
 
-const FilterCheckbox = () => {
+const FilterCheckbox = ({ handleChecked, isChecked }) => {
+  // const [isChecked, setIsChecked] = useState(false);
+
   return (
     <div className="checkbox">
       <label className="checkbox__name" htmlFor="checkbox">Короткометражки</label>
-      <input type="checkbox" id="checkbox" className="checkbox__image" />
+      <input type="checkbox" onChange={handleChecked} checked={isChecked} id="checkbox" className="checkbox__image" />
     </div>
   )
 };

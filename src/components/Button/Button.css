@@ -22,10 +22,19 @@
   background-color: transparent;
 }
 
+.button-disabled {
+  opacity: 0.2;
+}
+
 .button:hover {
   opacity: 0.7;
   cursor: pointer;
   transition: opacity .5s ease-in-out;
+}
+
+.button-disabled:hover {
+  cursor: none;
+  opacity: 0.2;
 }
 
 .button_place_search-form {

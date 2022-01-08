@@ -19,6 +19,8 @@ import moviesApi from '../../utils/MoviesApi';
 import { invalidAuthErr, updateProfileErr, invalidEmailErr} from '../../utils/errorsConfig';
 
 const App = () => {
+  const token = localStorage.getItem("jwt");
+
   const [currentUser, setCurrentUser] = useState({});
   const [isRegistered, setIsRegistered] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +31,18 @@ const App = () => {
   const navigate = useNavigate();
   // const location = useLocation();
   // const fromPage = location.state?.from?.pathname || '/';
+
+  useEffect(()=> {
+    if (token) {
+      auth.getContent(token)
+      .then((userInfo) => {
+        setIsLoggedIn(true);
+        setIsRegistered(true);
+        setCurrentUser(userInfo);
+      })
+      .catch((error) => console.log(error));
+    }
+  }, [navigate, token]);
 
   useEffect(() => {
     if (isLoggedIn === true) {
@@ -41,20 +55,6 @@ const App = () => {
       .catch((error) => {console.log(error)});
     }
   }, [isLoggedIn]);
-
-  useEffect(()=> {
-    const token = localStorage.getItem('jwt');
-
-    if (token) {
-      auth.getContent(token)
-      .then((userInfo) => {
-        setIsLoggedIn(true);
-        setIsRegistered(true);
-        setCurrentUser(userInfo);
-      })
-      .catch((error) => console.log(error));
-    }
-  }, [navigate]);
 
   useEffect(() => {
     const closeErrorPopupByEscape = (event) => {
@@ -69,11 +69,11 @@ const App = () => {
   const handleRegistration = (email, password, name) => {
     auth.register(email, password, name)
       .then((data) => {
+        handleAuthorization(email, password);
         localStorage.setItem('jwt', data.token)
-        // console.log(email, password, name);
         setIsRegistered(true);
         setIsLoggedIn(true);
-        return navigate('/signin');
+        return navigate('/movies', {replace: true});
       })
       .catch((error) => {
         setIsRegistered(false);
@@ -96,7 +96,7 @@ const App = () => {
         console.log(error);
       })
       .finally(() => {
-        //andleOpenErrorPopup();
+        //handleOpenErrorPopup();
       })
   };
 
@@ -104,13 +104,12 @@ const App = () => {
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
     setCurrentUser({});
-    console.log('Разлогинился');
     return navigate('/', {replace: true});
   };
 
   const handleUpdateUser = (data) => {
     api.setUserInfo(data)
-      .then((data) => {
+      .then(data => {
         setCurrentUser(data);
       })
       .catch((error) => {
@@ -155,7 +154,7 @@ const App = () => {
           <ProtectedRoute isLoggedIn={isLoggedIn}>
             <>
               <Header type="loggedIn" />
-              <Profile name={currentUser.name} onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />
+              <Profile isLoggedIn={token} onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />
             </>
           </ProtectedRoute>
         } />
