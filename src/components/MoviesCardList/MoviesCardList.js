@@ -29,11 +29,11 @@ const MoviesCardList = ({ cards, onClick, className }) => {
   const filterByDuration = (duration) => {
     console.log('I am checked now!')
 
-      if (duration > 60) {
-        console.log('Мы тут')
+      /* if (duration > 60) {
+
       } else {
-        console.log('Fuuuuck!')
-      }
+
+      } */
 
 
     /* if (duration > 60) {
