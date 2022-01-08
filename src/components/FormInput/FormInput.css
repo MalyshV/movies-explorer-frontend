@@ -82,6 +82,10 @@
   color: #EE3465;
 }
 
+.form__error_type_loggedin {
+  z-index: 1;
+}
+
 .form__error:valid {
   display: none;
 }
