@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
-// import { useSearchParams } from 'react-router-dom';
+import React, {useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import Button from '../Button/Button';
 import Preloader from '../Preloader/Preloader';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import { checkMovie } from '../../utils/constants';
+import Button from '../Button/Button';
 
 const MoviesCardList = ({ cards, onClick, className }) => {
   const [search, setSearch] = useState('');
   // const [cards, setCards] = useState([]);
-  const [visible, setIsVisible] = useState(12);
-  const [isLoading, setIsLoading] = useState(false);
   const [filtered, setIsFiltered] = useState(cards);
+  const [isLoading, setIsLoading] = useState(false);
+  const [visible, setIsVisible] = useState(12);
+
+  const location = useLocation();
 
   // добавили для теста
-  const [isShortMovies, setShortMovies] = React.useState(false);
-  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [isShortMovies, setShortMovies] = useState(false);
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   // добавили для теста
   const filterMoviesByDuration = (filtredMovies) => {
@@ -24,7 +26,7 @@ const MoviesCardList = ({ cards, onClick, className }) => {
 
   function handleCheckboxChecked(e) {
     setShortMovies(e.target.checked);
-}
+  }
 
   const filterByDuration = (duration) => {
     console.log('I am checked now!')
@@ -82,7 +84,7 @@ const MoviesCardList = ({ cards, onClick, className }) => {
         );
       })}
     </ul>
-    <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} />
+    { location.pathname === '/movies' ? <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} /> : null }
     </>
   )
 };

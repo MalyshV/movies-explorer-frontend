@@ -4,7 +4,6 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 
 const Movies = (props) => {
-
   const [isLiked, setIsLiked] = useState(false);
 
   const type = isLiked ? '-active' : '';
