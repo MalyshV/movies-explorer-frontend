@@ -133,7 +133,7 @@ const App = () => {
           </>
         } />
         <Route path='/movies' element={
-          <ProtectedRoute isLoggedIn={isLoggedIn}>
+          <ProtectedRoute isLoggedIn={token}>
             <>
               <Header type="loggedIn" />
               <Movies cards={cards} />
@@ -142,7 +142,7 @@ const App = () => {
           </ProtectedRoute>
         } />
         <Route path='/saved-movies' element={
-          <ProtectedRoute isLoggedIn={isLoggedIn}>
+          <ProtectedRoute isLoggedIn={token}>
             <>
               <Header type="loggedIn" />
               <SavedMovies cards={cards} />
@@ -151,7 +151,7 @@ const App = () => {
           </ProtectedRoute>
         } />
         <Route path='/profile' element={
-          <ProtectedRoute isLoggedIn={isLoggedIn}>
+          <ProtectedRoute isLoggedIn={token}>
             <>
               <Header type="loggedIn" />
               <Profile isLoggedIn={token} onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />

@@ -16,7 +16,7 @@ const FormInput = ({ labelClassName, inputClassName, labelName, inputType, input
         placeholder={placeholder}
         onChange={onChange}
         minLength={minLength}
-        maxLenght={maxLenght}
+        maxlenght={maxLenght}
       />
       <span className={`form__error form__error${spanClassName}`}>{spanText}</span>
     </>
