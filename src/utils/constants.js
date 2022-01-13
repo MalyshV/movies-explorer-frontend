@@ -26,3 +26,19 @@ export const setRigthDuration = (duration) => {
   return `${duration}`.endsWith(1) ? `${duration} минута` :
   ['2', '3', '4'].some(char => `${duration}`.endsWith(char)) ? `${duration} минуты` : `${duration} минут`;
 };
+
+export const filterMovies = (data, searchWord, searchList) => {
+  return searchList = data.filter((card) => {
+    return card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
+  });
+};
+
+// убрала из filterMovie
+/* if (searchList.length === 0) {
+  console.log(searchList.length);
+  // setSearchError(true);
+  // console.log(searchError);
+} else {
+  // setSearchError(false);
+  // console.log(searchError);
+} */

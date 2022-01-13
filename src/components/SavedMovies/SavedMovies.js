@@ -1,12 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 
-const SavedMovies = ({ cards, onDelete }) => {
+const SavedMovies = ({ cards, savedCards, onDelete, handleSearchCard }) => {
   const currentUser = useContext(CurrentUserContext);
-
-  const [isDelete, setIsDelete] = useState(false);
+  const [search, setIsSearch] = useState('');
 
   useEffect(() => {
     // что-нибудь
@@ -16,10 +15,19 @@ const SavedMovies = ({ cards, onDelete }) => {
     onDelete(card);
   };
 
+  const handleSearch = (e) => {
+    setIsSearch(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearchCard(search);
+  };
+
   return(
     <section className="movies">
-      <SearchForm />
-      <MoviesCardList className="-delete" onDelete={handleCardDelete} cards={cards} />
+      <SearchForm onChange={handleSearch} handleSearchCard={handleSearchCard} onSubmit={handleSubmit} />
+      <MoviesCardList className="-delete" onDelete={handleCardDelete} cards={cards} savedCards={savedCards} />
     </section>
   )
 };

@@ -15,6 +15,8 @@ const ErrorPopup = ({ onClose, isOpen }) => {
       return popupText = errors.invalidAuthErr;
     } else if (location.pathname === '/movies') {
       return popupText = errors.serverErr;
+    } else if (location.pathname === '/saved-movies') {
+      return popupText = errors.serverErr;
     }
   };
 

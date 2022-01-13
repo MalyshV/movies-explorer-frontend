@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
 import api from '../../utils/MainApi';
@@ -16,18 +16,19 @@ import SavedMovies from '../SavedMovies/SavedMovies'
 import Movies from '../Movies/Movies';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
+import { filterMovies } from '../../utils/constants';
 
 const App = () => {
   const token = localStorage.getItem('jwt');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [currentUser, setCurrentUser] = useState({}); // - загрузка текущего юзера
+  const [cards, setCards] = useState([]); // - все фильмы с сервера
+  const [savedCards, setSavedCards] = useState([]);
   const [isRegistered, setIsRegistered] = useState(false); // - стейт регистрации
   const [isLoggedIn, setIsLoggedIn] = useState(false); // - стейт логина
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false); // - стейт модалки
-  const [cards, setCards] = useState([]); // - все фильмы с сервера
-  const [savedCards, setSavedCards] = useState([]);
-
 
   /*** загрузка ***/
 
@@ -44,19 +45,16 @@ const App = () => {
     }
   }, [navigate, token]);
 
-  // загрузка данных юзера и общих фильмов
+  // загрузка данных юзера
   useEffect(() => {
     if (isLoggedIn === true) {
-      Promise.all([api.getUserInfo(), moviesApi.findMovies()])
-      .then(([userData, cards]) => {
-        localStorage.setItem('cards', JSON.stringify(cards));
-        setCurrentUser(userData);
-        setCards(cards);
-        setSavedCards(savedCards);
-      })
+      api.getUserInfo()
+        .then((userData) => {
+          setCurrentUser(userData);
+        })
       .catch((error) => {console.log(error)});
     }
-  }, [isLoggedIn, savedCards]);
+  }, [isLoggedIn]);
 
 
   /*** юзеры ***/
@@ -95,7 +93,7 @@ const App = () => {
       .then(data => {
         setCurrentUser(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
-        console.log(localStorage)
+        // console.log(localStorage)
       })
       .catch((error) => {
         console.log(error);
@@ -111,18 +109,52 @@ const App = () => {
     return navigate('/', {replace: true});
   };
 
+
   /*** фильмы ***/
+
+  // поиск
+  const handleSearchCard = (searchQuery) => {
+    if (isLoggedIn === true) {
+      if (location.pathname === '/movies') {
+
+        if (localStorage.getItem('cardsData')) {
+          const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
+          setCards(filterMovies(afterSearchData, searchQuery));
+        } else {
+          moviesApi.findMovies()
+            .then((res) => {
+              setCards(filterMovies(res, searchQuery));
+              localStorage.setItem('cardsData', JSON.stringify(res));
+            })
+            .catch((error) => {
+              handleOpenErrorPopup();
+              console.log(error);
+            })
+        }
+      } else {
+        api.getSavedMovies(token)
+          .then((res) => {
+            setSavedCards(filterMovies(res, searchQuery));
+            localStorage.setItem('savedCards', JSON.parse(res))
+          })
+          .catch((error) => {
+            handleOpenErrorPopup();
+            console.log(error);
+          })
+      }
+    }
+  };
 
   // сохранить фильм
   const handleSaveCard = (card) => {
     api.saveMovie(card)
-    .then((res) => {
-      setSavedCards([...savedCards, res])
-      localStorage.setItem('savedCards', JSON.stringify(savedCards));
-      console.log(savedCards); // и вот здесь
-    })
-    .catch(err => console.log(err))
-  }
+      .then((res) => {
+        setSavedCards([...savedCards, res])
+        localStorage.setItem('savedCards', JSON.stringify(savedCards));
+      // console.log(savedCards); // и вот здесь
+      })
+      .catch(err => console.log(err))
+  };
 
   // удалить фильм
   const handleDeleteCard = (card) => {
@@ -134,9 +166,10 @@ const App = () => {
       .catch(err => console.log(err))
   };
 
+
   /*** попапы ***/
 
-  // открыть - закрыть попап на крестик
+  // открыть/закрыть попап на крестик
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
   const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
 
@@ -163,6 +196,7 @@ const App = () => {
     return () => document.removeEventListener('keydown', closeErrorPopupByEscape)
   }, []);
 
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
@@ -181,6 +215,7 @@ const App = () => {
               <Movies
                 cards={cards}
                 handleSaveCard={handleSaveCard}
+                handleSearchCard={handleSearchCard}
               />
               <Footer />
             </>
@@ -194,6 +229,7 @@ const App = () => {
                 cards={savedCards}
                 savedCards={savedCards}
                 onDelete={handleDeleteCard}
+                handleSearchCard={handleSearchCard}
               />
               <Footer />
             </>

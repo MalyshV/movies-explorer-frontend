@@ -2,28 +2,39 @@ import React, { useState, useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
+import Preloader from '../Preloader/Preloader';
 
-const Movies = ({ cards, handleSaveCard, likeClassName }) => {
+const Movies = ({ cards, savedCards, handleSaveCard, likeClassName, handleSearchCard }) => {
   const currentUser = useContext(CurrentUserContext);
+  const [search, setSearch] = useState('');
+  const [isSearched, setIsSearched] = useState(true);
+  const [isFound, setIsFound] = useState(false);
+  const [result, setResult] = useState(savedCards || []);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    setIsSearched(false);
+    e.preventDefault();
+    handleSearchCard(search);
+    setTimeout(() => setIsSearched(true), 1000);
+  };
 
   useEffect(() => {
     // что-нибудь
-  }, [currentUser])
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const query = form.search.value;
-    console.log(query, 'работаю, но ничего не ищу')
-
-    return query;
-  }
+  }, [currentUser]);
 
   return (
     <section className="movies" >
       <div className="movies__content">
-        <SearchForm onSubmit={handleSubmit} />
-        <MoviesCardList handleSaveCard={handleSaveCard} className={likeClassName} cards={cards} />
+        <SearchForm onChange={handleSearch} handleSearchCard={handleSearchCard} onSubmit={handleSubmit} />
+        { isSearched ?
+          <MoviesCardList handleSaveCard={handleSaveCard} className={likeClassName} cards={cards} />
+          :
+          <Preloader />
+        }
       </div>
     </section>
   )

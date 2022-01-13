@@ -11,7 +11,7 @@ const Profile = ({ onUpdateUser, handleSignOut }) => {
   const userName = currentUser.name;
   const userEmail = currentUser.email;
 
-  const { values, setValues, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, setValues, handleChange, errors } = useFormWithValidation();
 
   useEffect(() => {
     setValues({
