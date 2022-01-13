@@ -1,37 +1,19 @@
-import React, { useState } from 'react';
-// import { useSearchParams } from 'react-router-dom';
+import React from 'react';
 import img from '../../images/search_icon.svg';
 import FormInput from '../FormInput/FormInput';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import Button from '../Button/Button';
-import useFormWithValidation from '../../hooks/useFormWithValidation';
 
-const SearchForm = (props) => {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  const [search, setSearch] = useState('');
-  const [cards, setCards] = useState([]);
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
-  const isDisabled = values.email === '' || values.password === '' || !isValid;
-  const loginButton = !isDisabled ? '' : ' button-disabled';
-
-  const filterMovies = cards.filter(card => {
-
-    return card.nameRU.toLowerCase().includes(search.toLocaleLowerCase())
-  });
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('hi');
-  }
+const SearchForm = ({ isShortChecked, setIsShortChecked, onSubmit }) => {
 
   return (
-    <form className="search" autoComplete="off" onSubmit={handleSubmit} >
+    <form className="search" autoComplete="off" onSubmit={onSubmit} >
       <fieldset className="search__box">
         <img src={img} alt="иконка поиска" className="search__icon" />
-        <FormInput minLength={2} onChange={ e => setSearch(e.target.value) } placeholder="Фильм" inputType="search" tabIndex="1" inputName="search" labelClassName="_place_movies" inputClassName="_place_movies" required="false" />
+        <FormInput minLength={2} placeholder="Фильм" inputType="search" tabIndex="1" inputName="search" labelClassName="_place_movies" inputClassName="_place_movies" required="false" />
         <Button textOnButton="Найти" buttonClassName="_place_search-form" />
       </fieldset>
-      <FilterCheckbox />
+      <FilterCheckbox setIsShortChecked={setIsShortChecked} isShortChecked={isShortChecked} />
     </form>
   )
 };

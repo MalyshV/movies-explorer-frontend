@@ -1,78 +1,63 @@
 import React, {useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import { checkMovie } from '../../utils/constants';
 import Button from '../Button/Button';
+import { setCards, addMoreCards } from '../../utils/constants';
 
-const MoviesCardList = ({ cards, onClick, className }) => {
-  const [search, setSearch] = useState('');
-  // const [cards, setCards] = useState([]);
-  const [filtered, setIsFiltered] = useState(cards);
+const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [visible, setIsVisible] = useState(12);
+  const [visible, setIsVisible] = useState(setCards());
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const postQuery = searchParams.get('card') || '';
+
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  const isClicked = (query) => {
+    setSearchParams({card: query});
+  };
 
   const location = useLocation();
 
-  // добавили для теста
-  const [isShortMovies, setShortMovies] = useState(false);
-  const [filteredMovies, setFilteredMovies] = useState([]);
-
-  // добавили для теста
-  const filterMoviesByDuration = (filtredMovies) => {
-    return filtredMovies.filter((card) => card.duration < 40)
-  }
-
-  function handleCheckboxChecked(e) {
-    setShortMovies(e.target.checked);
-  }
-
-  const filterByDuration = (duration) => {
-    console.log('I am checked now!')
-
-      /* if (duration > 60) {
-
-      } else {
-
-      } */
-
-
-    /* if (duration > 60) {
-      setIsFiltered(cards);
-    } else {
-      let newCards = [...cards].filter(item => item.duration === duration)
-      setIsFiltered(newCards);
-    }
-    /* console.log(props.duration);
-    if(duration > 60) {
-      setIsFiltered(cards);
-    } else {
-      let newCards = [...cards].filter(item => item.duration === duration)
-      setIsFiltered(newCards);
-    } */
-  };
-
-  // добавить константу для ширины экрана и передавать в useState не 12, а число в зависимости от ширины
-
-  /* const filterMovies = cards.filter( card => {
-    return card.nameRU.toLowerCase().includes(search.toLocaleLowerCase())
-  }); */
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const postQuery = searchParams.get('card') || '';
-
   const showMoreMovies = () => {
-    setIsLoading(true);
-    setIsVisible((prevValue) => prevValue + 3);
-
-    // добавить константу вместо 3 для разной ширины экрана
+    setIsVisible((prevValue) => prevValue + addMoreCards());
   };
+
+  /* const filterMovies = (cards) => {
+    const searchResult = cards.filter(card => card.director.toString().includes(postQuery));
+
+    return searchResult;
+  }; */
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s');
+
+
+  const filterCards = (cards, query) => {
+    if (!query) {
+        return cards;
+    }
+
+    return cards.filter((card) => {
+        const cardName = card.nameRu.toLowerCase();
+        return cardName.includes(query);
+    });
+};
+
+const filteredCards = filterCards(cards, query);
 
   return (
     <>
-    <FilterCheckbox handleChecked={handleCheckboxChecked} isChecked={isShortMovies} />
+    { isLoading && <Preloader /> }
     <ul className="cards">
-      {filtered.slice(0, visible).map((card) => {
+      {
+      filteredCards.slice(0, visible).map((card) => {
+        // console.log(card.director)
+        // console.log(card.year) */
         return (
           <MoviesCard
             key={card.id}
@@ -80,16 +65,16 @@ const MoviesCardList = ({ cards, onClick, className }) => {
             duration={card.duration}
             buttonClassName={className}
             onClick={onClick}
+            handleSaveCard={handleSaveCard}
+            onDelete={onDelete}
           />
         );
       })}
     </ul>
-    { location.pathname === '/movies' ? <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} /> : null }
+    { location.pathname === '/movies' ?  <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} /> : null }
+    { isLoading && <Preloader /> }
     </>
   )
 };
 
 export default MoviesCardList;
-
-// after showMovies
-// { isLoading && <Preloader /> }

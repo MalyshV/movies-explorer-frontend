@@ -1,3 +1,5 @@
+// const site = 'https://api.nomoreparties.co/';
+
 class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -35,23 +37,42 @@ class Api {
     .then((res) => this._checkResponse(res));
   };
 
-  // updateUserInfo - ??
-
-  // filterMovies - ??
-
-  // addMovie - ??
-
-  saveMovie(movieId) {
-    return fetch(`${this._baseUrl}/movies/:movieId`, {
-      method: 'PUT',
+  saveMovie(movie) {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: 'POST',
       headers: this._checkToken(this._headers),
       credentials: 'include',
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailer: movie.trailerLink,
+        thumbnail: movie.trailerLink,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      }),
     })
     .then((res) => this._checkResponse(res));
   };
 
+  getSavedMovies() {
+    return fetch(`${this._baseUrl}/movies`, {
+      method: "GET",
+      headers: this._checkToken(this._headers),
+    })
+    .then((res) => this._checkResponse(res)
+    )
+    .then((data) => {
+      return data;
+    });
+  };
+
   deleteMovie(movieId) {
-    return fetch(`${this._baseUrl}/movies/:movieId`, {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
       headers: this._checkToken(this._headers),
       credentials: 'include',

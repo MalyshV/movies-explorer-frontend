@@ -5,7 +5,6 @@ const FormInput = ({ labelClassName, inputClassName, labelName, inputType, input
     <>
       <label htmlFor={labelFor} className={`form__label form__label${labelClassName}`}>{labelName}</label>
       <input
-        autoComplete="off"
         id={inputId}
         type={inputType}
         name={inputName}

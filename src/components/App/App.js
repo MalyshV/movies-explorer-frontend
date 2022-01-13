@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
-import { Routes, Route, useNavigate, /*useLocation*/ } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import './App.css';
+import api from '../../utils/MainApi';
+import * as auth from '../../utils/auth';
+import moviesApi from '../../utils/MoviesApi';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
@@ -13,25 +16,22 @@ import SavedMovies from '../SavedMovies/SavedMovies'
 import Movies from '../Movies/Movies';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
-import api from '../../utils/MainApi';
-import * as auth from '../../utils/auth';
-import moviesApi from '../../utils/MoviesApi';
-import { invalidAuthErr, updateProfileErr, invalidEmailErr} from '../../utils/errorsConfig';
 
 const App = () => {
-  const token = localStorage.getItem("jwt");
+  const token = localStorage.getItem('jwt');
+  const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState({});
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false);
-  const [cards, setCards] = useState([]);
+  const [currentUser, setCurrentUser] = useState({}); // - загрузка текущего юзера
+  const [isRegistered, setIsRegistered] = useState(false); // - стейт регистрации
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // - стейт логина
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false); // - стейт модалки
+  const [cards, setCards] = useState([]); // - все фильмы с сервера
   const [savedCards, setSavedCards] = useState([]);
 
-  const navigate = useNavigate();
-  // const location = useLocation();
-  // const fromPage = location.state?.from?.pathname || '/';
 
+  /*** загрузка ***/
+
+  // проверка токена
   useEffect(()=> {
     if (token) {
       auth.getContent(token)
@@ -44,18 +44,115 @@ const App = () => {
     }
   }, [navigate, token]);
 
+  // загрузка данных юзера и общих фильмов
   useEffect(() => {
     if (isLoggedIn === true) {
       Promise.all([api.getUserInfo(), moviesApi.findMovies()])
       .then(([userData, cards]) => {
-        setCurrentUser(userData);
         localStorage.setItem('cards', JSON.stringify(cards));
-        setCards(cards); // надо ли? или оставить только верхнюю строку?
+        setCurrentUser(userData);
+        setCards(cards);
+        setSavedCards(savedCards);
       })
       .catch((error) => {console.log(error)});
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, savedCards]);
 
+
+  /*** юзеры ***/
+
+  // регистрация нового юзера
+  const handleRegistration = (email, password, name) => {
+    auth.register(email, password, name)
+      .then(() => {
+        handleAuthorization(email, password);
+      })
+      .catch((error) => {
+        setIsRegistered(false);
+        console.log(error);
+        handleOpenErrorPopup();
+      })
+  };
+
+  // логин для зарегистрированного юзера
+  const handleAuthorization = (email, password) => {
+    auth.authorize(email, password)
+      .then((data) => {
+        setIsLoggedIn(true);
+        setIsRegistered(true);
+        localStorage.setItem('jwt', data.token)
+        return navigate('/movies', {replace: true});
+      })
+      .catch((error) => {
+        handleOpenErrorPopup();
+        console.log(error);
+      })
+  };
+
+  // обновление данных профиля
+  const handleUpdateUser = (data) => {
+    api.setUserInfo(data)
+      .then(data => {
+        setCurrentUser(data);
+        localStorage.setItem('currentUser', JSON.stringify(data));
+        console.log(localStorage)
+      })
+      .catch((error) => {
+        console.log(error);
+        handleOpenErrorPopup();
+      })
+  };
+
+  // выход из аккаунта
+  const handleSignOut = () => {
+    localStorage.removeItem('jwt');
+    setIsLoggedIn(false);
+    setCurrentUser({});
+    return navigate('/', {replace: true});
+  };
+
+  /*** фильмы ***/
+
+  // сохранить фильм
+  const handleSaveCard = (card) => {
+    api.saveMovie(card)
+    .then((res) => {
+      setSavedCards([...savedCards, res])
+      localStorage.setItem('savedCards', JSON.stringify(savedCards));
+      console.log(savedCards); // и вот здесь
+    })
+    .catch(err => console.log(err))
+  }
+
+  // удалить фильм
+  const handleDeleteCard = (card) => {
+    api.deleteMovie(card._id)
+      .then(() => {
+        localStorage.setItem('savedCards', JSON.stringify(savedCards.filter((item) => item !== card)));
+        setSavedCards(savedCards.filter((item) => item !== card));
+      })
+      .catch(err => console.log(err))
+  };
+
+  /*** попапы ***/
+
+  // открыть - закрыть попап на крестик
+  const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
+  const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
+
+  // закрыть попап мимо попапа
+  useEffect(() => {
+    const closeErrorPopupByClick = (event) => {
+        if (event.target.classList.contains('popup_is-opened')) {
+          handleCloseErrorPopup();
+        }
+    };
+    document.addEventListener('mousedown', closeErrorPopupByClick);
+
+    return () => document.removeEventListener('mousedown', closeErrorPopupByClick);
+  }, []);
+
+  // закрыть попап на esc
   useEffect(() => {
     const closeErrorPopupByEscape = (event) => {
       if (event.key === 'Escape') {
@@ -65,61 +162,6 @@ const App = () => {
     document.addEventListener('keydown', closeErrorPopupByEscape)
     return () => document.removeEventListener('keydown', closeErrorPopupByEscape)
   }, []);
-
-  const handleRegistration = (email, password, name) => {
-    auth.register(email, password, name)
-      .then((data) => {
-        handleAuthorization(email, password);
-        localStorage.setItem('jwt', data.token)
-        setIsRegistered(true);
-        setIsLoggedIn(true);
-        return navigate('/movies', {replace: true});
-      })
-      .catch((error) => {
-        setIsRegistered(false);
-        console.log(error);
-        handleOpenErrorPopup(invalidAuthErr);
-      })
-      .finally(() => {
-        //handleOpenErrorPopup();
-      })
-  };
-
-  const handleAuthorization = (email, password) => {
-    auth.authorize(email, password)
-      .then(() => {
-        setIsLoggedIn(true);
-        return navigate('/movies', {replace: true});
-      })
-      .catch((error) => {
-        handleOpenErrorPopup(invalidEmailErr);
-        console.log(error);
-      })
-      .finally(() => {
-        //handleOpenErrorPopup();
-      })
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem('jwt');
-    setIsLoggedIn(false);
-    setCurrentUser({});
-    return navigate('/', {replace: true});
-  };
-
-  const handleUpdateUser = (data) => {
-    api.setUserInfo(data)
-      .then(data => {
-        setCurrentUser(data);
-      })
-      .catch((error) => {
-        console.log(error);
-        handleOpenErrorPopup(updateProfileErr);
-      })
-  };
-
-  const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
-  const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -136,7 +178,10 @@ const App = () => {
           <ProtectedRoute isLoggedIn={token}>
             <>
               <Header type="loggedIn" />
-              <Movies cards={cards} />
+              <Movies
+                cards={cards}
+                handleSaveCard={handleSaveCard}
+              />
               <Footer />
             </>
           </ProtectedRoute>
@@ -145,7 +190,11 @@ const App = () => {
           <ProtectedRoute isLoggedIn={token}>
             <>
               <Header type="loggedIn" />
-              <SavedMovies cards={cards} />
+              <SavedMovies
+                cards={savedCards}
+                savedCards={savedCards}
+                onDelete={handleDeleteCard}
+              />
               <Footer />
             </>
           </ProtectedRoute>
@@ -154,7 +203,11 @@ const App = () => {
           <ProtectedRoute isLoggedIn={token}>
             <>
               <Header type="loggedIn" />
-              <Profile isLoggedIn={token} onUpdateUser={handleUpdateUser} handleSignOut={handleSignOut} />
+              <Profile
+                isLoggedIn={token}
+                onUpdateUser={handleUpdateUser}
+                handleSignOut={handleSignOut}
+              />
             </>
           </ProtectedRoute>
         } />
@@ -163,7 +216,11 @@ const App = () => {
         <Route path='*' element={ <PageNotFound /> } />
       </Routes>
     </div>
-    <ErrorPopup popupText={[invalidEmailErr || updateProfileErr || invalidAuthErr]} isOpen={isErrorPopupOpened} onClose={handleCloseErrorPopup} isRegistered={isRegistered} />
+    <ErrorPopup
+      isOpen={isErrorPopupOpened}
+      onClose={handleCloseErrorPopup}
+      isRegistered={isRegistered}
+    />
     </CurrentUserContext.Provider>
   );
 };

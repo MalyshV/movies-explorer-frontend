@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
-// import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-const SavedMovies = (props) => {
+const SavedMovies = ({ cards, onDelete }) => {
+  const currentUser = useContext(CurrentUserContext);
+
   const [isDelete, setIsDelete] = useState(false);
 
-  const handleDeleteClick = () => {
-    console.log('delete');
-    setIsDelete(!isDelete);
+  useEffect(() => {
+    // что-нибудь
+  }, [currentUser])
+
+  const handleCardDelete = (card) => {
+    onDelete(card);
   };
 
   return(
     <section className="movies">
       <SearchForm />
-      <MoviesCardList className="-delete" onClick={handleDeleteClick} cards={props.cards} />
+      <MoviesCardList className="-delete" onDelete={handleCardDelete} cards={cards} />
     </section>
   )
 };

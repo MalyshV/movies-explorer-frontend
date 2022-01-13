@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 
-const Movies = (props) => {
-  const [isLiked, setIsLiked] = useState(false);
+const Movies = ({ cards, handleSaveCard, likeClassName }) => {
+  const currentUser = useContext(CurrentUserContext);
 
-  const type = isLiked ? '-active' : '';
+  useEffect(() => {
+    // что-нибудь
+  }, [currentUser])
 
-  const handleLikeClick = () => {
-    setIsLiked(!isLiked);
-    console.log('liked');
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const query = form.search.value;
+    console.log(query, 'работаю, но ничего не ищу')
+
+    return query;
+  }
 
   return (
     <section className="movies" >
       <div className="movies__content">
-        <SearchForm />
-        <MoviesCardList onClick={handleLikeClick} className={type} cards={props.cards} />
+        <SearchForm onSubmit={handleSubmit} />
+        <MoviesCardList handleSaveCard={handleSaveCard} className={likeClassName} cards={cards} />
       </div>
     </section>
   )
