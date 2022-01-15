@@ -9,6 +9,19 @@ const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete })
 
   const location = useLocation();
 
+  /* const keys = props.id;
+  const listItems = keys.map((key) =>
+    <MoviesCard
+    card={props.card}
+    key={key.toString()}
+    duration={props.duration}
+    buttonClassName={className}
+    onClick={onClick}
+    handleSaveCard={handleSaveCard}
+    onDelete={onDelete}
+    />
+  )*/
+
   const showMoreMovies = () => {
     setIsVisible((prevValue) => prevValue + addMoreCards());
   };

@@ -106,6 +106,10 @@
   border-bottom: 0;
 }
 
+.form__input_place_movies:valid {
+  border-bottom: none;
+}
+
 .form__input_place_movies::-webkit-search-cancel-button {
   -webkit-appearance: none;
   margin: 4px 3px 0 0;

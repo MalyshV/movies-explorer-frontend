@@ -15,6 +15,7 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Movies from '../Movies/Movies';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
+import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
 import { filterMovies } from '../../utils/constants';
 
@@ -25,14 +26,15 @@ const App = () => {
 
   const [currentUser, setCurrentUser] = useState({}); // - загрузка текущего юзера
   const [cards, setCards] = useState([]); // - все фильмы с сервера
-  const [savedCards, setSavedCards] = useState([]);
+  const [savedCards, setSavedCards] = useState([]); // - сохраненные фильмы
+  const [searchedCards, setSearchedCards] = useState([]); // - фильмы после поиска
   const [isRegistered, setIsRegistered] = useState(false); // - стейт регистрации
   const [isLoggedIn, setIsLoggedIn] = useState(false); // - стейт логина
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false); // - стейт модалки
+  const [isSuccessPopupOpened, setIsSuccessPopupOpened] = useState(false); // - для профиля
 
-  /*** загрузка ***/
+  /*** загрузка данных ***/
 
-  // проверка токена
   useEffect(()=> {
     if (token) {
       auth.getContent(token)
@@ -45,16 +47,27 @@ const App = () => {
     }
   }, [navigate, token]);
 
-  // загрузка данных юзера
   useEffect(() => {
     if (isLoggedIn === true) {
       api.getUserInfo()
-        .then((userData) => {
-          setCurrentUser(userData);
+        .then((userInfo) => {
+          setCurrentUser(userInfo)
         })
-      .catch((error) => {console.log(error)});
+        .catch((error) => console.log(error))
     }
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (token) {
+      api.getSavedMovies()
+      .then((res) => {
+        setSavedCards(res.filter((card) => card.owner === currentUser._id))
+        localStorage.setItem('savedCardsData', JSON.stringify(res));
+        // console.log(localStorage, 'фильмы сохраненные????'); // добрались! грузится в консоль 3 раза?? Но у нового юзера правильно подгружается пустой массив
+      })
+      .catch((error) => console.log(error));
+    }
+  }, [currentUser, token]);
 
 
   /*** юзеры ***/
@@ -66,8 +79,8 @@ const App = () => {
         handleAuthorization(email, password);
       })
       .catch((error) => {
-        setIsRegistered(false);
         console.log(error);
+        setIsRegistered(false);
         handleOpenErrorPopup();
       })
   };
@@ -93,7 +106,7 @@ const App = () => {
       .then(data => {
         setCurrentUser(data);
         localStorage.setItem('currentUser', JSON.stringify(data));
-        // console.log(localStorage)
+        showProfileUpdatePopup();
       })
       .catch((error) => {
         console.log(error);
@@ -103,7 +116,7 @@ const App = () => {
 
   // выход из аккаунта
   const handleSignOut = () => {
-    localStorage.removeItem('jwt');
+    localStorage.clear();
     setIsLoggedIn(false);
     setCurrentUser({});
     return navigate('/', {replace: true});
@@ -111,6 +124,8 @@ const App = () => {
 
 
   /*** фильмы ***/
+
+  // if (location.pathname === '/movies') && есть
 
   // поиск
   const handleSearchCard = (searchQuery) => {
@@ -120,29 +135,10 @@ const App = () => {
         if (localStorage.getItem('cardsData')) {
           const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
           setCards(filterMovies(afterSearchData, searchQuery));
-        } else {
-          moviesApi.findMovies()
-            .then((res) => {
-              setCards(filterMovies(res, searchQuery));
-              localStorage.setItem('cardsData', JSON.stringify(res));
-            })
-            .catch((error) => {
-              handleOpenErrorPopup();
-              console.log(error);
-            })
+          localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
         }
-      } else {
-        api.getSavedMovies(token)
-          .then((res) => {
-            setSavedCards(filterMovies(res, searchQuery));
-            localStorage.setItem('savedCards', JSON.parse(res))
-          })
-          .catch((error) => {
-            handleOpenErrorPopup();
-            console.log(error);
-          })
       }
-    }
+    };
   };
 
   // сохранить фильм
@@ -150,8 +146,7 @@ const App = () => {
     api.saveMovie(card)
       .then((res) => {
         setSavedCards([...savedCards, res])
-        localStorage.setItem('savedCards', JSON.stringify(savedCards));
-      // console.log(savedCards); // и вот здесь
+        localStorage.setItem('savedCardsData', JSON.stringify(savedCards));
       })
       .catch(err => console.log(err))
   };
@@ -160,7 +155,7 @@ const App = () => {
   const handleDeleteCard = (card) => {
     api.deleteMovie(card._id)
       .then(() => {
-        localStorage.setItem('savedCards', JSON.stringify(savedCards.filter((item) => item !== card)));
+        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.filter((item) => item !== card)));
         setSavedCards(savedCards.filter((item) => item !== card));
       })
       .catch(err => console.log(err))
@@ -172,6 +167,11 @@ const App = () => {
   // открыть/закрыть попап на крестик
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
   const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
+
+  const showProfileUpdatePopup = () => {
+    setIsSuccessPopupOpened(true)
+    setTimeout(() => setIsSuccessPopupOpened(false), 1900);
+  };
 
   // закрыть попап мимо попапа
   useEffect(() => {
@@ -203,7 +203,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={
           <>
-            <Header />
+            <Header isLoggedIn={token} />
             <Main />
             <Footer />
           </>
@@ -211,7 +211,7 @@ const App = () => {
         <Route path='/movies' element={
           <ProtectedRoute isLoggedIn={token}>
             <>
-              <Header type="loggedIn" />
+              <Header isLoggedIn={token} />
               <Movies
                 cards={cards}
                 handleSaveCard={handleSaveCard}
@@ -224,7 +224,7 @@ const App = () => {
         <Route path='/saved-movies' element={
           <ProtectedRoute isLoggedIn={token}>
             <>
-              <Header type="loggedIn" />
+              <Header isLoggedIn={token} />
               <SavedMovies
                 cards={savedCards}
                 savedCards={savedCards}
@@ -238,7 +238,7 @@ const App = () => {
         <Route path='/profile' element={
           <ProtectedRoute isLoggedIn={token}>
             <>
-              <Header type="loggedIn" />
+              <Header isLoggedIn={token} />
               <Profile
                 isLoggedIn={token}
                 onUpdateUser={handleUpdateUser}
@@ -257,8 +257,32 @@ const App = () => {
       onClose={handleCloseErrorPopup}
       isRegistered={isRegistered}
     />
+    <SuccessPopup onUpdate={isSuccessPopupOpened} />
     </CurrentUserContext.Provider>
   );
 };
 
 export default App;
+
+// todo
+
+// Перенести функцию поиска в MoviesCardList, как рекомендовано в ТЗ?
+// Убедиться, что заливка на нажатой кнопке остается при переходе между страницами
+// Добавить проверку на id при сохранении карточки, чтобы не сохранялись дубли
+// Добавить удаление карточки из сохраненных по повторному клику на кнопку
+// Кнопка еще должна исчезать при отсутствии карточек для выгрузки
+// Разобраться, откуда в консоли ошибка с key на /saved-movies
+// Разобраться, почему в консоль грузится массив сохраненных карточек трижды. Мешает ли это?
+// Добавить функционал для сортировки короткометражек
+// Выводить карточки п
+// resize при монтировании карточек??
+// Инпут в SearchForm не обязательный к заполнению!! Валидация должна происходить после сабмита. При попытке отправить пустой запрос - ошибка "Нужно ввести ключевое слово"
+// Тогда мне наверное надо поправить логику попапа...
+// Перечитать еще раз чек-лист. Найти, где там "Во время запроса произошла ошибка..."
+// Добавить в инпут для имена регулярку: рус, en, дефис и пробел
+// Не забыть про текст "Ничего не найдено", если данных по запросу фильмов нет
+// Проверить все файлы на неиспользуемый код
+// Проверить названия всех функций и переменных
+// В чек листе есть конфиг для постоянных значений. Добавить?
+// Проверить, нет ли у меня лишних файлов
+// Сейчас в файле constants лежат общие функции. Может вынести их оттуда?

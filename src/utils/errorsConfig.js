@@ -11,6 +11,17 @@ const errors = {
   // serverErr: '500 На сервере произошла ошибка.',
   serverErr: 'Какая-от ошибка, не забудь исправить на 500.',
   notFoundErr: '404 Страница по указанному маршруту не найдена.',
+  showMoviesErr: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+  emptySearchErr: 'Нужно ввести ключевое слово',
 };
 
-export default errors;
+const sucessMessages = {
+  updateProfileSucsecc: 'Данные профиля успешно обновлены',
+};
+
+export { errors, sucessMessages };
+
+// todo
+
+// проверить все ошибки
+// исправить serverErr

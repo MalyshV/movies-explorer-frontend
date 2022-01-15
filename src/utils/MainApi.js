@@ -1,5 +1,3 @@
-// const site = 'https://api.nomoreparties.co/';
-
 class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -37,41 +35,36 @@ class Api {
     .then((res) => this._checkResponse(res));
   };
 
-  saveMovie(movie) {
+  saveMovie(card) {
     return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       headers: this._checkToken(this._headers),
       credentials: 'include',
       body: JSON.stringify({
-        country: movie.country,
-        director: movie.director,
-        duration: movie.duration,
-        year: movie.year,
-        description: movie.description,
-        image: `https://api.nomoreparties.co${movie.image.url}`,
-        trailer: movie.trailerLink,
-        thumbnail: movie.trailerLink,
-        movieId: movie.id,
-        nameRU: movie.nameRU,
-        nameEN: movie.nameEN,
+        country: card.country ? card.country : 'данные не указаны',
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: `https://api.nomoreparties.co${card.image.url}`, // и так тоже не работает.....
+        trailer: card.trailerLink,
+        thumbnail: card.trailerLink,
+        movieId: card.id,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN ? card.nameEN : 'данные не указаны',
       }),
     })
     .then((res) => this._checkResponse(res));
   };
 
-  getSavedMovies(token) {
+  getSavedMovies() {
     return fetch(`${this._baseUrl}/movies`, {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
+      method: 'GET',
+      headers: this._checkToken(this._headers),
+      credentials: 'include',
     })
     .then((res) => this._checkResponse(res)
     )
-    .then((data) => {
-      return data;
-    });
   };
 
   deleteMovie(movieId) {

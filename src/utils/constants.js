@@ -32,13 +32,3 @@ export const filterMovies = (data, searchWord, searchList) => {
     return card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
   });
 };
-
-// убрала из filterMovie
-/* if (searchList.length === 0) {
-  console.log(searchList.length);
-  // setSearchError(true);
-  // console.log(searchError);
-} else {
-  // setSearchError(false);
-  // console.log(searchError);
-} */

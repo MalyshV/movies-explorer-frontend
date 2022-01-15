@@ -9,7 +9,7 @@ const Movies = ({ cards, savedCards, handleSaveCard, likeClassName, handleSearch
   const [search, setSearch] = useState('');
   const [isSearched, setIsSearched] = useState(true);
   const [isFound, setIsFound] = useState(false);
-  const [result, setResult] = useState(savedCards || []);
+  const [result, setResult] = useState(savedCards);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -20,11 +20,19 @@ const Movies = ({ cards, savedCards, handleSaveCard, likeClassName, handleSearch
     e.preventDefault();
     handleSearchCard(search);
     setTimeout(() => setIsSearched(true), 1000);
+    // setResult(result);
   };
+
+
+  useEffect(() => { // проверить,
+    setResult(savedCards);
+  }, [savedCards]);
 
   useEffect(() => {
     // что-нибудь
   }, [currentUser]);
+
+  // может быть проверка пути и localStorage
 
   return (
     <section className="movies" >
@@ -41,3 +49,19 @@ const Movies = ({ cards, savedCards, handleSaveCard, likeClassName, handleSearch
 };
 
 export default Movies;
+
+/*      { isSearched ?
+          <MoviesCardList handleSaveCard={handleSaveCard} className={likeClassName} cards={cards} />
+          :
+          <Preloader />
+        }
+
+        <p>Ничего не найдено</p> */
+
+// todo
+
+// сохранять изменение цвета кнопки
+// навесить удаление фильма из сохраненных при повторном клике
+// добраться до изображения
+// понять, откуда берется ошибка с key в консоли. Можно попробовать вынести компонент, как в теории...
+// подчистить код

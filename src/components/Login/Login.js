@@ -17,8 +17,8 @@ const Login = ({ handleAuthorization }) => {
   return (
     <>
       <Form name="loginForm" title="Рады видеть!" textOnButton="Войти" underFormQuestion="Ещё не зарегистрированы?" linkPath="/signup" linkName="Регистрация" onSubmit={handleSubmit}>
-        <FormInput inputType="email" inputName="email" labelName="Email" inputId="email" labelFor="email" tabIndex="1" placeholder="" value={values.email || ''} onChange={handleChange} spanText={errors.email} />
-        <FormInput inputType="password" inputName="password" labelName="Пароль" inputId="password" labelFor="password" tabIndex="2" placeholder="" value={values.password || ''} onChange={handleChange} spanText={errors.password} />
+        <FormInput required={true} inputType="email" inputName="email" labelName="Email" inputId="email" labelFor="email" tabIndex="1" placeholder="" value={values.email || ''} onChange={handleChange} spanText={errors.email} />
+        <FormInput required={true} inputType="password" inputName="password" labelName="Пароль" inputId="password" labelFor="password" tabIndex="2" placeholder="" value={values.password || ''} onChange={handleChange} spanText={errors.password} />
         <Button buttonClassName={loginButton} textOnButton="Войти" tabIndex="3" />
       </Form>
     </>

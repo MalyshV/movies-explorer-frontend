@@ -22,7 +22,7 @@ const Profile = ({ onUpdateUser, handleSignOut }) => {
 
   useEffect(() => {
     setIsUpdateUser(
-      !(values.name === userName) || !(values.email === userEmail)
+      !(values.name === '' || userName) || !(values.email === '' || userEmail)
     );
   }, [values.name, values.email, userName, userEmail]);
 
@@ -41,12 +41,17 @@ const Profile = ({ onUpdateUser, handleSignOut }) => {
   };
 
   return (
-      <Form logo="" name="profileForm" title={`Привет, ${userName}!`} titleClassName="_place_profile" linkPath="/" underFormQuestion="" linkName="Выйти из аккаунта" linkClassName="_type_loggenIn" profileLinkClassName="_place_profile" onClick={handleOut}>
-        <FormInput minLength={2} maxLenght={30} labelClassName="_type_loggedin" inputClassName="_type_loggedin" labelFor="Имя" labelName="Имя" inputType="text" inputName="name" tabIndex="1" value={values.name || ''} placeholder="" spanText={errors.name} spanClassName="_type_loggedin" onChange={handleChange} />
-        <FormInput labelClassName="_type_loggedin" inputClassName="_type_loggedin" inputType="email" labelName="E-mail" labelFor="E-mail" inputName="email" tabIndex="2" value={values.email || ''} placeholder="" spanText={errors.email} spanClassName="_type_loggedin" onChange={handleChange} />
-        <Button textOnButton="Редактировать" buttonClassName={profileButton} disabled={isUpdateUser} tabIndex="3" onClick={handleSubmit} />
-      </Form>
+    <Form logo="" name="profileForm" title={`Привет, ${userName}!`} titleClassName="_place_profile" linkPath="/" underFormQuestion="" linkName="Выйти из аккаунта" linkClassName="_type_loggenIn" profileLinkClassName="_place_profile" onClick={handleOut}>
+      <FormInput required={true} minLength={2} maxLenght={30} labelClassName="_type_loggedin" inputClassName="_type_loggedin" labelFor="Имя" labelName="Имя" inputType="text" inputName="name" tabIndex="1" value={values.name || ''} placeholder="" spanText={errors.name} spanClassName="_type_loggedin" onChange={handleChange} />
+      <FormInput required={true} labelClassName="_type_loggedin" inputClassName="_type_loggedin" inputType="email" labelName="E-mail" labelFor="E-mail" inputName="email" tabIndex="2" value={values.email || ''} placeholder="" spanText={errors.email} spanClassName="_type_loggedin" onChange={handleChange} />
+      <Button textOnButton="Редактировать" buttonClassName={profileButton} disabled={isUpdateUser} tabIndex="3" onClick={handleSubmit} />
+    </Form>
   )
 };
 
 export default Profile;
+
+// todo
+
+// Еще раз проверить, точно ли корректно срабатывает кнопка Редактировать
+// Добавить проверку на рус, англ, пробел и дефис, как в чек-листе

@@ -1,7 +1,7 @@
 import React from 'react';
 import wrong from '../../images/popup_bg_icon.svg';
 import { useLocation } from 'react-router-dom';
-import errors from '../../utils/errorsConfig';
+import { errors } from '../../utils/errorsConfig';
 
 const ErrorPopup = ({ onClose, isOpen }) => {
   const location = useLocation();
@@ -14,7 +14,7 @@ const ErrorPopup = ({ onClose, isOpen }) => {
     } else if (location.pathname === '/signup') {
       return popupText = errors.invalidAuthErr;
     } else if (location.pathname === '/movies') {
-      return popupText = errors.serverErr;
+      return popupText = errors.showMoviesErr;
     } else if (location.pathname === '/saved-movies') {
       return popupText = errors.serverErr;
     }
@@ -32,3 +32,8 @@ const ErrorPopup = ({ onClose, isOpen }) => {
 };
 
 export default ErrorPopup;
+
+// todo
+
+// облегчить конструкцию с if else
+// может config сделать для путей, кстати ??
