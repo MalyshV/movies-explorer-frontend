@@ -2,7 +2,9 @@
   margin: 0 auto;
   padding: 0;
   min-width: 320px;
+  height: 100vh;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
