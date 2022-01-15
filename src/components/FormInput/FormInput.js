@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormInput = ({ labelClassName, inputClassName, labelName, inputType, inputName, spanText, spanClassName, tabIndex, value, placeholder, labelFor, inputId, onChange, minLength, maxLenght, required }) => {
+const FormInput = ({ labelClassName, inputClassName, labelName, inputType, inputName, spanText, spanClassName, tabIndex, value, placeholder, labelFor, inputId, onChange, minLength, maxLenght, pattern, required }) => {
   return(
     <>
       <label htmlFor={labelFor} className={`form__label form__label${labelClassName}`}>{labelName}</label>
@@ -9,7 +9,8 @@ const FormInput = ({ labelClassName, inputClassName, labelName, inputType, input
         type={inputType}
         name={inputName}
         className={`form__input form__input${inputClassName}`}
-        required={false}
+        required={required}
+        pattern={pattern}
         tabIndex={tabIndex}
         value={value}
         placeholder={placeholder}

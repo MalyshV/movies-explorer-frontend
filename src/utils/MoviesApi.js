@@ -1,25 +1,3 @@
-// export const MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-
-// общий getMovies - ??
-
-/* export const findMovies = () => {
-  return fetch(MOVIES_URL, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    credentials: 'include',
-  })
-  .then((res) => checkResponse(res));
-}
-
-export const checkResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-}; */
-
 class MoviesApi {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -48,7 +26,7 @@ class MoviesApi {
       headers: {
         'Content-Type': 'application/json'
       },
-      // credentials: 'include', // убрала на время, чтобы добраться до фильмов
+      credentials: 'include', // убирала на время, чтобы добраться до фильмов. Скорее всего из-за этого не было изображения на /saved-movies
     })
     .then((res) => this._checkResponse(res));
   }
