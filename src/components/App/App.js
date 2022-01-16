@@ -45,7 +45,7 @@ const App = () => {
       })
       .catch((error) => console.log(error));
     }
-  }, [navigate, token]);
+  }, [token]);
 
   useEffect(() => {
     if (isLoggedIn === true) {
@@ -59,8 +59,10 @@ const App = () => {
 
   useEffect(() => {
     if (token) {
+      console.log(token);
       api.getSavedMovies()
       .then((res) => {
+        console.log(res);
         setSavedCards(res.filter((card) => card.owner === currentUser._id))
         localStorage.setItem('savedCardsData', JSON.stringify(res));
         // console.log(localStorage, 'фильмы сохраненные????'); // добрались! грузится в консоль 3 раза?? Но у нового юзера правильно подгружается пустой массив
@@ -76,10 +78,11 @@ const App = () => {
   const handleRegistration = (email, password, name) => {
     auth.register(email, password, name)
       .then(() => {
+        console.log('что-нибудь здесь есть???');
         handleAuthorization(email, password);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error, 'ошиииибочка');
         setIsRegistered(false);
         handleOpenErrorPopup();
       })
@@ -136,8 +139,22 @@ const App = () => {
           const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
           setCards(filterMovies(afterSearchData, searchQuery));
           localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
+        } else if (!localStorage.getItem('cardsData')) {
+          moviesApi.findMovies()
+          .then((res) => {
+            console.log(res, 1)
+            setCards(filterMovies(res, searchQuery));
+            localStorage.setItem('cardsData', JSON.stringify(res));
+            api.getSavedMovies()
+            console.log(localStorage)
+            })
+            .catch((error) => {
+              handleOpenErrorPopup();
+              console.log(error);
+            })
         }
-      }
+       }
+
     };
   };
 
@@ -145,8 +162,10 @@ const App = () => {
   const handleSaveCard = (card) => {
     api.saveMovie(card)
       .then((res) => {
-        setSavedCards([...savedCards, res])
-        localStorage.setItem('savedCardsData', JSON.stringify(savedCards));
+        // console.log(res)
+        //setSavedCards(res.filter((card) => card.cardId !== currentUser._id);
+        setSavedCards([...savedCards, res]);
+        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
       })
       .catch(err => console.log(err))
   };
@@ -271,10 +290,9 @@ export default App;
 // Добавить проверку на id при сохранении карточки, чтобы не сохранялись дубли
 // Добавить удаление карточки из сохраненных по повторному клику на кнопку
 // Кнопка еще должна исчезать при отсутствии карточек для выгрузки
-// Разобраться, откуда в консоли ошибка с key на /saved-movies
 // Разобраться, почему в консоль грузится массив сохраненных карточек трижды. Мешает ли это?
 // Добавить функционал для сортировки короткометражек
-// Выводить карточки п
+// Выводить карточки на /saved-movies только после поиска
 // resize при монтировании карточек??
 // Инпут в SearchForm не обязательный к заполнению!! Валидация должна происходить после сабмита. При попытке отправить пустой запрос - ошибка "Нужно ввести ключевое слово"
 // Тогда мне наверное надо поправить логику попапа...

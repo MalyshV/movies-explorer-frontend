@@ -1,3 +1,5 @@
+const url = 'https://api.nomoreparties.co';
+
 class Api {
   constructor(config) {
     this._baseUrl = config.baseUrl;
@@ -43,10 +45,12 @@ class Api {
       body: JSON.stringify({
         country: card.country ? card.country : 'данные не указаны',
         director: card.director,
-        duration: card.duration,
+        duration: card.duration ? card.duration : 'данные не указаны',
         year: card.year,
         description: card.description,
-        image: `https://api.nomoreparties.co${card.image.url}`, // и так тоже не работает.....
+        image: `${url}${card.image.url}`,
+        //image: `${url}card.image`, // не могу добраться до карточки...
+        //image: `https://api.nomoreparties.co${card.image.url}`, // и так тоже не работает.....
         trailer: card.trailerLink,
         thumbnail: card.trailerLink,
         movieId: card.id,
@@ -85,6 +89,7 @@ class Api {
 };
 
 const api = new Api({
+  // baseUrl: 'https://yourmoviesexplorer.nomoredomains.rocks/api',
   baseUrl: 'http://localhost:3001',
   headers: {
     'Content-Type': 'application/json'

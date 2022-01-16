@@ -26,7 +26,7 @@ class MoviesApi {
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'include', // убирала на время, чтобы добраться до фильмов. Скорее всего из-за этого не было изображения на /saved-movies
+      // credentials: 'include', // снова убрала, чтобы добраться до фильмов. Скорее всего из-за этого не было изображения на /saved-movies
     })
     .then((res) => this._checkResponse(res));
   }

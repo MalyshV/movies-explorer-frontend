@@ -26,15 +26,17 @@ const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete })
     setIsVisible((prevValue) => prevValue + addMoreCards());
   };
 
+
   return (
     <>
       <ul className="cards">
         {
         cards.slice(0, visible).map((card) => {
+
           return (
             <MoviesCard
               card={card}
-              key={card.id}
+              key={card._id || card.id}
               duration={card.duration}
               buttonClassName={className}
               onClick={onClick}
