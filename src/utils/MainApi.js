@@ -1,4 +1,4 @@
-const url = 'https://api.nomoreparties.co';
+import { MOVIES_URL } from '../utils/constants';
 
 class Api {
   constructor(config) {
@@ -43,19 +43,17 @@ class Api {
       headers: this._checkToken(this._headers),
       credentials: 'include',
       body: JSON.stringify({
-        country: card.country ? card.country : 'данные не указаны',
-        director: card.director,
-        duration: card.duration ? card.duration : 'данные не указаны',
-        year: card.year,
+        country: card.country === null ? card.nameRU : card.country,
         description: card.description,
-        image: `${url}${card.image.url}`,
-        //image: `${url}card.image`, // не могу добраться до карточки...
-        //image: `https://api.nomoreparties.co${card.image.url}`, // и так тоже не работает.....
-        trailer: card.trailerLink,
-        thumbnail: card.trailerLink,
+        director: card.director,
+        duration: card.duration,
+        image: `${MOVIES_URL}${card.image.url}`,
         movieId: card.id,
+        nameEN: card.nameEN === null ? 'данные не указаны' : card.nameEN,
         nameRU: card.nameRU,
-        nameEN: card.nameEN ? card.nameEN : 'данные не указаны',
+        thumbnail: `${MOVIES_URL}${card.image.url}`,
+        trailer: card.trailerLink,
+        year: card.year,
       }),
     })
     .then((res) => this._checkResponse(res));
@@ -90,7 +88,7 @@ class Api {
 
 const api = new Api({
   // baseUrl: 'https://yourmoviesexplorer.nomoredomains.rocks/api',
-  baseUrl: 'http://localhost:3001',
+  baseUrl: 'http://localhost:3000',
   headers: {
     'Content-Type': 'application/json'
   }

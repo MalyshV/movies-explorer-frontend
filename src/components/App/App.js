@@ -125,7 +125,6 @@ const App = () => {
     return navigate('/', {replace: true});
   };
 
-
   /*** фильмы ***/
 
   // if (location.pathname === '/movies') && есть
@@ -160,12 +159,14 @@ const App = () => {
 
   // сохранить фильм
   const handleSaveCard = (card) => {
+    console.log(card);
     api.saveMovie(card)
       .then((res) => {
-        // console.log(res)
+        // console.log(res._id);
         //setSavedCards(res.filter((card) => card.cardId !== currentUser._id);
-        setSavedCards([...savedCards, res]);
-        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
+          setSavedCards([...savedCards, res]);
+          // localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
+
       })
       .catch(err => console.log(err))
   };

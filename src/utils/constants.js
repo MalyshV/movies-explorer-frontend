@@ -1,3 +1,5 @@
+export const MOVIES_URL = 'https://api.nomoreparties.co';
+
 export const checkMovie = (card) => {
   const shortFilm = card.duration <= 40;
     if (shortFilm) {
