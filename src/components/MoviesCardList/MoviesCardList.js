@@ -9,23 +9,9 @@ const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete })
 
   const location = useLocation();
 
-  /* const keys = props.id;
-  const listItems = keys.map((key) =>
-    <MoviesCard
-    card={props.card}
-    key={key.toString()}
-    duration={props.duration}
-    buttonClassName={className}
-    onClick={onClick}
-    handleSaveCard={handleSaveCard}
-    onDelete={onDelete}
-    />
-  )*/
-
   const showMoreMovies = () => {
     setIsVisible((prevValue) => prevValue + addMoreCards());
   };
-
 
   return (
     <>
@@ -46,7 +32,7 @@ const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete })
           );
         })}
       </ul>
-      { location.pathname === '/movies' ?  <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} /> : null }
+      { location.pathname === '/movies' && (visible <= cards.length) ?  <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} /> : null }
     </>
   )
 };
