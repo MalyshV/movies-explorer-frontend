@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
 import { setRigthDuration, MOVIES_URL /*, checkMovieDuration */ } from '../../utils/constants';
 
-const MoviesCard = ({ card, handleSaveCard, onDelete }) => {
+const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
   const [isCliked, setIsCliked] = useState(false);
   const location = useLocation();
 
@@ -13,20 +13,25 @@ const MoviesCard = ({ card, handleSaveCard, onDelete }) => {
   const buttonClassName = location.pathname === '/movies' ? buttonMovies : buttonSavedMovies;
   const cardImageSrc = location.pathname === '/movies' ? `${MOVIES_URL}${card.image.url}` : `${card.image}`;
 
+  /*useEffect(() => {
+    savedCards && savedCards.some((item) => item.nameEn === card.nameEn) ? setIsCliked(true) : setIsCliked(false);
+  }, [savedCards, card.nameEn]);*/
+
   const handleSaveClick = () => {
+    // const liked = savedCards.find((item) => item.movieId === card.id);
     if(!isCliked) {
       handleSaveCard(card);
       setIsCliked(true);
     } else {
       setIsCliked(false);
     }
-  }
+  };
 
-  /*const useEffect = (() => {
+  useEffect(() => {
     function classChange(status) {
       setIsCliked(!isCliked);
     }
-  }, [isCliked]); */
+  }, [isCliked]);
 
   const handleDeleteClick = () => {
     onDelete(card);

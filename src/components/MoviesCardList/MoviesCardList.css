@@ -10,9 +10,20 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
+.cards__not-found {
+  margin: 0;
+  padding: 0;
+  color: #A0A0A0;
+  font-size: 17px;
+  font-weight: 500;
+}
+
 @media (max-width: 600px) {
   .cards {
     margin-top: 40px;
     gap: 16px 0;
+  }
+  .cards__not-found {
+
   }
 }

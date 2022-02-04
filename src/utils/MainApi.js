@@ -49,10 +49,10 @@ class Api {
         duration: card.duration,
         image: `${MOVIES_URL}${card.image.url}`,
         movieId: card.id,
-        nameEN: card.nameEN === null ? 'данные не указаны' : card.nameEN,
+        nameEN: card.nameEN === '' ? 'данные не указаны' : card.nameEN,
         nameRU: card.nameRU,
         thumbnail: `${MOVIES_URL}${card.image.url}`,
-        trailer: card.trailerLink,
+        trailer: card.trailerLink === null ? 'данные не указаны' : card.trailerLink,
         year: card.year,
       }),
     })

@@ -4,8 +4,10 @@ export const checkMovie = (card) => {
   const shortFilm = card.duration <= 40;
     if (shortFilm) {
       console.log('я - короткометражка');
+      return shortFilm;
     } else {
       console.log('а я - нет');
+      return
     }
 };
 
@@ -29,8 +31,24 @@ export const setRigthDuration = (duration) => {
   ['2', '3', '4'].some(char => `${duration}`.endsWith(char)) ? `${duration} минуты` : `${duration} минут`;
 };
 
-export const filterMovies = (data, searchWord, searchList) => {
+export const filterMovies = (data, searchWord, searchList, checkbox) => {
   return searchList = data.filter((card) => {
-    return card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
+    const isShortMovie = card.duration <= 40;
+    const isFoundMovie = card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
+
+    if (checkbox) {
+      return isShortMovie && isFoundMovie;
+    }
+
+    return isFoundMovie;
+    // return card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
+  });
+};
+
+export const filterMoviesByLength = (data) => {
+  data.filter((card) => {
+    if (card.duration <= 40) {
+      return card;
+    }
   });
 };

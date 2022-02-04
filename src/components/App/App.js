@@ -32,6 +32,9 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // - стейт логина
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false); // - стейт модалки
   const [isSuccessPopupOpened, setIsSuccessPopupOpened] = useState(false); // - для профиля
+  const [isCliked, setIsCliked] = useState(false);
+  const [checkbox, setCheckbox] = React.useState(false);
+  const [checkSavedCards, setCheckSavedCards] = React.useState(false);
 
   /*** загрузка данных ***/
 
@@ -59,13 +62,10 @@ const App = () => {
 
   useEffect(() => {
     if (token) {
-      console.log(token);
       api.getSavedMovies()
       .then((res) => {
-        console.log(res);
         setSavedCards(res.filter((card) => card.owner === currentUser._id))
         localStorage.setItem('savedCardsData', JSON.stringify(res));
-        // console.log(localStorage, 'фильмы сохраненные????'); // добрались! грузится в консоль 3 раза?? Но у нового юзера правильно подгружается пустой массив
       })
       .catch((error) => console.log(error));
     }
@@ -78,11 +78,9 @@ const App = () => {
   const handleRegistration = (email, password, name) => {
     auth.register(email, password, name)
       .then(() => {
-        console.log('что-нибудь здесь есть???');
         handleAuthorization(email, password);
       })
       .catch((error) => {
-        console.log(error, 'ошиииибочка');
         setIsRegistered(false);
         handleOpenErrorPopup();
       })
@@ -127,8 +125,6 @@ const App = () => {
 
   /*** фильмы ***/
 
-  // if (location.pathname === '/movies') && есть
-
   // поиск
   const handleSearchCard = (searchQuery) => {
     if (isLoggedIn === true) {
@@ -141,32 +137,37 @@ const App = () => {
         } else if (!localStorage.getItem('cardsData')) {
           moviesApi.findMovies()
           .then((res) => {
-            console.log(res, 1)
             setCards(filterMovies(res, searchQuery));
             localStorage.setItem('cardsData', JSON.stringify(res));
-            api.getSavedMovies()
-            console.log(localStorage)
+            api.getSavedMovies();
             })
             .catch((error) => {
               handleOpenErrorPopup();
               console.log(error);
             })
         }
-       }
-
+      };
+      if (location.pathname === '/saved-movies') {
+        api.getSavedMovies()
+          .then((res) => {
+            setSavedCards(filterMovies(res, searchQuery));
+            localStorage.setItem('savedCardsdata', JSON.stringify(res))
+          })
+          .catch((error) => {
+            handleOpenErrorPopup();
+            console.log(error);
+          })
+      };
     };
   };
 
   // сохранить фильм
   const handleSaveCard = (card) => {
-    console.log(card);
     api.saveMovie(card)
       .then((res) => {
-        // console.log(res._id);
+        setSavedCards([...savedCards, res]);
+        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
         //setSavedCards(res.filter((card) => card.cardId !== currentUser._id);
-          setSavedCards([...savedCards, res]);
-          // localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
-
       })
       .catch(err => console.log(err))
   };
@@ -180,7 +181,6 @@ const App = () => {
       })
       .catch(err => console.log(err))
   };
-
 
   /*** попапы ***/
 
@@ -234,8 +234,11 @@ const App = () => {
               <Header isLoggedIn={token} />
               <Movies
                 cards={cards}
+                savedCards={savedCards}
                 handleSaveCard={handleSaveCard}
                 handleSearchCard={handleSearchCard}
+                checkbox={checkbox}
+                setCheckbox={setCheckbox}
               />
               <Footer />
             </>
@@ -250,6 +253,8 @@ const App = () => {
                 savedCards={savedCards}
                 onDelete={handleDeleteCard}
                 handleSearchCard={handleSearchCard}
+                checkbox={checkSavedCards}
+                setCheckbox={setCheckSavedCards}
               />
               <Footer />
             </>
@@ -290,14 +295,11 @@ export default App;
 // Убедиться, что заливка на нажатой кнопке остается при переходе между страницами
 // Добавить проверку на id при сохранении карточки, чтобы не сохранялись дубли
 // Добавить удаление карточки из сохраненных по повторному клику на кнопку
-// Кнопка еще должна исчезать при отсутствии карточек для выгрузки
 // Разобраться, почему в консоль грузится массив сохраненных карточек трижды. Мешает ли это?
-// Добавить функционал для сортировки короткометражек
 // Выводить карточки на /saved-movies только после поиска
 // resize при монтировании карточек??
 // Инпут в SearchForm не обязательный к заполнению!! Валидация должна происходить после сабмита. При попытке отправить пустой запрос - ошибка "Нужно ввести ключевое слово"
 // Тогда мне наверное надо поправить логику попапа...
-// Перечитать еще раз чек-лист. Найти, где там "Во время запроса произошла ошибка..."
 // Не забыть про текст "Ничего не найдено", если данных по запросу фильмов нет
 // Проверить все файлы на неиспользуемый код
 // Проверить названия всех функций и переменных
