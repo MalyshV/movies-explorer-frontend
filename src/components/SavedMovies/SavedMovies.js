@@ -3,11 +3,13 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
+import Popup from '../Popup/Popup';
 
 const SavedMovies = ({ cards, savedCards, onDelete, handleSearchCard, checkbox, setCheckbox }) => {
   const currentUser = useContext(CurrentUserContext);
   const [search, setIsSearch] = useState('');
   const [isSearched, setIsSearched] = useState(true);
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   useEffect(() => {
     // что-нибудь
@@ -24,8 +26,14 @@ const SavedMovies = ({ cards, savedCards, onDelete, handleSearchCard, checkbox, 
   const handleSubmit = (e) => {
     setIsSearched(false);
     e.preventDefault();
-    handleSearchCard(search);
-    setTimeout(() => setIsSearched(true), 1000);
+
+    if (search === '') {
+      setIsPopupOpened(true)
+      setTimeout(() => setIsPopupOpened(false), 1900);
+    } else {
+      handleSearchCard(search);
+      setTimeout(() => setIsSearched(true), 1000);
+    }
   };
 
   return(
@@ -36,6 +44,7 @@ const SavedMovies = ({ cards, savedCards, onDelete, handleSearchCard, checkbox, 
         :
         <Preloader />
       }
+      <Popup onUpdate={isPopupOpened} />
     </section>
   )
 };

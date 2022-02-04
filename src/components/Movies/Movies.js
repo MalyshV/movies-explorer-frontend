@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
+import Popup from '../Popup/Popup';
 
 const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox }) => {
   const [search, setSearch] = useState('');
   const [isSearched, setIsSearched] = useState(true);
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -14,8 +16,15 @@ const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkb
   const handleSubmit = (e) => {
     setIsSearched(false);
     e.preventDefault();
-    handleSearchCard(search);
-    setTimeout(() => setIsSearched(true), 1000);
+
+    if (search === '') {
+      setIsPopupOpened(true)
+      setTimeout(() => setIsPopupOpened(false), 1900);
+    } else {
+      handleSearchCard(search);
+      console.log(search, 'vdghsjdks;dkskodkpsps!')
+      setTimeout(() => setIsSearched(true), 1000);
+    }
   };
 
   return (
@@ -28,6 +37,7 @@ const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkb
           <Preloader />
         }
       </div>
+      <Popup onUpdate={isPopupOpened} />
     </section>
   )
 };

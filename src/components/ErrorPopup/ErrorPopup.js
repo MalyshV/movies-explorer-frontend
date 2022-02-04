@@ -6,7 +6,7 @@ import { errors } from '../../utils/errorsConfig';
 const ErrorPopup = ({ onClose, isOpen }) => {
   const location = useLocation();
 
-  const showError = (popupText) => {
+  const showMessage = (popupText) => {
     if (location.pathname === '/profile') {
       return popupText = errors.updateProfileErr;
     } else if (location.pathname === '/signin') {
@@ -25,7 +25,7 @@ const ErrorPopup = ({ onClose, isOpen }) => {
       <div className="popup__content">
         <button className="popup__close" type="button" onClick={onClose}></button>
         <img className="popup__icon" src={wrong} alt="иконка модального окна" />
-        <h3 className="popup__title">{showError()}</h3>
+        <h3 className="popup__title">{showMessage()}</h3>
       </div>
     </div>
   )

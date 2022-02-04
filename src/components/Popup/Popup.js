@@ -1,12 +1,22 @@
 import React from 'react';
-import { sucessMessages } from '../../utils/errorsConfig';
-// import wrong from '../../images/popup_bg_icon.svg';
+import { sucessMessages, errors } from '../../utils/errorsConfig';
+import { useLocation } from 'react-router-dom';
 
 const SuccessPopup = ({ onUpdate }) => {
+  const location = useLocation();
+
+  const showMessage = (popupText) => {
+    if (location.pathname === '/profile') {
+      return popupText = sucessMessages.updateProfileSucsecc;
+    } else if (location.pathname === '/movies' || '/saved-movies') {
+      return popupText = errors.emptySearchErr;
+    }
+  };
+
   return(
     <div className={`popup ${onUpdate ? 'popup_is-opened' : ''}`}>
       <div className="popup__content">
-        <h3 className="popup__title">{sucessMessages.updateProfileSucsecc}</h3>
+        <h3 className="popup__title">{showMessage()}</h3>
       </div>
     </div>
   )

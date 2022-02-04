@@ -13,12 +13,15 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
   const buttonClassName = location.pathname === '/movies' ? buttonMovies : buttonSavedMovies;
   const cardImageSrc = location.pathname === '/movies' ? `${MOVIES_URL}${card.image.url}` : `${card.image}`;
 
-  /*useEffect(() => {
-    savedCards && savedCards.some((item) => item.nameEn === card.nameEn) ? setIsCliked(true) : setIsCliked(false);
-  }, [savedCards, card.nameEn]);*/
+  useEffect(() => {
+    savedCards && savedCards.map((item) => {
+      if (item.movieId === card.id) {
+        setIsCliked(true);
+      }
+    });
+  }, [savedCards, card.id]);
 
   const handleSaveClick = () => {
-    // const liked = savedCards.find((item) => item.movieId === card.id);
     if(!isCliked) {
       handleSaveCard(card);
       setIsCliked(true);
@@ -26,12 +29,6 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
       setIsCliked(false);
     }
   };
-
-  useEffect(() => {
-    function classChange(status) {
-      setIsCliked(!isCliked);
-    }
-  }, [isCliked]);
 
   const handleDeleteClick = () => {
     onDelete(card);

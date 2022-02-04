@@ -15,7 +15,7 @@ import Profile from '../Profile/Profile';
 import SavedMovies from '../SavedMovies/SavedMovies'
 import Movies from '../Movies/Movies';
 import ErrorPopup from '../ErrorPopup/ErrorPopup';
-import SuccessPopup from '../SuccessPopup/SuccessPopup';
+import Popup from '../Popup/Popup';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
 import { filterMovies } from '../../utils/constants';
 
@@ -216,7 +216,6 @@ const App = () => {
     return () => document.removeEventListener('keydown', closeErrorPopupByEscape)
   }, []);
 
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
@@ -282,7 +281,7 @@ const App = () => {
       onClose={handleCloseErrorPopup}
       isRegistered={isRegistered}
     />
-    <SuccessPopup onUpdate={isSuccessPopupOpened} />
+    <Popup onUpdate={isSuccessPopupOpened} />
     </CurrentUserContext.Provider>
   );
 };
