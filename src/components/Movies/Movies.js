@@ -33,7 +33,7 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
   return (
     <section className="movies" >
       <div className="movies__content">
-        <SearchForm onChange={handleSearch} handleSearchCard={handleSearchCard} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox}/>
+        <SearchForm onChange={handleSearch} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox}/>
         { !isSearched ?
           <MoviesCardList
             handleSaveCard={handleSaveCard}

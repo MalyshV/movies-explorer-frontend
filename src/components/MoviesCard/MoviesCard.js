@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
-import { setRigthDuration, MOVIES_URL /*, checkMovieDuration */ } from '../../utils/constants';
+import { setRigthDuration, MOVIES_URL } from '../../utils/constants';
 
-const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards, isMovieSaved }) => {
+const MoviesCard = ({ card, handleSaveCard, onDelete, isMovieSaved }) => {
   const [isCliked, setIsCliked] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     setIsCliked(isMovieSaved(card));
-  }, []);
+  }, [card, isMovieSaved]);
 
   const buttonMovies = isCliked ? '-active' : '';
   const buttonSavedMovies = '-delete';

@@ -32,7 +32,7 @@ const SavedMovies = ({ cards, savedCards, handleSavedMoviesSearchCard, onDelete,
 
   return(
     <section className="movies">
-      <SearchForm onChange={handleSearch} handleSavedMoviesSearchCard={handleSavedMoviesSearchCard} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox} />
+      <SearchForm onChange={handleSearch} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox} />
       { isSearched ?
         <MoviesCardList
           className="-delete"

@@ -181,10 +181,8 @@ const App = () => {
 
   // удалить фильм
   const handleDeleteCard = (card) => {
-    console.log(card._id)
     api.deleteMovie(card)
       .then(() => {
-        console.log('я тут')
         setSavedCards(
           savedCards.filter((item) => item._id !== card._id)
         );
@@ -196,7 +194,7 @@ const App = () => {
   };
 
   /*** попапы ***/
-  // открыть/закрыть попап на крестик
+  // открыть/закрыть на крестик
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
   const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
 
@@ -205,7 +203,7 @@ const App = () => {
     setTimeout(() => setIsSuccessPopupOpened(false), 1900);
   };
 
-  // закрыть попап мимо попапа
+  // закрыть мимо попапа
   useEffect(() => {
     const closeErrorPopupByClick = (event) => {
         if (event.target.classList.contains('popup_is-opened')) {
@@ -217,7 +215,7 @@ const App = () => {
     return () => document.removeEventListener('mousedown', closeErrorPopupByClick);
   }, []);
 
-  // закрыть попап на esc
+  // закрыть на esc
   useEffect(() => {
     const closeErrorPopupByEscape = (event) => {
       if (event.key === 'Escape') {

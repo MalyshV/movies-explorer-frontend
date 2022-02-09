@@ -13,9 +13,7 @@ const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete, s
   };
 
   const filteredMoviesByDuration = cards.filter((card) => {
-    if ((card.duration <= 40 && checkbox) || !checkbox) {
-      return card;
-    }
+    return ((card.duration <= 40 && checkbox) || !checkbox) ? card : null;
   });
 
   return (

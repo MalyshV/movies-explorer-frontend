@@ -28,11 +28,3 @@ export const filterMovies = (data, searchWord, searchList, noResult, cb) => {
 
   return searchList;
 };
-
-/* export const checkSearchListLength = ( noResult, newArray, arr, word) => {
-  newArray = filterMovies(arr, word);
-  noResult = newArray.length === 0 ? true : false;
-
-  console.log(noResult);
-  return noResult;
-}; */
