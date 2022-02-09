@@ -31,7 +31,6 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, isMovieSaved }) => {
   const handleDeleteClick = () => {
     onDelete(card);
     setIsCliked(false);
-    console.log(card);
   };
 
    const buttonClickFunction = location.pathname === '/movies' && !isCliked ? (handleSaveClick || handleDeleteClick) : handleDeleteClick;
