@@ -4,9 +4,9 @@ import SearchForm from '../SearchForm/SearchForm';
 import Preloader from '../Preloader/Preloader';
 import Popup from '../Popup/Popup';
 
-const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox }) => {
+const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, isMovieSaved, onDelete, searchedCards, cards, savedCards }) => {
   const [search, setSearch] = useState('');
-  const [isSearched, setIsSearched] = useState(true);
+  const [isSearched, setIsSearched] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   const handleSearch = (e) => {
@@ -14,7 +14,7 @@ const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkb
   };
 
   const handleSubmit = (e) => {
-    setIsSearched(false);
+    setIsSearched(true);
     e.preventDefault();
 
     if (search === '') {
@@ -22,17 +22,31 @@ const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkb
       setTimeout(() => setIsPopupOpened(false), 1900);
     } else {
       handleSearchCard(search);
-      console.log(search, 'vdghsjdks;dkskodkpsps!')
-      setTimeout(() => setIsSearched(true), 1000);
+      setTimeout(() => setIsSearched(false), 1000);
     }
+  };
+
+  const handleCardDelete = (card) => {
+    onDelete(card);
   };
 
   return (
     <section className="movies" >
       <div className="movies__content">
         <SearchForm onChange={handleSearch} handleSearchCard={handleSearchCard} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox}/>
-        { isSearched ?
-          <MoviesCardList handleSaveCard={handleSaveCard} className={likeClassName} cards={cards} checkbox={checkbox} setCheckbox={setCheckbox} />
+        { !isSearched ?
+          <MoviesCardList
+            handleSaveCard={handleSaveCard}
+            onDelete={handleCardDelete}
+            className={likeClassName}
+            cards={cards}
+            checkbox={checkbox}
+            setCheckbox={setCheckbox}
+            savedCards={savedCards}
+            isMovieSaved={isMovieSaved}
+            searchedCards={searchedCards}
+            isSearched={isSearched}
+          />
           :
           <Preloader />
         }
@@ -45,7 +59,5 @@ const Movies = ({ cards, handleSaveCard, likeClassName, handleSearchCard, checkb
 export default Movies;
 
 // todo
-
-// сохранять изменение цвета кнопки
 // навесить удаление фильма из сохраненных при повторном клике
 // подчистить код

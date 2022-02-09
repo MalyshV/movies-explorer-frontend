@@ -1,21 +1,5 @@
 export const MOVIES_URL = 'https://api.nomoreparties.co';
 
-export const checkMovie = (card) => {
-  const shortFilm = card.duration <= 40;
-    if (shortFilm) {
-      console.log('я - короткометражка');
-      return shortFilm;
-    } else {
-      console.log('а я - нет');
-      return
-    }
-};
-
-export const checkMovieDuration = (duration) => {
-  const result = duration <= 40 ? 'я - короткометражка' : 'а я - нет';
-  console.log(result);
-}
-
 export const setCards = (cardsAfterSearch) => {
   return cardsAfterSearch = window.innerWidth > 768 ? 12
     : window.innerWidth > 480 ? 8 : 5;
@@ -31,24 +15,24 @@ export const setRigthDuration = (duration) => {
   ['2', '3', '4'].some(char => `${duration}`.endsWith(char)) ? `${duration} минуты` : `${duration} минут`;
 };
 
-export const filterMovies = (data, searchWord, searchList, checkbox) => {
-  return searchList = data.filter((card) => {
-    const isShortMovie = card.duration <= 40;
-    const isFoundMovie = card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
-
-    if (checkbox) {
-      return isShortMovie && isFoundMovie;
-    }
-
-    return isFoundMovie;
-    // return card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
+export const filterMovies = (data, searchWord, searchList, noResult, cb) => {
+  searchList = data.filter((card) => {
+    return card.nameRU.toLowerCase().includes(searchWord.toLowerCase()) ? card : null;
   });
+
+  noResult = searchList.length === 0 ? true : false;
+
+  // noResult = searchList.length === 0 ? console.log('Ничего не найдено') : null;
+
+  searchList.length === 0 && alert(searchList.length);
+
+  return searchList;
 };
 
-export const filterMoviesByLength = (data) => {
-  data.filter((card) => {
-    if (card.duration <= 40) {
-      return card;
-    }
-  });
-};
+/* export const checkSearchListLength = ( noResult, newArray, arr, word) => {
+  newArray = filterMovies(arr, word);
+  noResult = newArray.length === 0 ? true : false;
+
+  console.log(noResult);
+  return noResult;
+}; */

@@ -49,7 +49,7 @@ class Api {
         duration: card.duration,
         image: `${MOVIES_URL}${card.image.url}`,
         movieId: card.id,
-        nameEN: card.nameEN === '' ? 'данные не указаны' : card.nameEN,
+        nameEN: card.nameEN === null ? 'данные не указаны' : card.nameEN,
         nameRU: card.nameRU,
         thumbnail: `${MOVIES_URL}${card.image.url}`,
         trailer: card.trailerLink === null ? 'данные не указаны' : card.trailerLink,
@@ -69,8 +69,8 @@ class Api {
     )
   };
 
-  deleteMovie(movieId) {
-    return fetch(`${this._baseUrl}/movies/${movieId}`, {
+  deleteMovie(card) {
+    return fetch(`${this._baseUrl}/movies/${card._id}`, {
       method: 'DELETE',
       headers: this._checkToken(this._headers),
       credentials: 'include',

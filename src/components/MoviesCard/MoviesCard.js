@@ -3,9 +3,13 @@ import { useLocation } from 'react-router-dom';
 import Button from '../Button/Button';
 import { setRigthDuration, MOVIES_URL /*, checkMovieDuration */ } from '../../utils/constants';
 
-const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
+const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards, isMovieSaved }) => {
   const [isCliked, setIsCliked] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    setIsCliked(isMovieSaved(card));
+  }, []);
 
   const buttonMovies = isCliked ? '-active' : '';
   const buttonSavedMovies = '-delete';
@@ -13,13 +17,6 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
   const buttonClassName = location.pathname === '/movies' ? buttonMovies : buttonSavedMovies;
   const cardImageSrc = location.pathname === '/movies' ? `${MOVIES_URL}${card.image.url}` : `${card.image}`;
 
-  useEffect(() => {
-    savedCards && savedCards.map((item) => {
-      if (item.movieId === card.id) {
-        setIsCliked(true);
-      }
-    });
-  }, [savedCards, card.id]);
 
   const handleSaveClick = () => {
     if(!isCliked) {
@@ -27,14 +24,18 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
       setIsCliked(true);
     } else {
       setIsCliked(false);
+      onDelete(card);
     }
   };
 
   const handleDeleteClick = () => {
     onDelete(card);
-  }
+    setIsCliked(false);
+    console.log(card);
+  };
 
-  const buttonClickFunction = location.pathname === '/movies' ? handleSaveClick : handleDeleteClick;
+   const buttonClickFunction = location.pathname === '/movies' && !isCliked ? (handleSaveClick || handleDeleteClick) : handleDeleteClick;
+  // - вот выше возможно ошибка, т.к. я по роуту /movies задаю только функцию handleSaveClick
 
   return (
     <li className="card">

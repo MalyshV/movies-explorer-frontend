@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
 import api from '../../utils/MainApi';
@@ -22,7 +22,6 @@ import { filterMovies } from '../../utils/constants';
 const App = () => {
   const token = localStorage.getItem('jwt');
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [currentUser, setCurrentUser] = useState({}); // - загрузка текущего юзера
   const [cards, setCards] = useState([]); // - все фильмы с сервера
@@ -31,13 +30,14 @@ const App = () => {
   const [isRegistered, setIsRegistered] = useState(false); // - стейт регистрации
   const [isLoggedIn, setIsLoggedIn] = useState(false); // - стейт логина
   const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false); // - стейт модалки
-  const [isSuccessPopupOpened, setIsSuccessPopupOpened] = useState(false); // - для профиля
-  const [isCliked, setIsCliked] = useState(false);
-  const [checkbox, setCheckbox] = React.useState(false);
-  const [checkSavedCards, setCheckSavedCards] = React.useState(false);
+  const [isSuccessPopupOpened, setIsSuccessPopupOpened] = useState(false); // - обновление профиля
+  const [checkbox, setCheckbox] = useState(false);
+  const [checkSavedCards, setCheckSavedCards] = useState(false);
+
+  // для показа ошибки
+  const [checkIsEmpty, setCheckIsEmpty] = useState(false);
 
   /*** загрузка данных ***/
-
   useEffect(()=> {
     if (token) {
       auth.getContent(token)
@@ -71,9 +71,13 @@ const App = () => {
     }
   }, [currentUser, token]);
 
+  useEffect(() => {
+    setCheckbox(JSON.parse(localStorage.getItem('ckeckboxCardsData')));
+    setSearchedCards(JSON.parse(localStorage.getItem('searchedCardsData')));
+  }, []);
+
 
   /*** юзеры ***/
-
   // регистрация нового юзера
   const handleRegistration = (email, password, name) => {
     auth.register(email, password, name)
@@ -124,41 +128,37 @@ const App = () => {
   };
 
   /*** фильмы ***/
-
   // поиск
   const handleSearchCard = (searchQuery) => {
-    if (isLoggedIn === true) {
-      if (location.pathname === '/movies') {
-
-        if (localStorage.getItem('cardsData')) {
-          const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
-          setCards(filterMovies(afterSearchData, searchQuery));
-          localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
-        } else if (!localStorage.getItem('cardsData')) {
-          moviesApi.findMovies()
-          .then((res) => {
-            setCards(filterMovies(res, searchQuery));
-            localStorage.setItem('cardsData', JSON.stringify(res));
-            api.getSavedMovies();
-            })
-            .catch((error) => {
-              handleOpenErrorPopup();
-              console.log(error);
-            })
-        }
-      };
-      if (location.pathname === '/saved-movies') {
-        api.getSavedMovies()
-          .then((res) => {
-            setSavedCards(filterMovies(res, searchQuery));
-            localStorage.setItem('savedCardsdata', JSON.stringify(res))
-          })
-          .catch((error) => {
-            handleOpenErrorPopup();
-            console.log(error);
-          })
-      };
+    if (localStorage.getItem('cardsData')) {
+      const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
+      setCards(filterMovies(afterSearchData, searchQuery));
+      localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
+    } else {
+      moviesApi.findMovies()
+        .then((res) => {
+          setCards(filterMovies(res, searchQuery));
+          localStorage.setItem('cardsData', JSON.stringify(res));
+          api.getSavedMovies();
+        })
+        .catch((error) => {
+          handleOpenErrorPopup();
+          console.log(error);
+        })
     };
+  };
+
+  // поиск по сохраненным
+  const handleSavedMoviesSearchCard = (searchQuery) => {
+    api.getSavedMovies()
+      .then((res) => {
+        setSavedCards(filterMovies(res, searchQuery));
+        localStorage.setItem('savedCardsdata', JSON.stringify(res))
+      })
+      .catch((error) => {
+        handleOpenErrorPopup();
+        console.log(error);
+      })
   };
 
   // сохранить фильм
@@ -167,23 +167,35 @@ const App = () => {
       .then((res) => {
         setSavedCards([...savedCards, res]);
         localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
-        //setSavedCards(res.filter((card) => card.cardId !== currentUser._id);
       })
       .catch(err => console.log(err))
+  };
+
+  function checkIfCardIsSaved(card) {
+    if (savedCards && card) {
+      return savedCards.some((item) => {
+        return item.movieId === card.id;
+      });
+    }
   };
 
   // удалить фильм
   const handleDeleteCard = (card) => {
-    api.deleteMovie(card._id)
+    console.log(card._id)
+    api.deleteMovie(card)
       .then(() => {
-        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.filter((item) => item !== card)));
-        setSavedCards(savedCards.filter((item) => item !== card));
+        console.log('я тут')
+        setSavedCards(
+          savedCards.filter((item) => item._id !== card._id)
+        );
+        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
       })
-      .catch(err => console.log(err))
+      .catch((error) => {
+        console.log(error);
+      })
   };
 
   /*** попапы ***/
-
   // открыть/закрыть попап на крестик
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
   const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
@@ -238,6 +250,9 @@ const App = () => {
                 handleSearchCard={handleSearchCard}
                 checkbox={checkbox}
                 setCheckbox={setCheckbox}
+                onDelete={handleDeleteCard}
+                isMovieSaved={checkIfCardIsSaved}
+                searchedCards={searchedCards}
               />
               <Footer />
             </>
@@ -251,9 +266,10 @@ const App = () => {
                 cards={savedCards}
                 savedCards={savedCards}
                 onDelete={handleDeleteCard}
-                handleSearchCard={handleSearchCard}
+                handleSavedMoviesSearchCard={handleSavedMoviesSearchCard}
                 checkbox={checkSavedCards}
                 setCheckbox={setCheckSavedCards}
+                isMovieSaved={checkIfCardIsSaved}
               />
               <Footer />
             </>
@@ -287,20 +303,3 @@ const App = () => {
 };
 
 export default App;
-
-// todo
-
-// Перенести функцию поиска в MoviesCardList, как рекомендовано в ТЗ?
-// Убедиться, что заливка на нажатой кнопке остается при переходе между страницами
-// Добавить проверку на id при сохранении карточки, чтобы не сохранялись дубли
-// Добавить удаление карточки из сохраненных по повторному клику на кнопку
-// Разобраться, почему в консоль грузится массив сохраненных карточек трижды. Мешает ли это?
-// Выводить карточки на /saved-movies только после поиска
-// resize при монтировании карточек??
-// Инпут в SearchForm не обязательный к заполнению!! Валидация должна происходить после сабмита. При попытке отправить пустой запрос - ошибка "Нужно ввести ключевое слово"
-// Тогда мне наверное надо поправить логику попапа...
-// Не забыть про текст "Ничего не найдено", если данных по запросу фильмов нет
-// Проверить все файлы на неиспользуемый код
-// Проверить названия всех функций и переменных
-// В чек листе есть конфиг для постоянных значений. Добавить?
-// Сейчас в файле constants лежат общие функции. Может вынести их оттуда?
