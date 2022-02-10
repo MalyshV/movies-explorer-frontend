@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, isMovieSaved, onDelete, searchedCards, cards, savedCards }) => {
+const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, isMovieSaved, onDelete, searchedCards, cards, savedCards, checkIsEmpty }) => {
   const [search, setSearch] = useState('');
   const [isSearched, setIsSearched] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -43,6 +43,7 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
             isMovieSaved={isMovieSaved}
             searchedCards={searchedCards}
             isSearched={isSearched}
+            checkIsEmpty={checkIsEmpty}
           />
           :
           <Preloader />

@@ -121,14 +121,26 @@ const App = () => {
   const handleSearchCard = (searchQuery) => {
     if (localStorage.getItem('cardsData')) {
       const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
-      setCards(filterMovies(afterSearchData, searchQuery));
-      localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
+      const searchList = (filterMovies(afterSearchData, searchQuery));
+
+      if (searchList.length === 0) {
+        setCheckIsEmpty(!checkIsEmpty);
+      } else {
+        setCards(filterMovies(afterSearchData, searchQuery));
+        localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
+      }
     } else {
       moviesApi.findMovies()
         .then((res) => {
-          setCards(filterMovies(res, searchQuery));
-          localStorage.setItem('cardsData', JSON.stringify(res));
-          api.getSavedMovies();
+          const searchList = filterMovies(res, searchQuery);
+
+          if (searchList.length === 0) {
+            setCheckIsEmpty(!checkIsEmpty);
+          } else {
+            setCards(filterMovies(res, searchQuery));
+            localStorage.setItem('cardsData', JSON.stringify(res));
+            api.getSavedMovies();
+          }
         })
         .catch((error) => {
           handleOpenErrorPopup();
@@ -141,8 +153,14 @@ const App = () => {
   const handleSavedMoviesSearchCard = (searchQuery) => {
     api.getSavedMovies()
       .then((res) => {
-        setSavedCards(filterMovies(res, searchQuery));
-        localStorage.setItem('savedCardsdata', JSON.stringify(res))
+        const searchList = filterMovies(res, searchQuery);
+
+        if (searchList.length === 0) {
+          setCheckIsEmpty(!checkIsEmpty);
+        } else {
+          setSavedCards(filterMovies(res, searchQuery));
+          localStorage.setItem('savedCardsdata', JSON.stringify(res))
+        }
       })
       .catch((error) => {
         handleOpenErrorPopup();
@@ -152,6 +170,7 @@ const App = () => {
 
   // сохранить фильм
   const handleSaveCard = (card) => {
+    console.log(card, 'сохраняем');
     api.saveMovie(card)
       .then((res) => {
         setSavedCards([...savedCards, res]);
@@ -160,7 +179,7 @@ const App = () => {
       .catch(err => console.log(err))
   };
 
-  function checkIfCardIsSaved(card) {
+   function checkIfCardIsSaved(card) {
     if (savedCards && card) {
       return savedCards.some((item) => {
         return item.movieId === card.id;
@@ -168,12 +187,44 @@ const App = () => {
     }
   };
 
+  function getLocalCardFromGlobal(card) {
+    if (savedCards && card) {
+      return savedCards.find((item) => {
+        if ((item.movieId === card.id) && (item.owner === currentUser._id)) {
+          return true;
+        }
+      });
+    }
+  };
+
   // удалить фильм
   const handleDeleteCard = (card) => {
+    console.log(card, 'удаляем');
     api.deleteMovie(card)
       .then(() => {
         setSavedCards(
           savedCards.filter((item) => item._id !== card._id)
+          // savedCards.filter((item) => item.movieId === card.id)
+        );
+        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  };
+
+  const handleDeleteGlobalCard = (card) => {
+    const item = getLocalCardFromGlobal(card);
+    if (item === null) {
+      console.log('картинка не найдена');
+      return;
+    }
+    console.log(item, 'удаляем');
+    api.deleteMovie(item)
+      .then(() => {
+        setSavedCards(
+          savedCards.filter((i) => i._id !== item._id)
+          // savedCards.filter((item) => item.movieId === card.id)
         );
         localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
       })
@@ -237,9 +288,10 @@ const App = () => {
                 handleSearchCard={handleSearchCard}
                 checkbox={checkbox}
                 setCheckbox={setCheckbox}
-                onDelete={handleDeleteCard}
+                onDelete={handleDeleteGlobalCard}
                 isMovieSaved={checkIfCardIsSaved}
                 searchedCards={searchedCards}
+                checkIsEmpty={checkIsEmpty}
               />
               <Footer />
             </>
@@ -257,6 +309,7 @@ const App = () => {
                 checkbox={checkSavedCards}
                 setCheckbox={setCheckSavedCards}
                 isMovieSaved={checkIfCardIsSaved}
+                checkIsEmpty={checkIsEmpty}
               />
               <Footer />
             </>
