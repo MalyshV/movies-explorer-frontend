@@ -1,7 +1,5 @@
 import React from 'react';
-import Form from '../Form/Form';
-import FormInput from '../FormInput/FormInput';
-import Button from '../Button/Button';
+import { Form, FormInput, Button } from '../index';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 const Login = ({ handleAuthorization }) => {

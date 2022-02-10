@@ -1,7 +1,7 @@
 import React from 'react';
-import Section from '../Section/Section';
+import { Section } from '../index';
 import studentPic from '../../images/students_pic.jpg';
-import studentsConfig from '../../utils/studentsConfig';
+import studentsConfig from '../../utils/configs/studentsConfig';
 
 const AboutMe = () => {
   return (

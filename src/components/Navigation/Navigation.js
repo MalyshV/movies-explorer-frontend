@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import Nav from '../Nav/Nav';
-import NavMobile from '../NavMobile/NavMobile';
+import { Nav, NavMobile } from '../index';
 import accauntIcon from '../../images/accaunt_icon.svg';
 
 const Navigation = ({ type }) => {

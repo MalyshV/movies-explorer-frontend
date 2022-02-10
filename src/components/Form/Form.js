@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from '../../images/logo_icon.svg';
 import { Link } from 'react-router-dom';
+import logo from '../../images/logo_icon.svg';
 
 const Form = ({ name, onSubmit, onClick, title, titleClassName, underFormQuestion, linkName, children, linkPath, linkClassName, profileLinkClassName }) => {
 

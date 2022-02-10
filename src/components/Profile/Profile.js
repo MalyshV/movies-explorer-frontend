@@ -1,7 +1,5 @@
 import React, { useContext, useEffect }  from 'react';
-import Form from '../Form/Form';
-import FormInput from '../FormInput/FormInput';
-import Button from '../Button/Button';
+import { Button, Form, FormInput } from '../index';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 

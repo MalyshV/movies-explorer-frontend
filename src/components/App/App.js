@@ -1,23 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import './App.css';
-import api from '../../utils/MainApi';
-import * as auth from '../../utils/auth';
-import moviesApi from '../../utils/MoviesApi';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
-import PageNotFound from '../PageNotFound/PageNotFound';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import Profile from '../Profile/Profile';
-import SavedMovies from '../SavedMovies/SavedMovies'
-import Movies from '../Movies/Movies';
-import ErrorPopup from '../ErrorPopup/ErrorPopup';
-import Popup from '../Popup/Popup';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
-import { filterMovies } from '../../utils/constants';
+import { ErrorPopup, Footer, Header, Login, Main, Movies, PageNotFound, Popup, Profile, Register, SavedMovies} from '../index';
+import * as auth from '../../utils/api/auth';
+import { moviesApi, api } from '../../utils/api/index';
+import { filterMovies } from '../../helpers/index';
+import './App.css';
 
 const App = () => {
   const token = localStorage.getItem('jwt');

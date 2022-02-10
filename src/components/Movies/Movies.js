@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import SearchForm from '../SearchForm/SearchForm';
-import Preloader from '../Preloader/Preloader';
-import Popup from '../Popup/Popup';
+import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
 const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, isMovieSaved, onDelete, searchedCards, cards, savedCards }) => {
   const [search, setSearch] = useState('');

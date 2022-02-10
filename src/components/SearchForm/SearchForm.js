@@ -1,8 +1,6 @@
 import React from 'react';
+import { Button, FilterCheckbox, FormInput } from '../index';
 import img from '../../images/search_icon.svg';
-import FormInput from '../FormInput/FormInput';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
-import Button from '../Button/Button';
 
 const SearchForm = ({ onSubmit, onChange, checkbox, setCheckbox }) => {
   const handleCheckbox = () => {

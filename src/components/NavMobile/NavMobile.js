@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from 'react-router-dom';
-import NavLinks from '../NavLinks/NavLinks';
+import { NavLinks } from '../index';
 import burgerIcon from '../../images/burger_open_icon.svg';
 import closeBurgerIcon from '../../images/burger_close_icon.svg';
 import accauntIcon from '../../images/accaunt_icon.svg';

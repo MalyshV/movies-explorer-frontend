@@ -1,8 +1,7 @@
 import React, {useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import MoviesCard from '../MoviesCard/MoviesCard';
-import Button from '../Button/Button';
-import { setCards, addMoreCards } from '../../utils/constants';
+import { Button, MoviesCard } from '../index';
+import { setCards, addMoreCards } from '../../helpers/index';
 
 const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete, savedCards, checkbox, isMovieSaved }) => {
   const [visible, setIsVisible] = useState(setCards());

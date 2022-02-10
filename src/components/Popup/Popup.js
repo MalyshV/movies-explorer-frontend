@@ -1,5 +1,5 @@
 import React from 'react';
-import { sucessMessages, errors } from '../../utils/errorsConfig';
+import { errors, sucessMessages } from '../../utils/configs/index';
 import { useLocation } from 'react-router-dom';
 
 const SuccessPopup = ({ onUpdate }) => {

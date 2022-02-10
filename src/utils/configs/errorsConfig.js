@@ -14,8 +14,4 @@ const errors = {
   emptySearchErr: 'Нужно ввести ключевое слово',
 };
 
-const sucessMessages = {
-  updateProfileSucsecc: 'Данные профиля успешно обновлены',
-};
-
-export { errors, sucessMessages };
+export default errors;

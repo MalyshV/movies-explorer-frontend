@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Button from '../Button/Button';
-import { setRigthDuration, MOVIES_URL } from '../../utils/constants';
+import { Button } from '../index';
+import { MOVIES_URL } from '../../utils/constants';
+import { setRigthDuration } from '../../helpers/index';
 
 const MoviesCard = ({ card, handleSaveCard, onDelete, isMovieSaved }) => {
   const [isCliked, setIsCliked] = useState(false);

@@ -1,7 +1,7 @@
 import React from 'react';
-import wrong from '../../images/popup_bg_icon.svg';
 import { useLocation } from 'react-router-dom';
-import { errors } from '../../utils/errorsConfig';
+import { errors } from '../../utils/configs/index';
+import wrong from '../../images/popup_bg_icon.svg'
 
 const ErrorPopup = ({ onClose, isOpen }) => {
   const location = useLocation();
