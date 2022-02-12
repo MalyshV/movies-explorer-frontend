@@ -1,4 +1,4 @@
-import { MOVIES_URL } from '../constants';
+import { MOVIES_URL, BASE_URL } from '../constants';
 
 class Api {
   constructor(config) {
@@ -87,8 +87,7 @@ class Api {
 };
 
 const api = new Api({
-  // baseUrl: 'https://yourmoviesexplorer.nomoredomains.rocks/api',
-  baseUrl: 'https://api.yourmoviesexplorer.nomoredomains.work',
+  baseUrl: BASE_URL,
   headers: {
     'Content-Type': 'application/json'
   }

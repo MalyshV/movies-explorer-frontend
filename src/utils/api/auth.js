@@ -1,5 +1,4 @@
-export const BASE_URL = 'https://api.yourmoviesexplorer.nomoredomains.work';
-// export const BASE_URL = 'https://yourmoviesexplorer.nomoredomains.rocks/api';
+import { BASE_URL } from '../../utils/constants';
 
 // регистрация
 export const register = (email, password, name) => {

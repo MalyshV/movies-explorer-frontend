@@ -1,4 +1,5 @@
 export const MOVIES_URL = 'https://api.nomoreparties.co';
+export const BASE_URL = 'https://api.yourmoviesexplorer.nomoredomains.work';
 export const DESKTOP_WIDTH = 768;
 export const MOBILE_WIDTH = 480;
 
