@@ -18,6 +18,6 @@
 
 ---
 
-Адрес фронтенда: https://yourmoviesexplorer.nomoredomains.rocks/  
-Адрес бэкенда: https://yourmoviesexplorer.nomoredomains.rocks/api/  
-Публичный IP: 51.250.12.230
+Адрес фронтенда: https://yourmoviesexplorer.nomoredomains.rocks/   
+Адрес бэкенда: https://api.yourmoviesexplorer.nomoredomains.work/  
+Публичный IP: 62.84.124.244
