@@ -167,9 +167,7 @@ const App = () => {
   const getLocalCardFromGlobal = (card) => {
     if (savedCards && card) {
       return savedCards.find((item) => {
-        if ((item.movieId === card.id) && (item.owner === currentUser._id)) {
-          return true;
-        }
+        return (item.movieId === card.id) && (item.owner === currentUser._id) ? true : false;
       });
     }
   };

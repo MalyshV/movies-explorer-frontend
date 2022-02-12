@@ -1,4 +1,6 @@
 export const MOVIES_URL = 'https://api.nomoreparties.co';
+export const DESKTOP_WIDTH = 768;
+export const MOBILE_WIDTH = 480;
 
 export const namePattern = '[a-zA-Zа-яА-ЯёЁ\\-\\s]+$';
 export const emailPattern = '^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$';

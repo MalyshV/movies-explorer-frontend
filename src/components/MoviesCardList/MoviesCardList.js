@@ -36,7 +36,11 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
         })}
       </ul>
     }
-      { location.pathname === '/movies' && (visible <= cards.length) ?  <Button textOnButton='Ещё' buttonClassName='_place_movies' onClick={showMoreCards} /> : null }
+      { location.pathname === '/movies' && (visible <= cards.length) ?
+        <Button textOnButton='Ещё' buttonClassName='_place_movies' onClick={showMoreCards} />
+        :
+        null
+      }
     </>
     )
 };

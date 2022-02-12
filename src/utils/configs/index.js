@@ -1,9 +1,9 @@
 import errors from './errorsConfig';
-import sucessMessages from './successConfig';
+import successMessages from './successConfig';
 import studentsConfig from './studentsConfig';
 
 export {
   errors,
-  sucessMessages,
+  successMessages,
   studentsConfig,
 };

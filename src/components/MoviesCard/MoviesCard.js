@@ -26,8 +26,6 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
     setIsCliked(checkIfCardIsSaved(card));
   }, [card, savedCards]);
 
-
-
   const handleSaveClick = () => {
     if(!isCliked) {
       handleSaveCard(card);

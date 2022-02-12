@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const NavLinks = ({ view, ...props }) => {
+
   const handleCloseBurgerMenu = () => {
     props.isMobile && props.closeBurgerMenu();
   };

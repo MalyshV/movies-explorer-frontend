@@ -1,5 +1,5 @@
 import React from 'react';
-import { errors, sucessMessages } from '../../utils/configs/index';
+import { errors, successMessages } from '../../utils/configs/index';
 import { useLocation } from 'react-router-dom';
 
 const SuccessPopup = ({ onUpdate }) => {
@@ -7,7 +7,7 @@ const SuccessPopup = ({ onUpdate }) => {
 
   const showMessage = (popupText) => {
     if (location.pathname === '/profile') {
-      return popupText = sucessMessages.updateProfileSucsecc;
+      return popupText = successMessages.updateProfileSuccess;
     } else if (location.pathname === '/movies' || '/saved-movies') {
       return popupText = errors.emptySearchErr;
     }

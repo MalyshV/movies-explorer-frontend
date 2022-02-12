@@ -1,5 +1,5 @@
-const sucessMessages = {
-  updateProfileSucsecc: 'Данные профиля успешно обновлены',
+const successMessages = {
+  updateProfilesuccess: 'Данные профиля успешно обновлены',
 };
 
-export default sucessMessages;
+export default successMessages;

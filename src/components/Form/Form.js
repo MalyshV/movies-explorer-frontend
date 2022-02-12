@@ -11,14 +11,26 @@ const Form = ({ name, onSubmit, onClick, title, titleClassName, underFormQuestio
           <img className='form__logo' src={logo} alt='логотип сайта'/>
         </Link>
         <h2 className={`form__title form__title${titleClassName}`}>{title}</h2>
-        <form autoComplete='off' className='form__form' action='#' name={name} onSubmit={onSubmit}>
+        <form
+          autoComplete='off'
+          className='form__form'
+          action='#'
+          name={name}
+          onSubmit={onSubmit}
+        >
           <fieldset className='form__container'>
             {children}
           </fieldset>
         </form>
         <div className='form__signin'>
           <p className='form__text'>{underFormQuestion}</p>
-          <Link onClick={onClick} className={`form__link form__link${profileLinkClassName}`} to={linkPath}>{linkName}</Link>
+          <Link
+            onClick={onClick}
+            className={`form__link form__link${profileLinkClassName}`}
+            to={linkPath}
+          >
+            {linkName}
+          </Link>
         </div>
       </div>
     </div>
