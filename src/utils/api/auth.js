@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://api.yourmoviesexplorer.nomoredomains.work';
 // export const BASE_URL = 'https://yourmoviesexplorer.nomoredomains.rocks/api';
 
 // регистрация

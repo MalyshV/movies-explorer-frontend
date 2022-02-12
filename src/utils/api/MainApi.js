@@ -88,7 +88,7 @@ class Api {
 
 const api = new Api({
   // baseUrl: 'https://yourmoviesexplorer.nomoredomains.rocks/api',
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.yourmoviesexplorer.nomoredomains.work',
   headers: {
     'Content-Type': 'application/json'
   }
