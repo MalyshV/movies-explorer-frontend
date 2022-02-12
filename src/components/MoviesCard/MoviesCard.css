@@ -6,7 +6,7 @@
   align-items: center;
   align-self: center;
   justify-content: space-between;
-  list-style-type: none; /* перенести в класс списка */
+  list-style-type: none;
   font-family: 'Inter', Arial, sans-serif;
   font-style: normal;
   border-radius: 6px;
@@ -67,12 +67,10 @@
     max-width: 342px;
     min-height: 309px;
   }
-
   .card__image {
     max-width: 342px;
     height: 190px;
   }
-
   .card__title {
     max-width: 260px;
   }
@@ -83,21 +81,17 @@
     min-height: 285px;
     padding: 14px 0;
   }
-
   .card__image {
     height: 168px;
     box-sizing: border-box;
   }
-
   .card__link {
     height: 168px;
   }
-
   .card__title {
     font-size: 12px;
     line-height: 18px;
   }
-
   .card__duration {
     font-size: 10px;
     line-height: 18px;

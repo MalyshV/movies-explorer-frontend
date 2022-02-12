@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const NavLinks = ({ view, ...props }) => {
@@ -10,9 +10,9 @@ const NavLinks = ({ view, ...props }) => {
 
   return (
     <>
-      <NavLink className={classes} to="/">Главная</NavLink>
-      <NavLink className={classes} to="/movies" onClick={handleCloseBurgerMenu}>Фильмы</NavLink>
-      <NavLink className={classes} to="/saved-movies" onClick={handleCloseBurgerMenu}>Сохранённые фильмы</NavLink>
+      <NavLink className={classes} to='/'>Главная</NavLink>
+      <NavLink className={classes} to='/movies' onClick={handleCloseBurgerMenu}>Фильмы</NavLink>
+      <NavLink className={classes} to='/saved-movies' onClick={handleCloseBurgerMenu}>Сохранённые фильмы</NavLink>
     </>
   )
 };

@@ -2,31 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
-import { ErrorPopup, Footer, Header, Login, Main, Movies, PageNotFound, Popup, Profile, Register, SavedMovies} from '../index';
 import * as auth from '../../utils/api/auth';
 import { moviesApi, api } from '../../utils/api/index';
 import { filterMovies } from '../../helpers/index';
+import { ErrorPopup, Footer, Header, Login, Main, Movies, PageNotFound, Popup, Profile, Register, SavedMovies} from '../index';
 import './App.css';
 
 const App = () => {
   const token = localStorage.getItem('jwt');
   const navigate = useNavigate();
 
-  const [currentUser, setCurrentUser] = useState({}); // - загрузка текущего юзера
-  const [cards, setCards] = useState([]); // - все фильмы с сервера
-  const [savedCards, setSavedCards] = useState([]); // - сохраненные фильмы
-  const [searchedCards, setSearchedCards] = useState([]); // - фильмы после поиска
-  const [isRegistered, setIsRegistered] = useState(false); // - стейт регистрации
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // - стейт логина
-  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false); // - стейт модалки
-  const [isSuccessPopupOpened, setIsSuccessPopupOpened] = useState(false); // - обновление профиля
+  const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
+  const [savedCards, setSavedCards] = useState([]);
+  const [searchedCards, setSearchedCards] = useState([]);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isErrorPopupOpened, setIsErrorPopupOpened] = useState(false);
+  const [isSuccessPopupOpened, setIsSuccessPopupOpened] = useState(false);
   const [checkbox, setCheckbox] = useState(false);
   const [checkSavedCards, setCheckSavedCards] = useState(false);
+  const [isNoSearchQuery, setIsNoSearchQuery] = useState(false);
 
-  // для показа ошибки
-  const [checkIsEmpty, setCheckIsEmpty] = useState(false);
-
-  /*** загрузка данных ***/
   useEffect(()=> {
     if (token) {
       auth.getContent(token)
@@ -67,7 +64,6 @@ const App = () => {
 
 
   /*** юзеры ***/
-  // регистрация нового юзера
   const handleRegistration = (email, password, name) => {
     auth.register(email, password, name)
       .then(() => {
@@ -79,7 +75,6 @@ const App = () => {
       })
   };
 
-  // логин для зарегистрированного юзера
   const handleAuthorization = (email, password) => {
     auth.authorize(email, password)
       .then((data) => {
@@ -94,7 +89,6 @@ const App = () => {
       })
   };
 
-  // обновление данных профиля
   const handleUpdateUser = (data) => {
     api.setUserInfo(data)
       .then(data => {
@@ -108,7 +102,6 @@ const App = () => {
       })
   };
 
-  // выход из аккаунта
   const handleSignOut = () => {
     localStorage.clear();
     setIsLoggedIn(false);
@@ -117,30 +110,25 @@ const App = () => {
   };
 
   /*** фильмы ***/
-  // поиск
   const handleSearchCard = (searchQuery) => {
     if (localStorage.getItem('cardsData')) {
-      const afterSearchData = JSON.parse(localStorage.getItem('cardsData'));
-      const searchList = (filterMovies(afterSearchData, searchQuery));
+      const searchedData = JSON.parse(localStorage.getItem('cardsData'));
+      const foundMoviesArray = filterMovies(searchedData, searchQuery);
 
-      if (searchList.length === 0) {
-        setCheckIsEmpty(!checkIsEmpty);
-      } else {
-        setCards(filterMovies(afterSearchData, searchQuery));
-        localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
-      }
+      foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+
+      setCards(filterMovies(searchedData, searchQuery));
+      localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
     } else {
       moviesApi.findMovies()
         .then((res) => {
-          const searchList = filterMovies(res, searchQuery);
+          const foundMoviesArray = filterMovies(res, searchQuery);
 
-          if (searchList.length === 0) {
-            setCheckIsEmpty(!checkIsEmpty);
-          } else {
-            setCards(filterMovies(res, searchQuery));
-            localStorage.setItem('cardsData', JSON.stringify(res));
-            api.getSavedMovies();
-          }
+          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+
+          setCards(filterMovies(res, searchQuery));
+          localStorage.setItem('cardsData', JSON.stringify(res));
+          api.getSavedMovies();
         })
         .catch((error) => {
           handleOpenErrorPopup();
@@ -150,17 +138,15 @@ const App = () => {
   };
 
   // поиск по сохраненным
-  const handleSavedMoviesSearchCard = (searchQuery) => {
+  const handleSavedSearchCard = (searchQuery) => {
     api.getSavedMovies()
       .then((res) => {
-        const searchList = filterMovies(res, searchQuery);
+        const foundSavedMoviesArray = filterMovies(res, searchQuery);
 
-        if (searchList.length === 0) {
-          setCheckIsEmpty(!checkIsEmpty);
-        } else {
-          setSavedCards(filterMovies(res, searchQuery));
-          localStorage.setItem('savedCardsdata', JSON.stringify(res))
-        }
+        foundSavedMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+
+        setSavedCards(filterMovies(res, searchQuery));
+        localStorage.setItem('savedCardsdata', JSON.stringify(res));
       })
       .catch((error) => {
         handleOpenErrorPopup();
@@ -170,7 +156,6 @@ const App = () => {
 
   // сохранить фильм
   const handleSaveCard = (card) => {
-    console.log(card, 'сохраняем');
     api.saveMovie(card)
       .then((res) => {
         setSavedCards([...savedCards, res]);
@@ -179,15 +164,7 @@ const App = () => {
       .catch(err => console.log(err))
   };
 
-   function checkIfCardIsSaved(card) {
-    if (savedCards && card) {
-      return savedCards.some((item) => {
-        return item.movieId === card.id;
-      });
-    }
-  };
-
-  function getLocalCardFromGlobal(card) {
+  const getLocalCardFromGlobal = (card) => {
     if (savedCards && card) {
       return savedCards.find((item) => {
         if ((item.movieId === card.id) && (item.owner === currentUser._id)) {
@@ -198,13 +175,11 @@ const App = () => {
   };
 
   // удалить фильм
-  const handleDeleteCard = (card) => {
-    console.log(card, 'удаляем');
+  const handleDeleteLocalCard = (card) => {
     api.deleteMovie(card)
       .then(() => {
         setSavedCards(
           savedCards.filter((item) => item._id !== card._id)
-          // savedCards.filter((item) => item.movieId === card.id)
         );
         localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
       })
@@ -216,15 +191,12 @@ const App = () => {
   const handleDeleteGlobalCard = (card) => {
     const item = getLocalCardFromGlobal(card);
     if (item === null) {
-      console.log('картинка не найдена');
       return;
     }
-    console.log(item, 'удаляем');
     api.deleteMovie(item)
       .then(() => {
         setSavedCards(
           savedCards.filter((i) => i._id !== item._id)
-          // savedCards.filter((item) => item.movieId === card.id)
         );
         localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
       })
@@ -234,7 +206,6 @@ const App = () => {
   };
 
   /*** попапы ***/
-  // открыть/закрыть на крестик
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
   const handleCloseErrorPopup = () => setIsErrorPopupOpened(false);
 
@@ -243,7 +214,6 @@ const App = () => {
     setTimeout(() => setIsSuccessPopupOpened(false), 1900);
   };
 
-  // закрыть мимо попапа
   useEffect(() => {
     const closeErrorPopupByClick = (event) => {
         if (event.target.classList.contains('popup_is-opened')) {
@@ -255,7 +225,6 @@ const App = () => {
     return () => document.removeEventListener('mousedown', closeErrorPopupByClick);
   }, []);
 
-  // закрыть на esc
   useEffect(() => {
     const closeErrorPopupByEscape = (event) => {
       if (event.key === 'Escape') {
@@ -266,9 +235,10 @@ const App = () => {
     return () => document.removeEventListener('keydown', closeErrorPopupByEscape)
   }, []);
 
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className="page">
+    <div className='page'>
       <Routes>
         <Route path='/' element={
           <>
@@ -289,9 +259,8 @@ const App = () => {
                 checkbox={checkbox}
                 setCheckbox={setCheckbox}
                 onDelete={handleDeleteGlobalCard}
-                isMovieSaved={checkIfCardIsSaved}
                 searchedCards={searchedCards}
-                checkIsEmpty={checkIsEmpty}
+                isNoSearchQuery={isNoSearchQuery}
               />
               <Footer />
             </>
@@ -304,12 +273,11 @@ const App = () => {
               <SavedMovies
                 cards={savedCards}
                 savedCards={savedCards}
-                onDelete={handleDeleteCard}
-                handleSavedMoviesSearchCard={handleSavedMoviesSearchCard}
+                onDelete={handleDeleteLocalCard}
+                handleSavedSearchCard={handleSavedSearchCard}
                 checkbox={checkSavedCards}
                 setCheckbox={setCheckSavedCards}
-                isMovieSaved={checkIfCardIsSaved}
-                checkIsEmpty={checkIsEmpty}
+                isNoSearchQuery={isNoSearchQuery}
               />
               <Footer />
             </>

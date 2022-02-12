@@ -5,7 +5,7 @@ const Button = ({ buttonClassName, textOnButton, tabIndex, onClick, buttonDisabl
     <button
       onClick={onClick}
       className={`button button${buttonClassName}`}
-      type="submit"
+      type='submit'
       disabled={buttonDisabled}
       tabIndex={tabIndex}>
         {textOnButton}

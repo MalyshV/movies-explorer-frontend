@@ -84,14 +84,12 @@
   .footer {
     padding: 0 18px 10px;
   }
-
   .footer__columns {
     align-items: center;
     justify-content: center;
     padding-top: 30px;
     flex-direction: column;
   }
-
   .footer__links {
     flex-direction: column;
     align-items: center;
@@ -107,7 +105,6 @@
     line-height: 15px;
     padding-bottom: 10px;
   }
-
   .footer__copyright {
     color: #A0A0A0;
   }

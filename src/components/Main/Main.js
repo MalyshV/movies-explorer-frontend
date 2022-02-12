@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 import { AboutMe, AboutProject, Portfolio, Promo, Techs } from '../index';
 
 const Main = () => {
   return (
-    <div className="main">
+    <div className='main'>
       <Promo />
       <AboutProject />
       <Techs />

@@ -63,11 +63,9 @@
     font-size: 12px;
     line-height: 18px;
   }
-
   .techs__items {
     margin-top: 83px;
   }
-
   .techs__item {
     width: 84px;
     height: 57px;
@@ -79,18 +77,15 @@
     max-width: 350px;
     margin-top: 50px;
   }
-
   .techs__subtitle {
     font-size: 30px;
     line-height: 36px;
     margin: 60px 0 24px;
   }
-
   .techs__text {
     font-size: 11px;
     line-height: 16px;
   }
-
   .techs__item {
     font-size: 12px;
     line-height: 15px;

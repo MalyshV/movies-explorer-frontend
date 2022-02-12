@@ -39,11 +39,9 @@
   .section {
     padding: 70px 18px;
   }
-
   .section:nth-of-type(3) {
     background-color: #fff;
   }
-
   .section__title {
     font-size: 18px;
     line-height: 22px;

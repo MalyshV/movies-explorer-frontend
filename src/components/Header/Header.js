@@ -10,8 +10,8 @@ const Header = ({ type, isLoggedIn }) => {
   return (
     <header className={`header header_type_${headerModificator}`}>
       <nav className={`header__content header__content_type_${type}`}>
-        <Link className="header__page" to="/">
-          <img className="header__icon" alt="логотип сайта" src={logoIcon}/>
+        <Link className='header__page' to='/'>
+          <img className='header__icon' alt='логотип сайта' src={logoIcon}/>
         </Link>
         { !isLoggedIn && <Navigation /> }
         { isLoggedIn && <Navigation type='loggedIn' /> }

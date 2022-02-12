@@ -97,29 +97,24 @@
   .student__info {
     margin-top: 66px;
   }
-
   .student__block {
     max-width: 500px;
   }
-
   .stunent__subtitle {
     font-size: 40px;
     line-height: 40px;
     margin-bottom: 16px;
   }
-
   .student__about {
     font-size: 12px;
     line-height: 18px;
   }
-
   .student__text {
     font-size: 12px;
     line-height: 18px;
     margin-top: 20px;
     margin-bottom: 87px;
   }
-
   .student__image {
     max-width: 255px;
     width: 100%;
@@ -128,7 +123,7 @@
   }
 }
 
- @media (max-width: 900px) {
+@media (max-width: 900px) {
   .student__block {
     max-width: 400px;
   }
@@ -145,24 +140,20 @@
     flex-direction: column-reverse;
     margin-top: 60px;
   }
-
   .stunent__subtitle {
     font-size: 30px;
     line-height: 36px;
     margin: 40px 0 20px;
   }
-
   .student__about {
     font-size: 11px;
     line-height: 16px;
   }
-
   .student__text {
     font-size: 11px;
     line-height: 16px;
     margin-bottom: 40px;
   }
-
   .student__image {
     max-width: 292px;
     width: 100%;
@@ -170,4 +161,3 @@
     box-sizing: border-box;
   }
 }
-

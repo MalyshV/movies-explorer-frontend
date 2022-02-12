@@ -1,25 +1,26 @@
 import React, {useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button, MoviesCard } from '../index';
-import { setCards, addMoreCards } from '../../helpers/index';
+import { renderCards, addMoreCards } from '../../helpers/index';
 
-const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete, savedCards, checkbox, isMovieSaved, checkIsEmpty}) => {
-  const [visible, setIsVisible] = useState(setCards());
+const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, isNoSearchQuery}) => {
+
+  const [visible, setIsVisible] = useState(renderCards());
   const location = useLocation();
 
-  const showMoreMovies = () => {
+  const showMoreCards = () => {
     setIsVisible((prevValue) => prevValue + addMoreCards());
   };
 
-  const filteredMoviesByDuration = cards.filter((card) => {
+  const filterCardsByDuration = cards.filter((card) => {
     return ((card.duration <= 40 && checkbox) || !checkbox) ? card : null;
   });
 
   return (
     <>
-    { checkIsEmpty ? <p className='cards__not-found'>Ничего не найдено</p> :
+    { isNoSearchQuery ? <p className='cards__not-found'>Ничего не найдено</p> :
       <ul className="cards">
-        { filteredMoviesByDuration.slice(0, visible).map((card) => {
+        { filterCardsByDuration.slice(0, visible).map((card) => {
           return (
             <MoviesCard
               card={card}
@@ -30,13 +31,12 @@ const MoviesCardList = ({ cards, onClick, className, handleSaveCard, onDelete, s
               handleSaveCard={handleSaveCard}
               onDelete={onDelete}
               savedCards={savedCards}
-              isMovieSaved={isMovieSaved}
             />
           )
         })}
       </ul>
     }
-      { location.pathname === '/movies' && (visible <= cards.length) ?  <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreMovies} /> : null }
+      { location.pathname === '/movies' && (visible <= cards.length) ?  <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreCards} /> : null }
     </>
     )
 };

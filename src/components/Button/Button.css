@@ -149,27 +149,22 @@
     line-height: 15px;
     margin-top: 220px;
   }
-
   .button_place_search-form {
     width: 59px;
     margin-top: 0;
   }
-
   .button_place_card {
     width: 100px;
     margin-top: 0;
   }
-
   .button_place_card-active {
     margin-top: 0;
     width: 100px;
   }
-
   .button_place_card-delete {
     margin-top: 0;
     width: 100px;
   }
-
   .button_place_movies {
     width: 100%;
     margin-top: 50px

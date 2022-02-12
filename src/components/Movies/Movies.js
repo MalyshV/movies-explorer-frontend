@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, isMovieSaved, onDelete, searchedCards, cards, savedCards, checkIsEmpty }) => {
+const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, onDelete, searchedCards, cards, savedCards, isNoSearchQuery }) => {
+
   const [search, setSearch] = useState('');
   const [isSearched, setIsSearched] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -28,8 +29,8 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
   };
 
   return (
-    <section className="movies" >
-      <div className="movies__content">
+    <section className='movies' >
+      <div className='movies__content'>
         <SearchForm onChange={handleSearch} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox}/>
         { !isSearched ?
           <MoviesCardList
@@ -40,10 +41,9 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
             checkbox={checkbox}
             setCheckbox={setCheckbox}
             savedCards={savedCards}
-            isMovieSaved={isMovieSaved}
             searchedCards={searchedCards}
             isSearched={isSearched}
-            checkIsEmpty={checkIsEmpty}
+            isNoSearchQuery={isNoSearchQuery}
           />
           :
           <Preloader />
@@ -55,7 +55,3 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
 };
 
 export default Movies;
-
-// todo
-// навесить удаление фильма из сохраненных при повторном клике
-// подчистить код

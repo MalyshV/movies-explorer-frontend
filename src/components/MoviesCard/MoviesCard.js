@@ -4,19 +4,28 @@ import { Button } from '../index';
 import { MOVIES_URL } from '../../utils/constants';
 import { setRigthDuration } from '../../helpers/index';
 
-const MoviesCard = ({ card, handleSaveCard, onDelete, isMovieSaved }) => {
+const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
+
   const [isCliked, setIsCliked] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    setIsCliked(isMovieSaved(card));
-  }, [card, isMovieSaved]);
-
   const buttonMovies = isCliked ? '-active' : '';
   const buttonSavedMovies = '-delete';
-
   const buttonClassName = location.pathname === '/movies' ? buttonMovies : buttonSavedMovies;
   const cardImageSrc = location.pathname === '/movies' ? `${MOVIES_URL}${card.image.url}` : `${card.image}`;
+
+  useEffect(() => {
+    const checkIfCardIsSaved = (card) => {
+      if (savedCards && card) {
+        return savedCards.some((item) => {
+          return item.movieId === card.id;
+        });
+      }
+    };
+
+    setIsCliked(checkIfCardIsSaved(card));
+  }, [card, savedCards]);
+
 
 
   const handleSaveClick = () => {
@@ -34,19 +43,18 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, isMovieSaved }) => {
     setIsCliked(false);
   };
 
-   const buttonClickFunction = location.pathname === '/movies' && !isCliked ? (handleSaveClick || handleDeleteClick) : handleDeleteClick;
-  // - вот выше возможно ошибка, т.к. я по роуту /movies задаю только функцию handleSaveClick
+  const buttonClickFunction = location.pathname === '/movies' && !isCliked ? (handleSaveClick || handleDeleteClick) : handleDeleteClick;
 
   return (
-    <li className="card">
-      <div className="card__info">
-        <h4 className="card__title">{card.nameRU}</h4>
-        <p className="card__duration">{setRigthDuration(card.duration)}</p>
+    <li className='card'>
+      <div className='card__info'>
+        <h4 className='card__title'>{card.nameRU}</h4>
+        <p className='card__duration'>{setRigthDuration(card.duration)}</p>
       </div>
-      <a className="card__link" href={card.trailerLink} rel="noreferrer" target="_blank">
+      <a className='card__link' href={card.trailerLink} rel='noreferrer' target='_blank'>
         <img className="card__image" alt={card.nameRU} src={cardImageSrc} />
       </a>
-      <Button textOnButton="" buttonClassName={`_place_card${buttonClassName}`} onClick={buttonClickFunction} />
+      <Button textOnButton='' buttonClassName={`_place_card${buttonClassName}`} onClick={buttonClickFunction} />
     </li>
   )
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NavLinks } from '../index';
 import burgerIcon from '../../images/burger_open_icon.svg';
@@ -16,13 +16,13 @@ const NavMobile = () => {
 
   return (
     <ul className={classes}>
-      <img className="nav__burger" src={wrightIcon} alt="иконка меню-бургера" onClick={handleBurgerClick} />
+      <img className='nav__burger' src={wrightIcon} alt='иконка меню-бургера' onClick={handleBurgerClick} />
       { isOpen &&
       <>
-        <NavLinks view="view_mobile" isMobile={true} closeBurgerMenu={closeBurgerMenu}  />
-        <NavLink className="nav__accaunt_view_mobile" to="/profile" onClick={closeBurgerMenu} >
-          <img className="nav__icon" alt="иконка входа в аккаунт" src={accauntIcon} />
-          <p className="nav__text">Аккаунт</p>
+        <NavLinks view='view_mobile' isMobile={true} closeBurgerMenu={closeBurgerMenu}  />
+        <NavLink className='nav__accaunt_view_mobile' to='/profile' onClick={closeBurgerMenu} >
+          <img className='nav__icon' alt='иконка входа в аккаунт' src={accauntIcon} />
+          <p className='nav__text'>Аккаунт</p>
         </NavLink>
       </>
       }

@@ -89,22 +89,18 @@
   .portfolio {
     padding: 0 18px 70px;
   }
-
   .portfolio__title {
     font-size: 14px;
     line-height: 20px;
   }
-
   .portfolio__links {
     margin-top: 40px;
     min-height: 162px;
   }
-
   .portfolio__link {
     font-size: 18px;
     line-height: 28px;
   }
-
   .portfolio__icon {
     width: 10px;
     height: 10px;

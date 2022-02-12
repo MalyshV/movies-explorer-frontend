@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const FormInput = ({ labelClassName, inputClassName, labelName, inputType, inputName, spanText, spanClassName, tabIndex, value, placeholder, labelFor, inputId, onChange, minLength, maxLenght, pattern, required }) => {
   return(

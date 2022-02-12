@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const SavedMovies = ({ cards, savedCards, handleSavedMoviesSearchCard, onDelete, checkbox, setCheckbox, isMovieSaved, checkIsEmpty }) => {
+const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkbox, setCheckbox, isNoSearchQuery }) => {
+
   const [search, setIsSearch] = useState('');
   const [isSearched, setIsSearched] = useState(true);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -22,24 +23,23 @@ const SavedMovies = ({ cards, savedCards, handleSavedMoviesSearchCard, onDelete,
       setIsPopupOpened(true)
       setTimeout(() => setIsPopupOpened(false), 1900);
     } else {
-      handleSavedMoviesSearchCard(search);
+      handleSavedSearchCard(search);
       setTimeout(() => setIsSearched(true), 1000);
     }
   };
 
   return(
-    <section className="movies">
+    <section className='movies'>
       <SearchForm onChange={handleSearch} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox} />
       { isSearched ?
         <MoviesCardList
-          className="-delete"
+          className='-delete'
           onDelete={handleCardDelete}
           cards={cards}
           savedCards={savedCards}
           checkbox={checkbox}
           setCheckbox={setCheckbox}
-          isMovieSaved={isMovieSaved}
-          checkIsEmpty={checkIsEmpty}
+          isNoSearchQuery={isNoSearchQuery}
         />
         :
         <Preloader />
