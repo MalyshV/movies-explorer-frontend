@@ -52,7 +52,7 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
         <p className='card__duration'>{setRigthDuration(card.duration)}</p>
       </div>
       <a className='card__link' href={card.trailerLink} rel='noreferrer' target='_blank'>
-        <img className="card__image" alt={card.nameRU} src={cardImageSrc} />
+        <img className='card__image' alt={card.nameRU} src={cardImageSrc} />
       </a>
       <Button textOnButton='' buttonClassName={`_place_card${buttonClassName}`} onClick={buttonClickFunction} />
     </li>

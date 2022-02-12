@@ -17,7 +17,7 @@ const FormInput = ({ labelClassName, inputClassName, labelName, inputType, input
         onChange={onChange}
         minLength={minLength}
         maxlenght={maxLenght}
-        autoComplete="off"
+        autoComplete='off'
       />
       <span className={`form__error form__error${spanClassName}`}>{spanText}</span>
     </>

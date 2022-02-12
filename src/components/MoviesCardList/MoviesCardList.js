@@ -19,7 +19,7 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
   return (
     <>
     { isNoSearchQuery ? <p className='cards__not-found'>Ничего не найдено</p> :
-      <ul className="cards">
+      <ul className='cards'>
         { filterCardsByDuration.slice(0, visible).map((card) => {
           return (
             <MoviesCard
@@ -36,7 +36,7 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
         })}
       </ul>
     }
-      { location.pathname === '/movies' && (visible <= cards.length) ?  <Button textOnButton="Ещё" buttonClassName="_place_movies" onClick={showMoreCards} /> : null }
+      { location.pathname === '/movies' && (visible <= cards.length) ?  <Button textOnButton='Ещё' buttonClassName='_place_movies' onClick={showMoreCards} /> : null }
     </>
     )
 };
