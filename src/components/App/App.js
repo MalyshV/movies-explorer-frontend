@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
 import * as auth from '../../utils/api/auth';
 import { moviesApi, api } from '../../utils/api/index';
-import { filterMovies } from '../../helpers/index';
+import { filterCards } from '../../helpers/index';
 import { ErrorPopup, Footer, Header, Login, Main, Movies, PageNotFound, Popup, Profile, Register, SavedMovies} from '../index';
 import './App.css';
 
@@ -113,20 +113,20 @@ const App = () => {
   const handleSearchCard = (searchQuery) => {
     if (localStorage.getItem('cardsData')) {
       const searchedData = JSON.parse(localStorage.getItem('cardsData'));
-      const foundMoviesArray = filterMovies(searchedData, searchQuery);
+      const foundMoviesArray = filterCards(searchedData, searchQuery);
 
       foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
 
-      setCards(filterMovies(searchedData, searchQuery));
+      setCards(filterCards(searchedData, searchQuery));
       localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
     } else {
       moviesApi.findMovies()
         .then((res) => {
-          const foundMoviesArray = filterMovies(res, searchQuery);
+          const foundMoviesArray = filterCards(res, searchQuery);
 
           foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
 
-          setCards(filterMovies(res, searchQuery));
+          setCards(filterCards(res, searchQuery));
           localStorage.setItem('cardsData', JSON.stringify(res));
           api.getSavedMovies();
         })
@@ -141,11 +141,11 @@ const App = () => {
   const handleSavedSearchCard = (searchQuery) => {
     api.getSavedMovies()
       .then((res) => {
-        const foundSavedMoviesArray = filterMovies(res, searchQuery);
+        const foundSavedMoviesArray = filterCards(res, searchQuery);
 
         foundSavedMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
 
-        setSavedCards(filterMovies(res, searchQuery));
+        setSavedCards(filterCards(res, searchQuery));
         localStorage.setItem('savedCardsdata', JSON.stringify(res));
       })
       .catch((error) => {
