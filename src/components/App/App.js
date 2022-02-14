@@ -158,10 +158,8 @@ const App = () => {
 
   // сохранить фильм
   const handleSaveCard = (card) => {
-    console.log(card);
     api.saveMovie(card)
       .then((res) => {
-        console.log(res);
         setSavedCards([...savedCards, res]);
         localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
       })
