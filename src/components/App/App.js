@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../../hoc/ProtectedRoute/ProtectedRoute';
 import * as auth from '../../utils/api/auth';
@@ -11,6 +11,7 @@ import './App.css';
 const App = () => {
   const token = localStorage.getItem('jwt');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
@@ -235,18 +236,30 @@ const App = () => {
     return () => document.removeEventListener('keydown', closeErrorPopupByEscape)
   }, []);
 
+  const renderMainLayout = () => {
+    return (
+      <>
+        <Header isLoggedIn={token} />
+        <Main />
+        <Footer />
+      </>
+    )
+  };
+
+  const navigateLoggedInUser = () => {
+    if (location.pathname === '/signup') {
+      return isLoggedIn ? renderMainLayout() : <Register handleRegistration={handleRegistration} />
+    }
+    if (location.pathname === '/signin') {
+      return isLoggedIn ? renderMainLayout() : <Login handleAuthorization={handleAuthorization} />
+    }
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className='page'>
       <Routes>
-        <Route path='/' element={
-          <>
-            <Header isLoggedIn={token} />
-            <Main />
-            <Footer />
-          </>
-        } />
+        <Route path='/' element={renderMainLayout()} />
         <Route path='/movies' element={
           <ProtectedRoute isLoggedIn={token}>
             <>
@@ -295,8 +308,8 @@ const App = () => {
             </>
           </ProtectedRoute>
         } />
-        <Route path='/signup' element={ <Register handleRegistration={handleRegistration} /> } />
-        <Route path='/signin' element={ <Login handleAuthorization={handleAuthorization} /> } />
+        <Route path='/signup' element={navigateLoggedInUser()} />
+        <Route path='/signin' element={navigateLoggedInUser()} />
         <Route path='*' element={ <PageNotFound /> } />
       </Routes>
     </div>
