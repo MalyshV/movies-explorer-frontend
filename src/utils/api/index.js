@@ -4,4 +4,4 @@ import moviesApi from './MoviesApi';
 export {
   api,
   moviesApi
-}
+};

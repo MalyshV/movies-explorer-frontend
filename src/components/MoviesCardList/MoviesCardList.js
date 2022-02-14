@@ -2,6 +2,7 @@ import React, {useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Button, MoviesCard } from '../index';
 import { renderCards, addMoreCards } from '../../helpers/index';
+import { SHORT_FILM_LENGTH } from '../../utils/constants';
 
 const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, isNoSearchQuery}) => {
 
@@ -13,7 +14,7 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
   };
 
   const filterCardsByDuration = cards.filter((card) => {
-    return ((card.duration <= 40 && checkbox) || !checkbox) ? card : null;
+    return ((card.duration <= SHORT_FILM_LENGTH && checkbox) || !checkbox) ? card : null;
   });
 
   return (

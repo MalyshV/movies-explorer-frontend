@@ -40,7 +40,7 @@ const App = () => {
     if (isLoggedIn === true) {
       api.getUserInfo()
         .then((userInfo) => {
-          setCurrentUser(userInfo)
+          setCurrentUser(userInfo);
         })
         .catch((error) => console.log(error))
     }
@@ -50,7 +50,7 @@ const App = () => {
     if (token) {
       api.getSavedMovies()
       .then((res) => {
-        setSavedCards(res.filter((card) => card.owner === currentUser._id))
+        setSavedCards(res.filter((card) => card.owner === currentUser._id));
         localStorage.setItem('savedCardsData', JSON.stringify(res));
       })
       .catch((error) => console.log(error));
@@ -81,7 +81,7 @@ const App = () => {
       .then((data) => {
         setIsLoggedIn(true);
         setIsRegistered(true);
-        localStorage.setItem('jwt', data.token)
+        localStorage.setItem('jwt', data.token);
         return navigate('/movies', {replace: true});
       })
       .catch((error) => {
