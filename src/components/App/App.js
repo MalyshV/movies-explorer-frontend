@@ -148,7 +148,7 @@ const App = () => {
         foundSavedMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
 
         setSavedCards(filterCards(res, searchQuery));
-        localStorage.setItem('savedCardsdata', JSON.stringify(res));
+        localStorage.setItem('savedCardsData', JSON.stringify(res));
       })
       .catch((error) => {
         handleOpenErrorPopup();
