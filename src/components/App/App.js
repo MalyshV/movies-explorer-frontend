@@ -69,7 +69,6 @@ const App = () => {
     auth.register(email, password, name)
       .then(() => {
         handleAuthorization(email, password);
-        alert('hi');
       })
       .catch((error) => {
         setIsRegistered(false);

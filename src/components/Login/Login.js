@@ -3,7 +3,7 @@ import { Form, FormInput, Button } from '../index';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 const Login = ({ handleAuthorization }) => {
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   const isDisabled = values.email === '' || values.password === '' || !isValid;
   const loginButton = !isDisabled ? '' : ' button-disabled';
@@ -11,7 +11,8 @@ const Login = ({ handleAuthorization }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     !isDisabled && handleAuthorization(values.email, values.password);
-  }
+    resetForm();
+  };
 
   return (
     <>

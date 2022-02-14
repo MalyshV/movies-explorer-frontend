@@ -5,7 +5,7 @@ import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 const Register = ({ handleRegistration }) => {
 
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation();
 
   const isDisabled = values.email === '' || values.password === '' || !isValid || values.name === '';
   const registerButton = !isDisabled ? '' : ' button-disabled';
@@ -13,6 +13,7 @@ const Register = ({ handleRegistration }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     !isDisabled && handleRegistration(values.email, values.password, values.name);
+    resetForm();
   };
 
   return(
