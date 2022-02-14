@@ -43,13 +43,15 @@ const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
 
   const buttonClickFunction = location.pathname === '/movies' && !isCliked ? (handleSaveClick || handleDeleteClick) : handleDeleteClick;
 
+  const cardTrailer = location.pathname === '/movies' ? card.trailerLink : card.trailer;
+
   return (
     <li className='card'>
       <div className='card__info'>
         <h4 className='card__title'>{card.nameRU}</h4>
         <p className='card__duration'>{setRigthDuration(card.duration)}</p>
       </div>
-      <a className='card__link' href={card.trailerLink} rel='noreferrer' target='_blank'>
+      <a className='card__link' href={cardTrailer} rel='noreferrer' target='_blank'>
         <img className='card__image' alt={card.nameRU} src={cardImageSrc} />
       </a>
       <Button textOnButton='' buttonClassName={`_place_card${buttonClassName}`} onClick={buttonClickFunction} />
