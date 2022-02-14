@@ -7,7 +7,7 @@ const SuccessPopup = ({ onUpdate }) => {
 
   const showMessage = (popupText) => {
     if (location.pathname === '/profile') {
-      return popupText = successMessages.updateProfilesuccess;
+      return popupText = successMessages.updateProfileSuccess;
     } else if (location.pathname === '/movies' || '/saved-movies') {
       return popupText = errors.emptySearchErr;
     }

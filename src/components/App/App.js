@@ -68,6 +68,7 @@ const App = () => {
     auth.register(email, password, name)
       .then(() => {
         handleAuthorization(email, password);
+        alert('hi');
       })
       .catch((error) => {
         setIsRegistered(false);
@@ -104,6 +105,7 @@ const App = () => {
 
   const handleSignOut = () => {
     localStorage.clear();
+    setSearchedCards([]);
     setIsLoggedIn(false);
     setCurrentUser({});
     return navigate('/', {replace: true});
