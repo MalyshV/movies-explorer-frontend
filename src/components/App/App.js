@@ -60,7 +60,8 @@ const App = () => {
 
   useEffect(() => {
     setCheckbox(JSON.parse(localStorage.getItem('ckeckboxCardsData')));
-    setSearchedCards(JSON.parse(localStorage.getItem('searchedCardsData')));
+    setCards(JSON.parse(localStorage.getItem('searchedCardsData')));
+    setSavedCards(JSON.parse(localStorage.getItem('savedCardsData')));
   }, []);
 
 
@@ -120,7 +121,7 @@ const App = () => {
       foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
 
       setCards(filterCards(searchedData, searchQuery));
-      localStorage.setItem('searchedCardsData', JSON.stringify(searchedCards));
+      localStorage.setItem('searchedCardsData', JSON.stringify(foundMoviesArray));
     } else {
       moviesApi.findMovies()
         .then((res) => {
