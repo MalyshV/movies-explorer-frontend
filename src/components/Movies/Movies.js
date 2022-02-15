@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
 const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, onDelete, searchedCards, cards, savedCards, isNoSearchQuery }) => {
@@ -22,6 +22,7 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
       handleSearchCard(search);
       setTimeout(() => setIsSearched(false), 1000);
     }
+    localStorage.setItem('searchQuery', search);
   };
 
   const handleCardDelete = (card) => {

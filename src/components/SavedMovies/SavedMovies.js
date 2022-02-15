@@ -26,6 +26,7 @@ const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, check
       handleSavedSearchCard(search);
       setTimeout(() => setIsSearched(true), 1000);
     }
+    localStorage.setItem('savedSearchQuery', search);
   };
 
   return(

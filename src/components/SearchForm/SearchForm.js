@@ -1,12 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Button, FilterCheckbox, FormInput } from '../index';
 import img from '../../images/search_icon.svg';
 
 const SearchForm = ({ onSubmit, onChange, checkbox, setCheckbox }) => {
+  const location = useLocation();
 
   const handleCheckbox = () => {
     localStorage.setItem('checkboxData', JSON.stringify(!checkbox));
     setCheckbox(!checkbox);
+  };
+
+  const setSearchValue = () => {
+    return location.pathname === '/movies' ? localStorage.getItem('searchQuery') : localStorage.getItem('savedSearchQuery');
   };
 
   return (
@@ -22,6 +28,7 @@ const SearchForm = ({ onSubmit, onChange, checkbox, setCheckbox }) => {
           inputName='search'
           labelClassName='_place_movies'
           inputClassName='_place_movies'
+          defaultValue = {setSearchValue() || ''}
         />
         <Button textOnButton='Найти' buttonClassName='_place_search-form' />
       </fieldset>

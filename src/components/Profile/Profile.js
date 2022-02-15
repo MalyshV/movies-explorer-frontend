@@ -5,7 +5,6 @@ import { namePattern, emailPattern } from '../../utils/constants';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
 
 const Profile = ({ onUpdateUser, handleSignOut }) => {
-
   const currentUser = useContext(CurrentUserContext);
   const userName = currentUser.name;
   const userEmail = currentUser.email;
