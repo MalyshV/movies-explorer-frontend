@@ -52,6 +52,9 @@ const App = () => {
       api.getSavedMovies()
       .then((res) => {
         setSavedCards(res.filter((card) => card.owner === currentUser._id));
+        if (localStorage.getItem('searchedCardsData')) {
+          setCards(JSON.parse(localStorage.getItem('searchedCardsData')));
+        }
         localStorage.setItem('savedCardsData', JSON.stringify(res));
       })
       .catch((error) => console.log(error));
@@ -60,8 +63,6 @@ const App = () => {
 
   useEffect(() => {
     setCheckbox(JSON.parse(localStorage.getItem('ckeckboxCardsData')));
-    setCards(JSON.parse(localStorage.getItem('searchedCardsData')));
-    setSavedCards(JSON.parse(localStorage.getItem('savedCardsData')));
   }, []);
 
 
@@ -107,6 +108,7 @@ const App = () => {
   const handleSignOut = () => {
     localStorage.clear();
     setSearchedCards([]);
+    setCards([]);
     setIsLoggedIn(false);
     setCurrentUser({});
     return navigate('/', {replace: true});
