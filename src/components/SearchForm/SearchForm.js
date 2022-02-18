@@ -13,7 +13,7 @@ const SearchForm = ({ onSubmit, onChange, checkbox, setCheckbox, checkSavedCards
     }
     if (location.pathname === '/saved-movies') {
       setCheckSavedCards(!checkSavedCards);
-      localStorage.setItem('SavedCheckboxData', JSON.stringify(!checkSavedCards));
+      localStorage.setItem('savedCheckboxData', JSON.stringify(!checkSavedCards));
     }
   };
 

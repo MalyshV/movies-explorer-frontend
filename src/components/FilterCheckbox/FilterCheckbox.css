@@ -20,7 +20,7 @@
   position: relative;
 }
 
-.checkbox__image:checked {
+.checkbox__image-active {
   background-color: #2BE080;
 }
 
@@ -38,7 +38,7 @@
   border-radius: 20px;
 }
 
-.checkbox__image:checked:before {
+.checkbox__image-active:before {
   left: 18px;
 }
 

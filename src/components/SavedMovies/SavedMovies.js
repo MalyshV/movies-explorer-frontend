@@ -8,7 +8,11 @@ const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, check
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   useEffect(() => {
-    setCheckSavedCards(JSON.parse(localStorage.getItem('SavedCheckboxData')));
+    if (localStorage.getItem('savedCheckboxData') === 'true') {
+      setCheckSavedCards(true);
+    } else {
+      setCheckSavedCards(false);
+    }
   }, [setCheckSavedCards]);
 
   const handleCardDelete = (card) => {
