@@ -51,19 +51,15 @@ const App = () => {
     if (token) {
       api.getSavedMovies()
       .then((res) => {
+        localStorage.setItem('savedCardsData', JSON.stringify(res));
         setSavedCards(res.filter((card) => card.owner === currentUser._id));
         if (localStorage.getItem('searchedCardsData')) {
           setCards(JSON.parse(localStorage.getItem('searchedCardsData')));
         }
-        localStorage.setItem('savedCardsData', JSON.stringify(res));
       })
       .catch((error) => console.log(error));
     }
   }, [currentUser, token]);
-
-  useEffect(() => {
-    setCheckbox(JSON.parse(localStorage.getItem('ckeckboxCardsData')));
-  }, []);
 
 
   /*** юзеры ***/
@@ -114,52 +110,8 @@ const App = () => {
     return navigate('/', {replace: true});
   };
 
+
   /*** фильмы ***/
-  const handleSearchCard = (searchQuery) => {
-    if (localStorage.getItem('cardsData')) {
-      const searchedData = JSON.parse(localStorage.getItem('cardsData'));
-      const foundMoviesArray = filterCards(searchedData, searchQuery);
-
-      foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
-
-      setCards(filterCards(searchedData, searchQuery));
-      localStorage.setItem('searchedCardsData', JSON.stringify(foundMoviesArray));
-    } else {
-      moviesApi.findMovies()
-        .then((res) => {
-          const foundMoviesArray = filterCards(res, searchQuery);
-
-          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
-
-          setCards(filterCards(res, searchQuery));
-          localStorage.setItem('cardsData', JSON.stringify(res));
-          api.getSavedMovies();
-        })
-        .catch((error) => {
-          handleOpenErrorPopup();
-          console.log(error);
-        })
-    };
-  };
-
-  // поиск по сохраненным
-  const handleSavedSearchCard = (searchQuery) => {
-    api.getSavedMovies()
-      .then((res) => {
-        const foundSavedMoviesArray = filterCards(res, searchQuery);
-
-        foundSavedMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
-
-        setSavedCards(filterCards(res, searchQuery));
-        localStorage.setItem('savedCardsData', JSON.stringify(res));
-      })
-      .catch((error) => {
-        handleOpenErrorPopup();
-        console.log(error);
-      })
-  };
-
-  // сохранить фильм
   const handleSaveCard = (card) => {
     api.saveMovie(card)
       .then((res) => {
@@ -177,7 +129,6 @@ const App = () => {
     }
   };
 
-  // удалить фильм
   const handleDeleteLocalCard = (card) => {
     api.deleteMovie(card)
       .then(() => {
@@ -207,6 +158,49 @@ const App = () => {
         console.log(error);
       })
   };
+
+  const handleSearchCard = (searchQuery) => {
+    if (localStorage.getItem('cardsData')) {
+      const searchedData = JSON.parse(localStorage.getItem('cardsData'));
+      const foundMoviesArray = filterCards(searchedData, searchQuery);
+
+      foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+
+      setCards(filterCards(searchedData, searchQuery));
+      localStorage.setItem('searchedCardsData', JSON.stringify(foundMoviesArray));
+    } else {
+      moviesApi.findMovies()
+        .then((res) => {
+          const foundMoviesArray = filterCards(res, searchQuery);
+
+          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+
+          setCards(filterCards(res, searchQuery));
+          localStorage.setItem('cardsData', JSON.stringify(res));
+          api.getSavedMovies();
+        })
+        .catch((error) => {
+          handleOpenErrorPopup();
+          console.log(error);
+        })
+    };
+  };
+
+  const handleSavedSearchCard = (searchQuery) => {
+    api.getSavedMovies()
+      .then((res) => {
+        const foundSavedMoviesArray = filterCards(res, searchQuery);
+        foundSavedMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+
+        setSavedCards(foundSavedMoviesArray);
+        localStorage.setItem('searchedSavedCardsData', JSON.stringify(res));
+      })
+      .catch((error) => {
+        handleOpenErrorPopup();
+        console.log(error);
+      })
+  };
+
 
   /*** попапы ***/
   const handleOpenErrorPopup = () => setIsErrorPopupOpened(true);
@@ -257,6 +251,7 @@ const App = () => {
     }
   };
 
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className='page'>
@@ -290,8 +285,8 @@ const App = () => {
                 savedCards={savedCards}
                 onDelete={handleDeleteLocalCard}
                 handleSavedSearchCard={handleSavedSearchCard}
-                checkbox={checkSavedCards}
-                setCheckbox={setCheckSavedCards}
+                checkSavedCards={checkSavedCards}
+                setCheckSavedCards={setCheckSavedCards}
                 isNoSearchQuery={isNoSearchQuery}
               />
               <Footer />

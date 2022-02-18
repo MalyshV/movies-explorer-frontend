@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkbox, setCheckbox, isNoSearchQuery }) => {
+const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkSavedCards, setCheckSavedCards, isNoSearchQuery }) => {
 
   const [search, setIsSearch] = useState('');
   const [isSearched, setIsSearched] = useState(true);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
+
+  useEffect(() => {
+    setCheckSavedCards(JSON.parse(localStorage.getItem('SavedCheckboxData')));
+  }, [setCheckSavedCards]);
 
   const handleCardDelete = (card) => {
     onDelete(card);
@@ -31,15 +35,15 @@ const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, check
 
   return(
     <section className='movies'>
-      <SearchForm onChange={handleSearch} onSubmit={handleSubmit} checkbox={checkbox} setCheckbox={setCheckbox} />
+      <SearchForm onChange={handleSearch} onSubmit={handleSubmit} checkSavedCards={checkSavedCards} setCheckSavedCards={setCheckSavedCards} />
       { isSearched ?
         <MoviesCardList
           className='-delete'
           onDelete={handleCardDelete}
           cards={cards}
           savedCards={savedCards}
-          checkbox={checkbox}
-          setCheckbox={setCheckbox}
+          checkSavedCards={checkSavedCards}
+          setCheckSavedCards={setCheckSavedCards}
           isNoSearchQuery={isNoSearchQuery}
         />
         :

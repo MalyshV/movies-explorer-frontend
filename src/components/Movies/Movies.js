@@ -7,6 +7,10 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
   const [isSearched, setIsSearched] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
+  useEffect(() => {
+    setCheckbox(JSON.parse(localStorage.getItem('checkboxData')));
+  }, [setCheckbox]);
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };

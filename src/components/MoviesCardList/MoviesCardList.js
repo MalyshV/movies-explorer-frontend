@@ -4,7 +4,7 @@ import { Button, MoviesCard } from '../index';
 import { renderCards, addMoreCards } from '../../helpers/index';
 import { SHORT_FILM_LENGTH } from '../../utils/constants';
 
-const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, isNoSearchQuery}) => {
+const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, checkSavedCards, setCheckSavedCards, isNoSearchQuery}) => {
 
   const [visible, setIsVisible] = useState(renderCards());
   const location = useLocation();
@@ -14,7 +14,12 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
   };
 
   const filterCardsByDuration = cards.filter((card) => {
-    return ((card.duration <= SHORT_FILM_LENGTH && checkbox) || !checkbox) ? card : null;
+    if (location.pathname === '/movies') {
+      return ((card.duration <= SHORT_FILM_LENGTH && checkbox) || !checkbox) ? card : null;
+    }
+    if (location.pathname === '/saved-movies') {
+      return ((card.duration <= SHORT_FILM_LENGTH && checkSavedCards) || !checkSavedCards) ? card : null;
+    }
   });
 
   return (
@@ -37,7 +42,7 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
         })}
       </ul>
     }
-      { location.pathname === '/movies' && (visible <= cards.length) ?
+      { location.pathname === '/movies' && (visible <= filterCardsByDuration.length) ?
         <Button textOnButton='Ещё' buttonClassName='_place_movies' onClick={showMoreCards} />
         :
         null
