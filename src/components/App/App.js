@@ -24,6 +24,7 @@ const App = () => {
   const [checkbox, setCheckbox] = useState(false);
   const [checkSavedCards, setCheckSavedCards] = useState(false);
   const [isNoSearchQuery, setIsNoSearchQuery] = useState(false);
+  const [isNoSearchSavedQuery, setIsNoSearchSavedQuery] = useState(false);
 
   useEffect(()=> {
     if (token) {
@@ -171,9 +172,9 @@ const App = () => {
     } else {
       moviesApi.findMovies()
         .then((res) => {
-          const foundMoviesArray = filterCards(res, searchQuery);
+          const foundMoviesArray = filterCards(res, searchQuery); // совпадение 1
 
-          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) : // совпадение 2
 
           setCards(filterCards(res, searchQuery));
           localStorage.setItem('cardsData', JSON.stringify(res));
@@ -189,8 +190,8 @@ const App = () => {
   const handleSavedSearchCard = (searchQuery) => {
     api.getSavedMovies()
       .then((res) => {
-        const foundSavedMoviesArray = filterCards(res, searchQuery);
-        foundSavedMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+        const foundSavedMoviesArray = filterCards(res, searchQuery); // совпадение 1
+        foundSavedMoviesArray.length === 0 ? setIsNoSearchSavedQuery(!isNoSearchSavedQuery) : // совпадение 2
 
         setSavedCards(foundSavedMoviesArray);
         localStorage.setItem('searchedSavedCardsData', JSON.stringify(res));
@@ -287,7 +288,7 @@ const App = () => {
                 handleSavedSearchCard={handleSavedSearchCard}
                 checkSavedCards={checkSavedCards}
                 setCheckSavedCards={setCheckSavedCards}
-                isNoSearchQuery={isNoSearchQuery}
+                isNoSearchSavedQuery={isNoSearchSavedQuery}
               />
               <Footer />
             </>

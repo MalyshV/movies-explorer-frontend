@@ -4,10 +4,12 @@ import { Button, MoviesCard } from '../index';
 import { renderCards, addMoreCards } from '../../helpers/index';
 import { SHORT_FILM_LENGTH } from '../../utils/constants';
 
-const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, checkSavedCards, setCheckSavedCards, isNoSearchQuery}) => {
+const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, checkSavedCards, setCheckSavedCards, isNoSearchQuery, isNoSearchSavedQuery}) => {
 
   const [visible, setIsVisible] = useState(renderCards());
   const location = useLocation();
+
+  const noSearchResult = location.pathname === '/movies' ? isNoSearchQuery : isNoSearchSavedQuery;
 
   const showMoreCards = () => {
     setIsVisible((prevValue) => prevValue + addMoreCards());
@@ -24,7 +26,7 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
 
   return (
     <>
-    { isNoSearchQuery ? <p className='cards__not-found'>Ничего не найдено</p> :
+    { noSearchResult ? <p className='cards__not-found'>Ничего не найдено</p> :
       <ul className='cards'>
         { filterCardsByDuration.slice(0, visible).map((card) => {
           return (
