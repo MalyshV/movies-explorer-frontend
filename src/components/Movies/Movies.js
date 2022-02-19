@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, onDelete, searchedCards, cards, savedCards, isNoSearchQuery }) => {
+const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, onDelete, searchedCards, cards, savedCards, setSavedCards, isNoSearchQuery }) => {
 
   const [search, setSearch] = useState('');
   const [isSearched, setIsSearched] = useState(false);
@@ -10,6 +10,10 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
   useEffect(() => {
     setCheckbox(JSON.parse(localStorage.getItem('checkboxData')));
   }, [setCheckbox]);
+
+  useState(() => {
+    setSavedCards(JSON.parse(localStorage.getItem('savedCardsData')));
+  }, [])
 
   const handleSearch = (e) => {
     setSearch(e.target.value);

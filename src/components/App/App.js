@@ -52,8 +52,8 @@ const App = () => {
     if (token) {
       api.getSavedMovies()
       .then((res) => {
-        localStorage.setItem('savedCardsData', JSON.stringify(res));
         setSavedCards(res.filter((card) => card.owner === currentUser._id));
+
         if (localStorage.getItem('searchedCardsData')) {
           setCards(JSON.parse(localStorage.getItem('searchedCardsData')));
         }
@@ -117,7 +117,7 @@ const App = () => {
     api.saveMovie(card)
       .then((res) => {
         setSavedCards([...savedCards, res]);
-        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
+        localStorage.setItem('savedCardsData', JSON.stringify([...savedCards, res]));
       })
       .catch(err => console.log(err))
   };
@@ -136,7 +136,9 @@ const App = () => {
         setSavedCards(
           savedCards.filter((item) => item._id !== card._id)
         );
-        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
+
+        const deleteResult = savedCards.filter((item) => item._id !== card._id);
+        localStorage.setItem('savedCardsData', JSON.stringify(deleteResult));
       })
       .catch((error) => {
         console.log(error);
@@ -153,7 +155,8 @@ const App = () => {
         setSavedCards(
           savedCards.filter((i) => i._id !== item._id)
         );
-        localStorage.setItem('savedCardsData', JSON.stringify(savedCards.data));
+        const result = savedCards.filter((i) => i._id !== item._id);
+       localStorage.setItem('savedCardsData', JSON.stringify(result));
       })
       .catch((error) => {
         console.log(error);
@@ -265,6 +268,7 @@ const App = () => {
               <Movies
                 cards={cards}
                 savedCards={savedCards}
+                setSavedCards={setSavedCards}
                 handleSaveCard={handleSaveCard}
                 handleSearchCard={handleSearchCard}
                 checkbox={checkbox}

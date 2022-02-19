@@ -5,7 +5,6 @@ import { MOVIES_URL } from '../../utils/constants';
 import { setRigthDuration } from '../../helpers/index';
 
 const MoviesCard = ({ card, handleSaveCard, onDelete, savedCards }) => {
-
   const [isCliked, setIsCliked] = useState(false);
   const location = useLocation();
 
