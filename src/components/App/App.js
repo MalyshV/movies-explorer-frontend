@@ -168,19 +168,18 @@ const App = () => {
       const searchedData = JSON.parse(localStorage.getItem('cardsData'));
       const foundMoviesArray = filterCards(searchedData, searchQuery);
 
-      foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+      !foundMoviesArray ? setIsNoSearchQuery(!isNoSearchQuery) : localStorage.setItem('searchedCardsData', JSON.stringify(foundMoviesArray));
 
       setCards(filterCards(searchedData, searchQuery));
-      localStorage.setItem('searchedCardsData', JSON.stringify(foundMoviesArray));
+
     } else {
       moviesApi.findMovies()
         .then((res) => {
           const foundMoviesArray = filterCards(res, searchQuery);
 
-          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
+          !foundMoviesArray ? setIsNoSearchQuery(!isNoSearchQuery) : localStorage.setItem('cardsData', JSON.stringify(res));
 
           setCards(filterCards(res, searchQuery));
-          localStorage.setItem('cardsData', JSON.stringify(res));
           api.getSavedMovies();
         })
         .catch((error) => {
@@ -194,10 +193,10 @@ const App = () => {
     api.getSavedMovies()
       .then((res) => {
         const foundSavedMoviesArray = filterCards(res, searchQuery);
-        foundSavedMoviesArray.length === 0 ? setIsNoSearchSavedQuery(!isNoSearchSavedQuery) :
+
+        !foundSavedMoviesArray ? setIsNoSearchSavedQuery(!isNoSearchSavedQuery) : localStorage.setItem('searchedSavedCardsData', JSON.stringify(res));
 
         setSavedCards(foundSavedMoviesArray);
-        localStorage.setItem('searchedSavedCardsData', JSON.stringify(res));
       })
       .catch((error) => {
         handleOpenErrorPopup();
