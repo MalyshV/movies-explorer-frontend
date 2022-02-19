@@ -11,9 +11,11 @@ const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, set
     setCheckbox(JSON.parse(localStorage.getItem('checkboxData')));
   }, [setCheckbox]);
 
-  useState(() => {
-    setSavedCards(JSON.parse(localStorage.getItem('savedCardsData')));
-  }, [])
+  useEffect(() => {
+    if (localStorage.getItem('savedCardsData')) {
+      setSavedCards(JSON.parse(localStorage.getItem('savedCardsData')));
+    }
+  }, [setSavedCards]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkSavedCards, setCheckSavedCards, isNoSearchSavedQuery }) => {
+const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkSavedCards, setCheckSavedCards, isNoSearchSavedQuery, setSavedCards }) => {
 
   const [search, setIsSearch] = useState('');
   const [isSearched, setIsSearched] = useState(true);

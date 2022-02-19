@@ -288,6 +288,7 @@ const App = () => {
               <SavedMovies
                 cards={savedCards}
                 savedCards={savedCards}
+                setSavedCards={setSavedCards}
                 onDelete={handleDeleteLocalCard}
                 handleSavedSearchCard={handleSavedSearchCard}
                 checkSavedCards={checkSavedCards}

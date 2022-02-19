@@ -18,6 +18,10 @@
   font-weight: 500;
 }
 
+.cards__not-found_hidden {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .cards {
     margin-top: 40px;

@@ -4,7 +4,7 @@ import { Button, MoviesCard } from '../index';
 import { renderCards, addMoreCards } from '../../helpers/index';
 import { SHORT_FILM_LENGTH } from '../../utils/constants';
 
-const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, checkSavedCards, setCheckSavedCards, isNoSearchQuery, isNoSearchSavedQuery}) => {
+const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard, onDelete, checkbox, checkSavedCards, isNoSearchQuery, isNoSearchSavedQuery}) => {
 
   const [visible, setIsVisible] = useState(renderCards());
   const location = useLocation();
