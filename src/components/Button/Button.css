@@ -65,10 +65,6 @@
   color: #000;
 }
 
-.button_place_movies-hidden {
-  display: none;
-}
-
 .button_place_movies:hover {
   box-shadow: 5px 5px 20px rgba(46, 46, 46, 0.308);
   transition: box-shadow 1s linear;

@@ -175,9 +175,9 @@ const App = () => {
     } else {
       moviesApi.findMovies()
         .then((res) => {
-          const foundMoviesArray = filterCards(res, searchQuery); // совпадение 1
+          const foundMoviesArray = filterCards(res, searchQuery);
 
-          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) : // совпадение 2
+          foundMoviesArray.length === 0 ? setIsNoSearchQuery(!isNoSearchQuery) :
 
           setCards(filterCards(res, searchQuery));
           localStorage.setItem('cardsData', JSON.stringify(res));
@@ -193,8 +193,8 @@ const App = () => {
   const handleSavedSearchCard = (searchQuery) => {
     api.getSavedMovies()
       .then((res) => {
-        const foundSavedMoviesArray = filterCards(res, searchQuery); // совпадение 1
-        foundSavedMoviesArray.length === 0 ? setIsNoSearchSavedQuery(!isNoSearchSavedQuery) : // совпадение 2
+        const foundSavedMoviesArray = filterCards(res, searchQuery);
+        foundSavedMoviesArray.length === 0 ? setIsNoSearchSavedQuery(!isNoSearchSavedQuery) :
 
         setSavedCards(foundSavedMoviesArray);
         localStorage.setItem('searchedSavedCardsData', JSON.stringify(res));
