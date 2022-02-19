@@ -10,7 +10,6 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
   const location = useLocation();
 
   const noSearchResult = location.pathname === '/movies' ? isNoSearchQuery : isNoSearchSavedQuery;
-  console.log(isNoSearchQuery);
 
   const showMoreCards = () => {
     setIsVisible((prevValue) => prevValue + addMoreCards());

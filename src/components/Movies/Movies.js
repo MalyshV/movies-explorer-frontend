@@ -3,7 +3,7 @@ import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
 const Movies = ({ handleSaveCard, likeClassName, handleSearchCard, checkbox, setCheckbox, onDelete, searchedCards, cards, savedCards, setSavedCards, isNoSearchQuery }) => {
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('' || localStorage.getItem('searchQuery'));
   const [isSearched, setIsSearched] = useState(false);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 

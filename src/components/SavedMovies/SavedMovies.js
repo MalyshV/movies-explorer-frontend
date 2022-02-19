@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MoviesCardList, Popup, Preloader, SearchForm } from '../index';
 
-const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkSavedCards, setCheckSavedCards, isNoSearchSavedQuery, setSavedCards }) => {
+const SavedMovies = ({ cards, savedCards, handleSavedSearchCard, onDelete, checkSavedCards, setCheckSavedCards, isNoSearchSavedQuery }) => {
 
-  const [search, setIsSearch] = useState('');
+  const [search, setIsSearch] = useState('' || localStorage.getItem('savedSearchQuery'));
   const [isSearched, setIsSearched] = useState(true);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
