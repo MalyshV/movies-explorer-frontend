@@ -23,22 +23,6 @@ const SearchForm = ({ onSubmit, onChange, checkbox, setCheckbox, checkSavedCards
 
   const item = location.pathname === '/movies' ? checkbox : checkSavedCards;
 
-  /* let signClassName;
-  if (localStorage.getItem('searchedCardsData')) {
-    const test = JSON.parse(localStorage.getItem('searchedCardsData'));
-    console.log(test);
-
-    if (test.length === 0 ) {
-      signClassName = 'cards__not-found'
-    } else if (test.length > 0) {
-      signClassName = 'cards__not-found cards__not-found-hidden'
-    };
-  } else {
-    signClassName = 'cards__not-found cards__not-found-hidden'
-  };*/
-
-  // const signClassName =   ? 'cards__not-found cards__not-found-hidden' : 'cards__not-found';
-
   return (
     <>
     <form className='search' autoComplete='off' onSubmit={onSubmit} >
@@ -64,5 +48,3 @@ const SearchForm = ({ onSubmit, onChange, checkbox, setCheckbox, checkSavedCards
 };
 
 export default SearchForm;
-
-//     { !checkSavedCards && <p className={signClassName}>Ничего не найдено</p> }
