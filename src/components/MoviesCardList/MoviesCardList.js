@@ -25,20 +25,30 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
   });
 
   const renderSign = () => {
-    if (localStorage.getItem('cardsData')) {
-      if (filterCardsByDuration.length === 0) {
-        return (
-          <p className='cards__not-found'>Ничего не найдено</p>
-        )
+    if (location.pathname === '/movies') {
+      if (localStorage.getItem('cardsData')) {
+        if (filterCardsByDuration.length === 0) {
+          return (
+            <p className='cards__not-found'>Ничего не найдено</p>
+          )
+        } else {
+          return (null)
+        }
       } else {
-        return (
-          null
-        )
+        return (null)
       }
     } else {
-      return (
-        null
-      )
+      if (localStorage.getItem('searchedSavedCardsData')) {
+        if (filterCardsByDuration.length === 0) {
+          return (
+            <p className='cards__not-found'>Ничего не найдено</p>
+          )
+        } else {
+          return (null)
+        }
+      } else {
+        return (null)
+      }
     }
   };
 
