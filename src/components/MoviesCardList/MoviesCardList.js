@@ -24,9 +24,29 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
     }
   });
 
+  const renderSign = () => {
+    if (localStorage.getItem('cardsData')) {
+      if (filterCardsByDuration.length === 0) {
+        return (
+          <p className='cards__not-found'>Ничего не найдено</p>
+        )
+      } else {
+        return (
+          null
+        )
+      }
+    } else {
+      return (
+        null
+      )
+    }
+  };
+
   return (
     <>
-    { noSearchResult ? <p className='cards__not-found'>Ничего не найдено</p> :
+    { !noSearchResult &&
+      <>
+      { renderSign() }
       <ul className='cards'>
         { filterCardsByDuration.slice(0, visible).map((card) => {
           return (
@@ -43,6 +63,7 @@ const MoviesCardList = ({ cards, savedCards, onClick, className, handleSaveCard,
           )
         })}
       </ul>
+      </>
     }
     { location.pathname === '/movies' && (visible <= filterCardsByDuration.length) ?
       <Button textOnButton='Ещё' buttonClassName='_place_movies' onClick={showMoreCards} />

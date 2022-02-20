@@ -25,6 +25,7 @@ const App = () => {
   const [checkSavedCards, setCheckSavedCards] = useState(false);
   const [isNoSearchQuery, setIsNoSearchQuery] = useState(false);
   const [isNoSearchSavedQuery, setIsNoSearchSavedQuery] = useState(false);
+  // const [isSearched, setIsSearched] = useState(false);
 
   useEffect(()=> {
     if (token) {
