@@ -1,7 +1,6 @@
 export const MOVIES_URL = 'https://api.nomoreparties.co';
 export const FULL_MOVIES_URL = 'https://api.nomoreparties.co/beatfilm-movies';
-// export const BASE_URL = 'https://api.yourmoviesexplorer.nomoredomains.work';
-export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://api.yourmoviesexplorer.nomoredomains.work';
 export const DESKTOP_WIDTH = 768;
 export const MOBILE_WIDTH = 480;
 export const CARDS_PER_ROW_DESKTOP = 3;
