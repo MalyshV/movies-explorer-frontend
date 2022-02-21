@@ -43,4 +43,4 @@ export const techs = [
     id: 7,
     name: 'mongoDB',
   },
-]
+];
