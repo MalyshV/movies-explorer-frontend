@@ -21,3 +21,5 @@
 Адрес фронтенда: https://yourmoviesexplorer.nomoredomains.rocks/   
 Адрес бэкенда: https://api.yourmoviesexplorer.nomoredomains.work/  
 Публичный IP: 62.84.124.244
+
+Archived educational project (2023)
